@@ -15,8 +15,7 @@
 <title>지상갑 음식점 선택시</title>
 
 <!-- Bootstrap core CSS -->
-<link href="resources/css/bootstrap.min.css"
-	rel="stylesheet">
+<link href="resources/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
 <link href="resources/css/modern-business.css" rel="stylesheet">
@@ -25,8 +24,8 @@
 
 <body>
 
-	
-	<%@ include file = "views/common/header_my.jsp" %>
+
+	<%@ include file="views/common/header_my.jsp"%>
 	<!-- Page Content -->
 	<div class="container">
 		<br>
@@ -67,78 +66,100 @@
         일단 임시로 복붙 블록 생성 -->
 
 				<div class="card">
-					<div class="text-left"><p>
+					<div class="text-left">
 						리뷰제목
 						</p>
 						<div class="text-right">USER-ID</div>
 						<small>제2항의 재판관중 3인은 국회에서 선출하는 자를, 3인은 대법원장이 지명하는 자를 임명한다.</small>
 						<div class="text-right">★★★★★</div>
+						<div class="text-right">
+							<a href="#" class="" style="">리뷰 수정</a>
+						</div>
 					</div>
 				</div>
 
 				<div class="card">
-					<div class="text-left"><p>
+					<div class="text-left">
 						리뷰제목
 						</p>
 						<div class="text-right">USER-ID</div>
 						<small>제2항의 재판관중 3인은 국회에서 선출하는 자를, 3인은 대법원장이 지명하는 자를 임명한다.</small>
 						<div class="text-right">★★★★★</div>
+						<div class="text-right">
+							<a href="#" class="" style="">리뷰 수정</a>
+						</div>
 					</div>
 				</div>
 
 				<div class="card">
-					<div class="text-left"><p>
+					<div class="text-left">
 						리뷰제목
 						</p>
 						<div class="text-right">USER-ID</div>
 						<small>제2항의 재판관중 3인은 국회에서 선출하는 자를, 3인은 대법원장이 지명하는 자를 임명한다.</small>
 						<div class="text-right">★★★★★</div>
+						<div class="text-right">
+							<a href="#" class="" style="">리뷰 수정</a>
+						</div>
 					</div>
 				</div>
 
 				<div class="card">
-					<div class="text-left"><p>
+					<div class="text-left">
 						리뷰제목
 						</p>
 						<div class="text-right">USER-ID</div>
 						<small>제2항의 재판관중 3인은 국회에서 선출하는 자를, 3인은 대법원장이 지명하는 자를 임명한다.</small>
 						<div class="text-right">★★★★★</div>
+						<div class="text-right">
+							<a href="#" class="" style="">리뷰 수정</a>
+						</div>
 					</div>
 				</div>
 
 				<div class="card">
-					<div class="text-left"><p>
+					<div class="text-left">
 						리뷰제목
 						</p>
 						<div class="text-right">USER-ID</div>
 						<small>제2항의 재판관중 3인은 국회에서 선출하는 자를, 3인은 대법원장이 지명하는 자를 임명한다.</small>
 						<div class="text-right">★★★★★</div>
+						<div class="text-right">
+							<a href="#" class="" style="">리뷰 수정</a>
+						</div>
 					</div>
 				</div>
 
 				<div id="test"></div>
 
 				<script>
-                    // 테스트 용도로 만든 리뷰 반복 생성 함수
-                    window.onload = function() {
-                        var test = document.getElementById('test');
+					// 테스트 용도로 만든 리뷰 반복 생성 함수
+					window.onload = function() {
+						var test = document.getElementById('test');
 
-                        var result = "";
+						var result = "";
 
-                        // 임시 예문 작성 : 제목,id,내용,별점 ID값 부여해야됨
-                        result += '<div class="card">' +
-                            '<div class="text-left">리뷰제목</p>' +
-                            '<div class="text-right">USER-ID</div>' +
-                            '<small>제2항의 재판관중 3인은 국회에서 선출하는 자를, 3인은 대법원장이 지명하는 자를 임명한다.</small>' +
-                            '<div class="text-right">★★★★★</div> </div> </div>';
+						// 임시 예문 작성 : 제목,id,내용,별점 ID값 부여해야됨
+						result += '<div class="card">'
+								+ '<div class="text-left">리뷰제목</p>'
+								+ '<div class="text-right">USER-ID</div>'
+								+ '<small>제2항의 재판관중 3인은 국회에서 선출하는 자를, 3인은 대법원장이 지명하는 자를 임명한다.</small>'
+								+ '<div class="text-right">★★★★★</div> '
+								+ ' <div class="text-right"> '
+								+ ' <a href="#" class="" style="">리뷰 수정</a>'
+								+ '</div> </div> </div>';
 
-                        // i의 최대값을 조절하면 갯수 증가
-                        for (var i = 0; i < 5; i++) {
-                            test.innerHTML += result;
-                        }
+						// i의 최대값을 조절하면 갯수 증가
+						for (var i = 0; i < 5; i++) {
+							test.innerHTML += result;
+						}
 
-                    }
-                </script>
+					}
+				</script>
+
+				<div class="text-right row" style="margin-left: 92%;">
+					<a href="#" class="" style="">리뷰 작성</a>
+				</div>
 
 			</div>
 		</div>
@@ -209,92 +230,80 @@
 		<div class="row">
 
 			<div class="col-lg-2 col-sm-4 mb-4 text-center h-auto">
-				<img class="img-fluid"
-					src="resources/images/chicken/01/menu01.jpg" alt="">
+				<img class="img-fluid" src="resources/images/chicken/01/menu01.jpg"
+					alt="">
 				<div class="card-body">
-					<h6 class="card-title">
-						치킨이름
-						</h6>
-						<h6 class="card-subtitle mb-2 text-muted">15,000원</h6>
-						<br>
-						<div class="card" style="bottom: 10px;">
-							<a href="#">구매하기</a>
-						</div>
+					<h6 class="card-title">치킨이름</h6>
+					<h6 class="card-subtitle mb-2 text-muted">15,000원</h6>
+					<br>
+					<div class="card" style="bottom: 10px;">
+						<a href="#">구매하기</a>
+					</div>
 				</div>
 			</div>
 
 			<div class="col-lg-2 col-sm-4 mb-4 text-center h-auto">
-				<img class="img-fluid"
-					src="resources/images/chicken/01/menu03.jpg" alt="">
+				<img class="img-fluid" src="resources/images/chicken/01/menu03.jpg"
+					alt="">
 				<div class="card-body">
-					<h6 class="card-title">
-						치킨이름
-						</h6>
-						<h6 class="card-subtitle mb-2 text-muted">15,000원</h6>
-						<br>
-						<div class="card" style="bottom: 10px;">
-							<a href="#">구매하기</a>
-						</div>
+					<h6 class="card-title">치킨이름</h6>
+					<h6 class="card-subtitle mb-2 text-muted">15,000원</h6>
+					<br>
+					<div class="card" style="bottom: 10px;">
+						<a href="#">구매하기</a>
+					</div>
 				</div>
 			</div>
 
 			<div class="col-lg-2 col-sm-4 mb-4 text-center h-auto">
-				<img class="img-fluid"
-					src="resources/images/chicken/01/menu04.jpg" alt="">
+				<img class="img-fluid" src="resources/images/chicken/01/menu04.jpg"
+					alt="">
 				<div class="card-body">
-					<h6 class="card-title">
-						치킨이름
-						</h6>
-						<h6 class="card-subtitle mb-2 text-muted">15,000원</h6>
-						<br>
-						<div class="card" style="bottom: 10px;">
-							<a href="#">구매하기</a>
-						</div>
+					<h6 class="card-title">치킨이름</h6>
+					<h6 class="card-subtitle mb-2 text-muted">15,000원</h6>
+					<br>
+					<div class="card" style="bottom: 10px;">
+						<a href="#">구매하기</a>
+					</div>
 				</div>
 			</div>
 
 			<div class="col-lg-2 col-sm-4 mb-4 text-center h-auto">
-				<img class="img-fluid"
-					src="resources/images/chicken/01/menu01.jpg" alt="">
+				<img class="img-fluid" src="resources/images/chicken/01/menu01.jpg"
+					alt="">
 				<div class="card-body">
-					<h6 class="card-title">
-						치킨이름
-						</h6>
-						<h6 class="card-subtitle mb-2 text-muted">15,000원</h6>
-						<br>
-						<div class="card" style="bottom: 10px;">
-							<a href="#">구매하기</a>
-						</div>
+					<h6 class="card-title">치킨이름</h6>
+					<h6 class="card-subtitle mb-2 text-muted">15,000원</h6>
+					<br>
+					<div class="card" style="bottom: 10px;">
+						<a href="#">구매하기</a>
+					</div>
 				</div>
 			</div>
 
 			<div class="col-lg-2 col-sm-4 mb-4 text-center h-auto">
-				<img class="img-fluid"
-					src="resources/images/chicken/01/menu03.jpg" alt="">
+				<img class="img-fluid" src="resources/images/chicken/01/menu03.jpg"
+					alt="">
 				<div class="card-body">
-					<h6 class="card-title">
-						치킨이름
-						</h6>
-						<h6 class="card-subtitle mb-2 text-muted">15,000원</h6>
-						<br>
-						<div class="card" style="bottom: 10px;">
-							<a href="#">구매하기</a>
-						</div>
+					<h6 class="card-title">치킨이름</h6>
+					<h6 class="card-subtitle mb-2 text-muted">15,000원</h6>
+					<br>
+					<div class="card" style="bottom: 10px;">
+						<a href="#">구매하기</a>
+					</div>
 				</div>
 			</div>
 
 			<div class="col-lg-2 col-sm-4 mb-4 text-center h-auto">
-				<img class="img-fluid"
-					src="resources/images/chicken/01/menu04.jpg" alt="">
+				<img class="img-fluid" src="resources/images/chicken/01/menu04.jpg"
+					alt="">
 				<div class="card-body">
-					<h6 class="card-title">
-						치킨이름
-						</h6>
-						<h6 class="card-subtitle mb-2 text-muted">15,000원</h6>
-						<br>
-						<div class="card" style="bottom: 10px;">
-							<a href="#">구매하기</a>
-						</div>
+					<h6 class="card-title">치킨이름</h6>
+					<h6 class="card-subtitle mb-2 text-muted">15,000원</h6>
+					<br>
+					<div class="card" style="bottom: 10px;">
+						<a href="#">구매하기</a>
+					</div>
 				</div>
 			</div>
 
@@ -304,9 +313,9 @@
 	</div>
 	<!-- /.container -->
 
-	
-	<%@ include file = "views/common/footer.jsp" %>
-	
+
+	<%@ include file="views/common/footer.jsp"%>
+
 
 	<!-- <script>
         // 테스트용 크롬에선 작동안됨 ( 나중에 삭제하기 )
