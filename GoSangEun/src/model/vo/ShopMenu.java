@@ -9,32 +9,42 @@ public class ShopMenu implements Serializable {
 	 */
 	private static final long serialVersionUID = 9001365691493623424L;
 
-	private int shopId; 		// 식당번호
-	private String menuNo;		// 메뉴번
-	private String menuName;	// 메뉴이름
-	private int menuPrice;		// 가격
-	private String menuInfo;	// 메뉴설명
+	private int No;
+	private int shopId;
+	private String Code;
+	private String Name;
+	private String Price;
+	private String info;
 
 	public ShopMenu() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public ShopMenu(int shopId, String menuNo, String menuName, int menuPrice, String menuInfo) {
+	public ShopMenu(int no, int shopId, String code, String name, String price, String info) {
 		super();
+		No = no;
 		this.shopId = shopId;
-		this.menuNo = menuNo;
-		this.menuName = menuName;
-		this.menuPrice = menuPrice;
-		this.menuInfo = menuInfo;
+		Code = code;
+		Name = name;
+		Price = price;
+		this.info = info;
 	}
 
-	public ShopMenu(int shopId, String menuNo, String menuName, int menuPrice) {
+	public ShopMenu(int no, int shopId, String code, String name, String price) {
 		super();
+		No = no;
 		this.shopId = shopId;
-		this.menuNo = menuNo;
-		this.menuName = menuName;
-		this.menuPrice = menuPrice;
+		Code = code;
+		Name = name;
+		Price = price;
+	}
+
+	public int getNo() {
+		return No;
+	}
+
+	public void setNo(int no) {
+		No = no;
 	}
 
 	public int getShopId() {
@@ -45,42 +55,42 @@ public class ShopMenu implements Serializable {
 		this.shopId = shopId;
 	}
 
-	public String getMenuNo() {
-		return menuNo;
+	public String getCode() {
+		return Code;
 	}
 
-	public void setMenuNo(String menuNo) {
-		this.menuNo = menuNo;
+	public void setCode(String code) {
+		Code = code;
 	}
 
-	public String getMenuName() {
-		return menuName;
+	public String getName() {
+		return Name;
 	}
 
-	public void setMenuName(String menuName) {
-		this.menuName = menuName;
+	public void setName(String name) {
+		Name = name;
 	}
 
-	public int getMenuPrice() {
-		return menuPrice;
+	public String getPrice() {
+		return Price;
 	}
 
-	public void setMenuPrice(int menuPrice) {
-		this.menuPrice = menuPrice;
+	public void setPrice(String price) {
+		Price = price;
 	}
 
-	public String getMenuInfo() {
-		return menuInfo;
+	public String getInfo() {
+		return info;
 	}
 
-	public void setMenuInfo(String menuInfo) {
-		this.menuInfo = menuInfo;
+	public void setInfo(String info) {
+		this.info = info;
 	}
 
 	@Override
 	public String toString() {
-		return "ShopMenu [shopId=" + shopId + ", menuNo=" + menuNo + ", menuName=" + menuName + ", menuPrice="
-				+ menuPrice + ", menuInfo=" + menuInfo + "]";
+		return "ShopMenu [No=" + No + ", shopId=" + shopId + ", Code=" + Code + ", Name=" + Name + ", Price=" + Price
+				+ ", info=" + info + "]";
 	}
 
 }
