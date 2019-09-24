@@ -157,11 +157,13 @@
 					}
 				</script>
 
+
+			</div>
+			
 				<div class="text-right row" style="margin-left: 92%;">
 					<a href="#" class="" style="">∏Æ∫‰ ¿€º∫</a>
 				</div>
-
-			</div>
+				
 		</div>
 		<!-- /.row -->
 

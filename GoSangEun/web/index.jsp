@@ -24,7 +24,6 @@
 </head>
 
 <body>
-
    
     
     <%@ include file = "views/common/header_log.jsp" %>
