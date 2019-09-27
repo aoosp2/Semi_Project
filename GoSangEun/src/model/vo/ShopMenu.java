@@ -9,18 +9,18 @@ public class ShopMenu implements Serializable {
 	 */
 	private static final long serialVersionUID = 9001365691493623424L;
 
-	private int No;
-	private int shopId;
-	private String Code;
-	private String Name;
-	private String Price;
-	private String info;
+	private int No;			// 메뉴번호
+	private int shopId;		// 식당번호
+	private String Code;	// 메뉴코드
+	private String Name;	// 메뉴이름
+	private int Price;	// 메뉴가격
+	private String info;	// 메뉴설명
 
 	public ShopMenu() {
 		super();
 	}
 
-	public ShopMenu(int no, int shopId, String code, String name, String price, String info) {
+	public ShopMenu(int no, int shopId, String code, String name, int price, String info) {
 		super();
 		No = no;
 		this.shopId = shopId;
@@ -30,7 +30,7 @@ public class ShopMenu implements Serializable {
 		this.info = info;
 	}
 
-	public ShopMenu(int no, int shopId, String code, String name, String price) {
+	public ShopMenu(int no, int shopId, String code, String name, int price) {
 		super();
 		No = no;
 		this.shopId = shopId;
@@ -71,11 +71,11 @@ public class ShopMenu implements Serializable {
 		Name = name;
 	}
 
-	public String getPrice() {
+	public int getPrice() {
 		return Price;
 	}
 
-	public void setPrice(String price) {
+	public void setPrice(int price) {
 		Price = price;
 	}
 

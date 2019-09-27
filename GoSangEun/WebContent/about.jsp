@@ -1,5 +1,13 @@
+<%@page import="model.vo.Shop"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="model.vo.ShopMenu"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="EUC-KR"%>
+<%
+	Shop s = (Shop)request.getAttribute("shop");
+	ShopMenu sm = null;
+	ArrayList<ShopMenu> list = (ArrayList<ShopMenu>)request.getAttribute("list");
+%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -27,11 +35,27 @@
 		<br>
 		<!-- Page Heading/Breadcrumbs -->
 		<h1 class="mt-4 mb-3">
-			치킨 <small>치킨집 01</small>
+		<%
+		String categoryName = "";
+		String code = ((Shop)request.getAttribute("shop")).getCategoryId();
+		
+		if(code.equals("KO")){
+			categoryName = "한식";
+		}else if(code.equals("CH")){
+			categoryName = "중식";
+		}else if(code.equals("CK")){
+			categoryName = "치킨";
+		}else if(code.equals("ZOK")){
+			categoryName = "족발";
+		}else if(code.equals("PZ")){
+			categoryName = "피자";
+		}
+		%> <%= categoryName %>
+		 <small> <%= s.getShopName() %> </small>
 		</h1>
 
 		<ol class="breadcrumb">
-			<li class="breadcrumb-item"><a href="index_login.html">Home</a>
+			<li class="breadcrumb-item"><a href="index_login.jsp">Home</a>
 			</li>
 			<li class="breadcrumb-item active">치킨</li>
 		</ol>
@@ -155,9 +179,9 @@
 
 
 			</div>
-				<div class="text-right row" style="margin-left: 92%;">
-					<a href="#" class="" style="">리뷰 작성</a>
-				</div>
+			<div class="text-right row" style="margin-left: 92%;">
+				<a href="#" class="" style="">리뷰 작성</a>
+			</div>
 		</div>
 		<!-- /.row -->
 

@@ -236,7 +236,7 @@
                     var more = document.getElementsByClassName("more");
 
                     if (choice.innerHTML == "치&nbsp;&nbsp;&nbsp;&nbsp;킨&nbsp;&nbsp;&nbsp;&nbsp;") {
-                        more[0].href = "about.html";
+                        more[0].href = "/GoSangEun/Menu.s?shopId=102";
                     }
                 }
             </script>
