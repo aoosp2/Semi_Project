@@ -6,6 +6,12 @@ import java.util.Properties;
 
 
 
+/**
+ * 
+ * 그 외 Dao
+ * @author heera
+ *
+ */
 public class GoDao {
 
 	private Properties prop;

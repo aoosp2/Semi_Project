@@ -1,6 +1,7 @@
 package common;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -17,11 +18,9 @@ public class JDBCTemplate {
 		
 		try {
 			
-			Context initContext = new InitialContext();
+			Class.forName("oracle.jdbc.driver.OracleDriver");
 			
-			DataSource ds = (DataSource)initContext.lookup("java:comp/env/jdbc/oraDB");
-			
-			con = ds.getConnection();
+			con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","SEMI","SEMI");
 			
 			con.setAutoCommit(false);
 			
@@ -79,32 +78,3 @@ public class JDBCTemplate {
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
