@@ -1,143 +1,227 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="EUC-KR"%>
+	pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
 
-    <title>¡ˆ.ªÛ.∞©</title>
+<title>ÏßÄ.ÏÉÅ.Í∞ë</title>
 
+<!-- Bootstrap core CSS -->
+<link href="resources/vendor/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet">
+<link href="resources/vendor/client/styles/square/_effect1.scss"
+	rel="stylesheet">
+<link href="resources/vendor/client/styles/square/_effect13.scss"
+	rel="stylesheet">
+<link href="resources/vendor/src/ihover.css" rel="stylesheet">
+<script src="resources/vendor/jquery/jquery.min.js"></script>
+
+<!-- Custom styles for this template -->
+<link href="css/modern-business.css" rel="stylesheet">
+
+<!-- CSS font -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
 
 <body>
 
-    <!-- Navigation -->
-    <%@ include file = "views/common/header_my.jsp" %>
+	<!-- Navigation -->
+	<nav
+		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+		<div class="container">
+			<a class="navbar-brand" href="index_login.jsp"><img
+				src="resources/images/logo.png" alt="logo" style="width: 120px;"></a>
+			<button class="navbar-toggler navbar-toggler-right" type="button"
+				data-toggle="collapse" data-target="#navbarResponsive"
+				aria-controls="navbarResponsive" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item active dropdown"><a
+						class="nav-link dropdown-toggle" href="MyPage.jsp"
+						id="navbarDropdownBlog" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false"> Ïû•Î∞îÍµ¨Îãà </a>
+						<div class="dropdown-menu dropdown-menu-right"
+							aria-labelledby="navbarDropdownPortfolio"
+							style="width: 220px; height: auto;">
+							<div class="dropdown-item-text" style="padding-left: 47px;">Ïû•Î∞îÍµ¨Îãà
+								Î™©Î°ù</div>
+							<div class="card">
+								<div>ÏπòÌÇ®Î©îÎâ¥1</div>
+								<div class="text-right">20,000Ïõê</div>
+							</div>
+							<div class="card">
+								<div>ÏπòÌÇ®Î©îÎâ¥2</div>
+								<div class="text-right">20,000Ïõê</div>
+							</div>
+							<hr>
+							<div class="card" style="color: red;">
+								<div style="font-size: 20px;">Ï¥ù Í∏àÏï°</div>
+								<div class="text-right">40,000Ïõê</div>
+							</div>
+							<a class="dropdown-item;" href="payment.jsp"
+								style="font-size: 20px; float: right; margin-right: 10px;">Íµ¨Îß§ÌïòÍ∏∞</a>
+						</div></li>
+					<li class="nav-item active dropdown"><a
+						class="nav-link dropdown-toggle" href="MyPage.jsp"
+						id="navbarDropdownBlog" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false"> ÎßàÏù¥ÌéòÏù¥ÏßÄ </a>
+						<div class="dropdown-menu dropdown-menu-right"
+							aria-labelledby="navbarDropdownBlog">
+							<a class="dropdown-item" href="MyPage.jsp">Í≥ÑÏ†ï ÏÑ§Ï†ï</a> <a
+								class="dropdown-item" href="MyPage_CheckOrder.jsp">Ï£ºÎ¨∏ ÌôïÏù∏</a>
+						</div></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
 
-    <header>
-        <!-- image slider -->
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-            </ol>
-            <div class="carousel-inner" role="listbox">
-                <!-- Slide One - Set the background image for this slide in the line below -->
-                <div class="carousel-item active">
-                    <img src="resources/images/1.jpg" alt="">
-                </div>
-                <!-- Slide Two - Set the background image for this slide in the line below -->
-                <div class="carousel-item">
-                    <img src="resources/images/2.jpg" alt="">
-                </div>
-                <!-- Slide Three - Set the background image for this slide in the line below -->
-                <div class="carousel-item">
-                    <img src="resources/images/3.jpg" alt="">
-                </div>
-                <!-- Slide four - Set the background image for this slide in the line below -->
-                <div class="carousel-item">
-                    <img src="resources/images/4.jpg" alt="">
-                </div>
-            </div>
-            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-        </div>
-    </header>
+	<header>
+		<!-- image slider -->
+		<div id="carouselExampleIndicators" class="carousel slide"
+			data-ride="carousel">
+			<ol class="carousel-indicators">
+				<li data-target="#carouselExampleIndicators" data-slide-to="0"
+					class="active"></li>
+				<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+				<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+				<li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+			</ol>
+			<div class="carousel-inner" role="listbox">
+				<!-- Slide One - Set the background image for this slide in the line below -->
+				<div class="carousel-item active">
+					<img src="resources/images/1.jpg" alt="">
+				</div>
+				<!-- Slide Two - Set the background image for this slide in the line below -->
+				<div class="carousel-item">
+					<img src="resources/images/2.jpg" alt="">
+				</div>
+				<!-- Slide Three - Set the background image for this slide in the line below -->
+				<div class="carousel-item">
+					<img src="resources/images/3.jpg" alt="">
+				</div>
+				<!-- Slide four - Set the background image for this slide in the line below -->
+				<div class="carousel-item">
+					<img src="resources/images/4.jpg" alt="">
+				</div>
+			</div>
+			<a class="carousel-control-prev" href="#carouselExampleIndicators"
+				role="button" data-slide="prev"> <span
+				class="carousel-control-prev-icon" aria-hidden="true"></span> <span
+				class="sr-only">Previous</span>
+			</a> <a class="carousel-control-next" href="#carouselExampleIndicators"
+				role="button" data-slide="next"> <span
+				class="carousel-control-next-icon" aria-hidden="true"></span> <span
+				class="sr-only">Next</span>
+			</a>
+		</div>
+	</header>
 
-    <!-- Page Content -->
-    <br><br>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-4 mb-4">
-                <div class="card h-100">
-                    <h4 class="card-header" style="text-align: center">«—Ωƒ</h4>
-                    <div class="card-body">
-                        <img src="resources/images/«—Ωƒ.png" alt="korean" style="position: inherit; top:0; left: 0; width: 100%; height: 100%;">
-                    </div>
-                    <div class="card-footer" style="text-align: center">
-                        <div>
-                            <a href="ShopList.html" class="btn btn-primary">±∏∏≈«œ±‚</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 mb-4">
-                <div class="card h-100">
-                    <h4 class="card-header" style="text-align: center">¿œΩƒ</h4>
-                    <div class="card-body">
-                        <img src="resources/images/¿œΩƒ.jpg" alt="korean" style="position: inherit; top:0; left: 0; width: 100%; height: 100%;">
-                    </div>
-                    <div class="card-footer" style="text-align: center">
-                        <a href="#" class="btn btn-primary">±∏∏≈«œ±‚</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 mb-4">
-                <div class="card h-100">
-                    <h4 class="card-header" style="text-align: center">¡ﬂΩƒ</h4>
-                    <div class="card-body">
-                        <img src="resources/images/¡ﬂΩƒ.jpg" alt="korean" style="position: inherit; top:0; left: 0; width: 100%; height: 100%;">
-                    </div>
-                    <div class="card-footer" style="text-align: center">
-                        <a href="#" class="btn btn-primary">±∏∏≈«œ±‚</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 mb-4">
-                <div class="card h-100">
-                    <h4 class="card-header" style="text-align: center">««¿⁄</h4>
-                    <div class="card-body">
-                        <img src="resources/images/««¿⁄.jfif" alt="korean" style="position: inherit; top:0; left: 0; width: 100%; height: 100%;">
+	<!-- Page Content -->
+	<br>
+	<div class="container">
+		<div class="row">
 
-                    </div>
-                    <div class="card-footer" style="text-align: center">
-                        <a href="#" class="btn btn-primary">±∏∏≈«œ±‚</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 mb-4">
-                <div class="card h-100">
-                    <h4 class="card-header" style="text-align: center">ƒ°≈≤</h4>
-                    <div class="card-body">
-                        <img src="resources/images/ƒ°≈≤.jpg" alt="korean" style="position: inherit; top:0; left: 0; width: 100%; height: 100%;">
-                    </div>
-                    <div class="card-footer" style="text-align: center">
-                        <a href="resources/about.html" class="btn btn-primary">±∏∏≈«œ±‚</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 mb-4">
-                <div class="card h-100">
-                    <h4 class="card-header" style="text-align: center">¡∑πﬂ</h4>
-                    <div class="card-body">
-                        <img src="resources/images/¡∑πﬂ.jpg" alt="korean" style="position: inherit; top:0; left: 0; width: 100%; height: 100%;">
-                    </div>
-                    <div class="card-footer" style="text-align: center">
-                        <a href="#" class="btn btn-primary">±∏∏≈«œ±‚</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- /.container -->
+			<div class="ih-item square effect13 left_to_right">
+				<a href="ShopList.jsp"> <img src="resources/images/ÌïúÏãù.png"
+					alt="img" class="img"
+					style="position: inherit; top: 0; left: 0; width: 100%; height: 100%; border-radius: 8px;">
+					<div class="info">
+						<h3>K O R E A N</h3>
+						<p>korean food</p>
+					</div>
+				</a>
+			</div>
 
-   
-    <%@ include file = "views/common/footer.jsp" %>
+			<div class="ih-item square effect13 left_to_right">
+				<a href="ShopList.html"> <img src="resources/images/ÏùºÏãù.jpg"
+					alt="korean" class="img"
+					style="position: inherit; top: 0; left: 0; width: 100%; height: 100%; border-radius: 8px;">
+					<div class="info">
+						<h3>J A P A N E S E</h3>
+						<p>japanese food</p>
+					</div>
+				</a>
+			</div>
+
+			<div class="ih-item square effect13 left_to_right">
+				<a href="ShopList.html"> <img src="resources/images/Ï§ëÏãù.jpg"
+					alt="korean" class="img"
+					style="position: inherit; top: 0; left: 0; width: 100%; height: 100%; border-radius: 8px;">
+					<div class="info">
+						<h3>C H I N E S E</h3>
+						<p>chinese food</p>
+					</div>
+				</a>
+			</div>
+
+			<div class="ih-item square effect13 left_to_right">
+				<a href="ShopList.html"> <img src="resources/images/ÌîºÏûê.jfif"
+					alt="korean" class="img"
+					style="position: inherit; top: 0; left: 0; width: 100%; height: 100%; border-radius: 8px;">
+					<div class="info">
+						<h3>P I Z Z A</h3>
+						<p>pizza</p>
+					</div>
+				</a>
+			</div>
+
+			<div class="ih-item square effect13 left_to_right">
+				<a href="ShopList.html"> <img src="resources/images/ÏπòÌÇ®.jpg"
+					alt="korean" class="img"
+					style="position: inherit; top: 0; left: 0; width: 100%; height: 100%; border-radius: 8px;">
+					<div class="info">
+						<h3>C H I C K E N</h3>
+						<p>chicken</p>
+					</div>
+				</a>
+			</div>
+
+			<div class="ih-item square effect13 left_to_right">
+				<a href="ShopList.html"> <img src="resources/images/Ï°±Î∞ú.jpg"
+					alt="korean" class="img"
+					style="position: inherit; top: 0; left: 0; width: 100%; height: 100%; border-radius: 8px;">
+					<div class="info">
+						<h3>J O C K B A L</h3>
+						<p>jockbal</p>
+					</div>
+				</a>
+			</div>
+
+		</div>
+	</div>
+	<br>
+	<br>
+	<br>
+	<!-- /.container -->
+
+	<!-- Footer -->
+	<footer class="py-5 bg-dark">
+		<div class="container">
+			<p class="m-0 text-center text-white">
+				¬© (Ïïà) Ï†ïÏãù ÏóÜÎäî KH Ï†ïÏãù &nbsp;&nbsp; 2019 All Right Reserved <br>
+				&lt; ÏÑúÏö∏Ïãú Í∞ïÎÇ®Íµ¨ ÌÉúÌó§ÎûÄÎ°ú 14-6 &gt; <br> E-mail: xxxx@xxxx.co.kr
+				&nbsp;&nbsp; ‚òé02-123-4567
+			</p>
+		</div>
+		<!-- /.container -->
+	</footer>
+
+	<!-- Bootstrap core JavaScript -->
+	<script src="/vendor/jquery/jquery.min.js"></script>
+	<script src="resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 </body>
 
