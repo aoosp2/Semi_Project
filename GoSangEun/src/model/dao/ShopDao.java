@@ -57,7 +57,7 @@ public class ShopDao {
 				s = new Shop();
 				
 				s.setShopId(shopId);
-				s.setCategoryId(rset.getString("CATEGORY_CODE"));
+				s.setCategoryId(rset.getString("CATEGORY_NAME"));
 				s.setShopName(rset.getString("SHOP_NAME"));
 				s.setShopLogo(rset.getString("SHOP_LOGO"));
 				s.setShopPhone(rset.getString("SHOP_PHONE"));

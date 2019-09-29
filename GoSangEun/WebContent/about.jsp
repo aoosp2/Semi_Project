@@ -24,7 +24,39 @@
 
 <title>지상갑 음식점 선택시</title>
 
+<style> /* 별점기능 테스트중 */
+.starR1 { 
+	background:
+		url('http://miuu227.godohosting.com/images/icon/ico_review.png')
+		no-repeat -52px 0;
+	background-size: auto 100%;
+	width: 15px;
+	height: 30px;
+	float: left;
+	text-indent: -9999px;
+	cursor: pointer;
+}
 
+.starR2 {
+	background:
+		url('http://miuu227.godohosting.com/images/icon/ico_review.png')
+		no-repeat right 0;
+	background-size: auto 100%;
+	width: 15px;
+	height: 30px;
+	float: left;
+	text-indent: -9999px;
+	cursor: pointer;
+}
+
+.starR1.on {
+	background-position: 0 0;
+}
+
+.starR2.on {
+	background-position: -15px 0;
+}
+</style>
 
 </head>
 
@@ -37,29 +69,14 @@
 		<br>
 		<!-- Page Heading/Breadcrumbs -->
 		<h1 class="mt-4 mb-3">
-		<%
-		String categoryName = "";
-		String code = ((Shop)request.getAttribute("shop")).getCategoryId();
-		
-		if(code.equals("KO")){
-			categoryName = "한식";
-		}else if(code.equals("CH")){
-			categoryName = "중식";
-		}else if(code.equals("CK")){
-			categoryName = "치킨";
-		}else if(code.equals("ZOK")){
-			categoryName = "족발";
-		}else if(code.equals("PZ")){
-			categoryName = "피자";
-		}
-		%> <%= categoryName %>
+		<%= s.getCategoryId() %>
 		 <small> <%= s.getShopName() %> </small>
 		</h1>
 
 		<ol class="breadcrumb">
 			<li class="breadcrumb-item"><a href="index_login.jsp">Home</a>
 			</li>
-			<li class="breadcrumb-item active"><%= categoryName %></li>
+			<li class="breadcrumb-item active"><%= s.getCategoryId() %></li>
 		</ol>
 
 		<!-- Intro Content -->
@@ -71,10 +88,30 @@
 
 			<div class="col-lg-4">
 				<h2><%= s.getShopName() %></h2>
+				<h5>
+					<!-- 별점 테스트기능 -->
+					<div class="starRev">
+						<span class="starR1 on">별1_왼쪽</span> <span class="starR2">별1_오른쪽</span>
+						<span class="starR1">별2_왼쪽</span> <span class="starR2">별2_오른쪽</span>
+						<span class="starR1">별3_왼쪽</span> <span class="starR2">별3_오른쪽</span>
+						<span class="starR1">별4_왼쪽</span> <span class="starR2">별4_오른쪽</span>
+						<span class="starR1">별5_왼쪽</span> <span class="starR2">별5_오른쪽</span>
+						<div> <%= s.getPoint() %></div>
+					</div>
+				</h5>
+				<br>
 				<p>영업 시간 : <%= s.getShopTime() %></p>
 				<p>전화번호 : <%= s.getShopPhone() %></p>
 				<p>설명 : <%= s.getShopInfo() %></p>
 			</div>
+			
+			<script> // 별점기능 테스트용 (별점 주기용으로 써야할뜻)
+				$('.starRev span').click(function() {
+					$(this).parent().children('span').removeClass('on');
+					$(this).addClass('on').prevAll('span').addClass('on');
+					return false;
+				});
+			</script>
 
 			<div class="col-lg-4 pre-scrollable" style="max-height: 500px;">
 
