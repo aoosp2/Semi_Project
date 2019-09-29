@@ -5,6 +5,8 @@ import java.sql.Connection;
 import model.dao.MemberDao;
 import model.vo.Member;
 
+import static common.JDBCTemplate.commit;
+import static common.JDBCTemplate.rollback;
 import static common.JDBCTemplate.*;
 
 public class MemberService {
@@ -33,6 +35,11 @@ public class MemberService {
 
 		System.out.println("m service : " + m);
 
+		if (result != null)
+			commit(con);
+		else
+			rollback(con);
+		
 		close(con);
 
 		return result;

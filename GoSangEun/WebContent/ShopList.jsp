@@ -18,7 +18,7 @@
 
 <body onload="defaultCheck();">
     
-    <%@ include file = "views/common/header_my.jsp" %>
+    <%@ include file = "views/common/header.jsp" %>
 
     <!-- Page Content -->
     <div class="container">

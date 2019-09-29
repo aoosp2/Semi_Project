@@ -5,26 +5,39 @@ import java.io.Serializable;
 public class ShopOrder implements Serializable {
 
 	/**
-	 * 
-	 */
+	* 
+	*/
 	private static final long serialVersionUID = 2095843090908870850L;
 
-	private int orderId;		// 주문번호
-	private int shopId;			// 식당번호
-	private String userId;		// 사용자아이디
-	private int menuNo;			// 메뉴코드
-	private int orderCount;		// 주문 갯수
-	private int orderSum;		// 주문 합계
-	private String orderInfo;	// 요청사항
-	private Boolean orderCheck;	// 결제 여부 (Y/N)
+	private int orderId;
+	private int shopId;
+	private String userId;
+	private int menuNo;
+	private int orderCount;
+	private int orderSum;
+	private String orderInfo;
+	private String orderCheck;
+	private String orderAddr;
 
 	public ShopOrder() {
 		super();
-		// TODO Auto-generated constructor stub
+	}
+
+	public ShopOrder(int orderId, int shopId, String userId, int menuNo, int orderCount, int orderSum,
+			String orderCheck, String orderAddr) {
+		super();
+		this.orderId = orderId;
+		this.shopId = shopId;
+		this.userId = userId;
+		this.menuNo = menuNo;
+		this.orderCount = orderCount;
+		this.orderSum = orderSum;
+		this.orderCheck = orderCheck;
+		this.orderAddr = orderAddr;
 	}
 
 	public ShopOrder(int orderId, int shopId, String userId, int menuNo, int orderCount, int orderSum, String orderInfo,
-			Boolean orderCheck) {
+			String orderCheck, String orderAddr) {
 		super();
 		this.orderId = orderId;
 		this.shopId = shopId;
@@ -34,18 +47,7 @@ public class ShopOrder implements Serializable {
 		this.orderSum = orderSum;
 		this.orderInfo = orderInfo;
 		this.orderCheck = orderCheck;
-	}
-
-	public ShopOrder(int orderId, int shopId, String userId, int menuNo, int orderCount, int orderSum,
-			Boolean orderCheck) {
-		super();
-		this.orderId = orderId;
-		this.shopId = shopId;
-		this.userId = userId;
-		this.menuNo = menuNo;
-		this.orderCount = orderCount;
-		this.orderSum = orderSum;
-		this.orderCheck = orderCheck;
+		this.orderAddr = orderAddr;
 	}
 
 	public int getOrderId() {
@@ -104,19 +106,27 @@ public class ShopOrder implements Serializable {
 		this.orderInfo = orderInfo;
 	}
 
-	public Boolean getOrderCheck() {
+	public String getOrderCheck() {
 		return orderCheck;
 	}
 
-	public void setOrderCheck(Boolean orderCheck) {
+	public void setOrderCheck(String orderCheck) {
 		this.orderCheck = orderCheck;
+	}
+
+	public String getOrderAddr() {
+		return orderAddr;
+	}
+
+	public void setOrderAddr(String orderAddr) {
+		this.orderAddr = orderAddr;
 	}
 
 	@Override
 	public String toString() {
 		return "ShopOrder [orderId=" + orderId + ", shopId=" + shopId + ", userId=" + userId + ", menuNo=" + menuNo
 				+ ", orderCount=" + orderCount + ", orderSum=" + orderSum + ", orderInfo=" + orderInfo + ", orderCheck="
-				+ orderCheck + "]";
+				+ orderCheck + ", orderAddr=" + orderAddr + "]";
 	}
 
 }

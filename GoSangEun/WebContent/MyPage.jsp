@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="model.vo.Member"%>
-<%
-	Member m = (Member)session.getAttribute("member");
-%>
+	pageEncoding="UTF-8"%>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -22,8 +20,7 @@
 </head>
 
 <body>
-
-	<%@ include file="views/common/header_my.jsp"%>
+	<%@ include file="views/common/header.jsp"%>
 
 	<!-- Page Content -->
 	<div class="container">
@@ -47,11 +44,11 @@
 					<div style="margin-left: 30px">
 						<img src="resources/images/boy.png" style="width: 120px;">
 					</div>
-					<div>닉네임</div>
+					<div>닉네임 : <%=m.getUSER_NICKNAME()%></div>
 				</div>
 
 				<br>
-				<div style="margin-left: 65px">등급</div>
+				<div style="margin-left: 65px"><%=m.getRANK()%></div>
 			</div>
 		</div>
 
@@ -77,7 +74,7 @@
 							class="collapsed">&nbsp; <b>계정 설정</b></a>
 					</h5>
 				</div>
-				<div id="collapseOne" class="collapse show" role="tabpanel"
+				<div id="collapseOne" class="collapse" role="tabpanel"
 					aria-labelledby="headingOne">
 					<div class="card-body">
 						<br>
@@ -85,15 +82,44 @@
 							style="list-style-type: none; text-align: right; margin-right: 40%;">
 							<table align="center">
 								<tr>
-									<td width="200px">* 아이디: <%= m.getUSER_ID() %></td>
-									<td style="color: white; text-align: left; padding-left: 20px;"><%= m.getUSER_ID() %></td>
+									<td width="200px">* 이름:</td>
+									<td style="text-align: left; padding-left: 20px;"><%=m.getUSER_NAME()%></td>
 									<td width="200px"></td>
 								</tr>
-								
+								<tr>
+									<td width="200px">* 아이디:</td>
+									<td style="text-align: left; padding-left: 20px;"><%=m.getUSER_ID()%></td>
+									<td width="200px"></td>
+								</tr>
+								<tr>
+									<td width="200px">* 닉네임:</td>
+									<td style="text-align: left; padding-left: 20px;"><%=m.getUSER_NICKNAME()%></td>
+									<td width="200px"></td>
+								</tr>
+								<tr>
+									<td width="200px">* 비밀번호:</td>
+									<td style="text-align: left; padding-left: 20px;"><%=m.getUSER_PASSWORD()%></td>
+									<td width="200px"></td>
+								</tr>
+								<tr>
+									<td width="200px">* 전화번호:</td>
+									<td style="text-align: left; padding-left: 20px;"><%=m.getUSER_PHONE()%></td>
+									<td width="200px"></td>
+								</tr>
+								<tr>
+									<td width="200px">* 이메일:</td>
+									<td style="text-align: left; padding-left: 20px;"><%=m.getUSER_EMAIL()%></td>
+									<td width="200px"></td>
+								</tr>
+								<tr>
+									<td width="200px">* 주소:</td>
+									<td style="text-align: left; padding-left: 20px;"><%=m.getUSER_ADDRESS()%></td>
+									<td width="200px"></td>
+								</tr>								
 							</table>
 
 						</ul>
-						
+
 					</div>
 				</div>
 			</div>
@@ -101,7 +127,7 @@
 			<div class="card">
 				<div class="card-header" role="tab" id="headingTwo"
 					data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"
-					aria-expanded="false" aria-controls="collapseOne" class="collapsed"
+					aria-expanded="true" aria-controls="collapseOne" class="collapsed"
 					style="cursor: pointer">
 					<h5 class="mb-0">
 						<img src="resources/images/cart.png" alt="account"

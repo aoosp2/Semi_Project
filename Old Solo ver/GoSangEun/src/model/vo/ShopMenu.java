@@ -9,12 +9,12 @@ public class ShopMenu implements Serializable {
 	 */
 	private static final long serialVersionUID = 9001365691493623424L;
 
-	private int No;			// 메뉴번호
-	private int shopId;		// 식당번호
-	private String Code;	// 메뉴코드
-	private String Name;	// 메뉴이름
-	private int Price;	// 메뉴가격
-	private String info;	// 메뉴설명
+	private int No;
+	private int shopId;
+	private String Code;
+	private String Name;
+	private int Price;
+	private String info;
 
 	public ShopMenu() {
 		super();

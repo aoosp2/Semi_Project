@@ -7,14 +7,15 @@
 <title>회원가입</title>
 </head>
 <body>
-	<%@ include file="views/common/header_log.jsp"%>
+	<%@ include file="views/common/header.jsp"%>
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-8 mb-4">
 				<div id="signup_wrapper">
+					<br> <br> <br>
 					<h3>회원가입</h3>
-					<h5>*표는 꼭 기입해주세요</h5>
-					<br>
+					<h6 style="text-align: right;">*표는 꼭 기입해주세요</h6>
+
 					<form action="join.do" name="join" id="contactForm" method="post"
 						onsubmit="return check()">
 						<div class="control-group form-group">
@@ -26,9 +27,14 @@
 						</div>
 						<div class="control-group form-group">
 							<div class="controls">
-								<label>ID*</label> <input type="text" class="form-control"
-									name="USER_ID"> <input type="button" name="confirm_id"
-									value="중복확인" onclick="openConfirmid(this.form)" />
+								<label>ID*</label>
+								<div style="display: flex;">
+									<input type="text" class="form-control" name="USER_ID"
+										style="width: 87%">&nbsp;&nbsp;&nbsp; <input
+										type="button" name="confirm_id" value="중복확인"
+										onclick="openConfirmid(this.form)"
+										style="border-radius: 4px; border: 1px solid;" />
+								</div>
 							</div>
 						</div>
 						<div class="control-group form-group">
@@ -109,11 +115,11 @@
                                 <br>
                             </div>
                         </div> -->
-						<div id="success"></div>
-						<input type="submit" id="submit" class="btn btn-primary"
-							id="contactForm" style="width: 140px;" value="회원가입">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<button class="btn btn-primary" id="nojoin" style="width: 140px;"
-							onclick="location.href ='index.jsp'">비회원주문</button>
+						<div id="success" align="center">
+							<input type="submit" id="submit" class="btn btn-primary"
+								id="contactForm" style="width: 140px;" value="회원가입">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<a href="index.jsp" class="btn btn-primary" style="width: 140px;"button">비회원주문</a>
+						</div>
 					</form>
 
 					<script type="text/javascript">
@@ -140,8 +146,84 @@
 									});
 						});
 
-						function check() {
-							if (!document.user)
+						// 로그인 유효성 검사
+						function checkz() {
+							var getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
+							var getCheck = RegExp(/^[a-zA-Z0-9]{4,12}$/);
+							var getName = RegExp(/^[가-힣]+$/);
+							var getPhone = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;
+							var fmt = RegExp(/^\d{6}[1234]\d{6}$/); //형식 설정
+
+							//아이디 공백 확인
+							if ($("#USER_ID").val() == "") {
+								alert("아이디 필수 입력입니다");
+								$("#USER_ID").focus();
+								return false;
+							}
+							//이름 공백 확인
+							if ($("#USER_MAIL").val() == "") {
+								alert("이름 필수 입력입니다");
+								$("#USER_MAIL").focus();
+								return false;
+							}
+							//닉네임 공백 확인
+							if ($("#USER_NICKNAME").val() == "") {
+								alert("닉네임 필수 입력입니다");
+								$("#USER_NICKNAME").focus();
+								return false;
+							}
+							//전화번호 공백 확인
+							if ($("#USER_PHONE").val() == "") {
+								alert("전화번호 필수 입력입니다");
+								$("#USER_PHONE").focus();
+								return false;
+							}
+							//주소 공백 확인
+							if ($("#USER_ADDRESSE").val() == "") {
+								alert("주소 필수 입력입니다");
+								$("#USER_ADDRESSE").focus();
+								return false;
+							}
+
+							//이메일 유효성 검사
+							if (!getMail.test($("#USER_MAIL").val())) {
+								alert("이메일형식에 맞게 입력해주세요")
+								$("#USER_MAIL").val("");
+								$("#USER_MAIL").focus();
+								return false;
+							}
+
+							//이름 유효성
+							if (!getName.test($("#USER_NAME").val())) {
+								alert("이름을 정확히 입력해주세요");
+								$("#USER_NAME").val("");
+								$("#USER_NAME").focus();
+								return false;
+							}
+
+							//전화번호 유효성
+							if (!getPhone.test($("#USER_PHONE").val())) {
+								alert("전화번호를 정확히 입력해주세요");
+								$("#USER_PHONE").val("");
+								$("#USER_PHONE").focus();
+								return false;
+							}
+							alert("회원가입이 완료되었습니다.");
+						}
+						function openConfirmid(join) {
+
+							if (join.USER_ID.value == "") {
+								alert("아이디를 입력하세요")
+								return;
+							}
+							// ID 전송
+							url = "confirmid.jsp?USER_ID=" + join.USER_ID.value;
+
+							// 윈도우 창 생성
+							open(
+									url,
+									"confirm",
+									"toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=310,height=180");
 
 						}
 					</script>

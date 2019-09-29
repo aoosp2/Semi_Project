@@ -59,7 +59,7 @@ main.cf.my_account {
 </style>
 </head>
 <body>
-	<%@ include file="views/common/header_log.jsp"%>
+	<%@ include file="views/common/header.jsp"%>
 	<div id="pjax-container">
 		<div class="blog-main-content">
 			<div class="container">

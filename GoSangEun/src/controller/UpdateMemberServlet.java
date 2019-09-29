@@ -41,7 +41,6 @@ public class UpdateMemberServlet extends HttpServlet {
 		String USER_PHONE = request.getParameter("USER_PHONE");
 		String USER_EMAIL = request.getParameter("USER_EMAIL");
 		String USER_ADDRESS = request.getParameter("USER_ADDRESS");
-		int CARD_NO = Integer.parseInt(request.getParameter("CARD_NO"));
 
 		// 해당 회원을 구분짓는 ID 받아오기
 		HttpSession session = request.getSession(false);
