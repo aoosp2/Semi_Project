@@ -53,7 +53,7 @@ public class LoginServlet extends HttpServlet {
 			// 로그인 성공!!
 			System.out.println("로그인 성공 : " + m);
 
-			RequestDispatcher view = request.getRequestDispatcher("index_login.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("index.jsp");
 
 			// 로그인 정보 유지하기
 			HttpSession session = request.getSession();

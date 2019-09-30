@@ -90,7 +90,7 @@
 					<li class="nav-item active dropdown"><a
 						class="nav-link dropdown-toggle" href="MyPage.jsp"
 						id="navbarDropdownBlog" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false"> 마이페이지 </a>
+						aria-haspopup="true" aria-expanded="false"> <%=m.getUSER_NICKNAME()%> </a>
 						<div class="dropdown-menu dropdown-menu-right"
 							aria-labelledby="navbarDropdownBlog">
 							<a class="dropdown-item" href="MyPage.jsp">계정 설정</a> <a

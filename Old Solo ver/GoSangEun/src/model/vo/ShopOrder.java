@@ -5,8 +5,8 @@ import java.io.Serializable;
 public class ShopOrder implements Serializable {
 
 	/**
-	* 
-	*/
+	 * 
+	 */
 	private static final long serialVersionUID = 2095843090908870850L;
 
 	private int orderId;
@@ -128,5 +128,6 @@ public class ShopOrder implements Serializable {
 				+ ", orderCount=" + orderCount + ", orderSum=" + orderSum + ", orderInfo=" + orderInfo + ", orderCheck="
 				+ orderCheck + ", orderAddr=" + orderAddr + "]";
 	}
+	
 
 }
