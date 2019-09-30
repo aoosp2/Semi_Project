@@ -6,7 +6,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="http://.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -27,7 +26,7 @@
 	<%
 		if (m == null) {
 	%>
-	<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+	<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
 		<div class="container">
 			<a class="navbar-brand" href="index.jsp"><img
 				src="resources/images/logo.png" alt="logo" style="width: 120px;"></a>

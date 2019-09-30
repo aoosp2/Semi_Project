@@ -47,19 +47,20 @@ main.cf.my_account {
 
 .blog-main-content {
 	background: #fafafa;
-	height: 700px;
+	height: 720px;
 }
 
 .col-md-5 {
 	-ms-flex: 0 0 41.666667% !important;
 	flex: 0 0 41.666667% !important;
 	max-width: 41.666667% !important;
-	height: 420px;
+	height: 430px;
 }
 </style>
 </head>
 <body>
 	<%@ include file="views/common/header.jsp"%>
+	<br>
 	<div id="pjax-container">
 		<div class="blog-main-content">
 			<div class="container">
@@ -99,15 +100,14 @@ main.cf.my_account {
 										onclick="location.href='index.jsp'"
 										class="btn btn-success btn-lg btn-block" />
 								</div>
-
 								<div class="form-group login-link">
 									<p>
 										아직 회원이 아니신가요? <a href="join.jsp">회원 가입 하기 &rarr;</a>
 								</div>
 							</form>
 						</div>
-
 					</div>
+					
 					<main class="cf my_account col-md-5 col-md-offset-1">
 					<article class="full-width">
 						<h1 class="offer_page_header" float="center">회원 가입 특전</h1>

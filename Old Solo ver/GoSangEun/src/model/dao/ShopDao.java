@@ -135,7 +135,6 @@ public class ShopDao {
 				
 				r.setNo(rset.getInt("REVIEW_NO"));
 				r.setShopId(shopId);
-				r.setUserId(rset.getString("USER_ID"));
 				r.setUserName(rset.getString("USER_NAME"));
 				r.setInfo(rset.getString("REVIEW_INFO"));
 				r.setPoint(rset.getInt("REVIEW_POINT"));

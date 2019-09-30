@@ -21,7 +21,7 @@
 						<div class="control-group form-group">
 							<div class="controls">
 								<label>이름*</label> <input type="text" class="form-control"
-									name="USER_NAME">
+									name="USER_NAME" id="USER_NAME">
 								<p class="help-block"></p>
 							</div>
 						</div>
@@ -29,7 +29,7 @@
 							<div class="controls">
 								<label>ID*</label>
 								<div style="display: flex;">
-									<input type="text" class="form-control" name="USER_ID"
+									<input type="text" class="form-control" name="USER_ID" id="USER_ID"
 										style="width: 87%">&nbsp;&nbsp;&nbsp; <input
 										type="button" name="confirm_id" value="중복확인"
 										onclick="openConfirmid(this.form)"
@@ -40,13 +40,13 @@
 						<div class="control-group form-group">
 							<div class="controls">
 								<label>닉네임*</label> <input type="text" class="form-control"
-									name="USER_NICKNAME">
+									name="USER_NICKNAME" id="USER_NICKNAME">
 							</div>
 						</div>
 						<div class="control-group form-group">
 							<div class="controls">
 								<label>비밀번호*</label> <input type="password" id="pwd1"
-									class="form-control" name="USER_PASSWORD">
+									class="form-control" name="USER_PASSWORD" id="USER_PASSWORD">
 							</div>
 						</div>
 						<div class="control-group form-group">
@@ -63,19 +63,19 @@
 						<div class="control-group form-group">
 							<div class="controls">
 								<label>전화번호*</label> <input type="tel" class="form-control"
-									name="USER_PHONE">
+									name="USER_PHONE" id="USER_PHONE">
 							</div>
 						</div>
 						<div class="control-group form-group">
 							<div class="controls">
 								<label>이메일</label> <input type="email" class="form-control"
-									name="USER_EMAIL">
+									name="USER_EMAIL" id="USER_EMAIL">
 							</div>
 						</div>
 						<div class="control-group form-group">
 							<div class="controls">
 								<label>주소*</label> <input type="text" class="form-control"
-									name="USER_ADDRESS">
+									name="USER_ADDRESS" id="USER_ADDRESS">
 							</div>
 						</div>
 						<!-- <div class="control-group form-group">
@@ -116,7 +116,7 @@
                             </div>
                         </div> -->
 						<div id="success" align="center">
-							<input type="submit" id="submit" class="btn btn-primary"
+							<input type="submit" id="submit" class="btn btn-primary" onclick="return checkz()"
 								id="contactForm" style="width: 140px;" value="회원가입">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<a href="index.jsp" class="btn btn-primary" style="width: 140px;"button">비회원주문</a>
 						</div>
@@ -154,16 +154,16 @@
 							var getPhone = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;
 							var fmt = RegExp(/^\d{6}[1234]\d{6}$/); //형식 설정
 
+							//이름 공백 확인
+							if ($("#USER_NAME").val() == "") {
+								alert("이름 필수 입력입니다");
+								$("#USER_NAME").focus();
+								return false;
+							}
 							//아이디 공백 확인
 							if ($("#USER_ID").val() == "") {
 								alert("아이디 필수 입력입니다");
 								$("#USER_ID").focus();
-								return false;
-							}
-							//이름 공백 확인
-							if ($("#USER_MAIL").val() == "") {
-								alert("이름 필수 입력입니다");
-								$("#USER_MAIL").focus();
 								return false;
 							}
 							//닉네임 공백 확인
@@ -186,10 +186,10 @@
 							}
 
 							//이메일 유효성 검사
-							if (!getMail.test($("#USER_MAIL").val())) {
+							if (!getMail.test($("#USER_EMAIL").val())) {
 								alert("이메일형식에 맞게 입력해주세요")
-								$("#USER_MAIL").val("");
-								$("#USER_MAIL").focus();
+								$("#USER_EMAIL").val("");
+								$("#USER_EMAIL").focus();
 								return false;
 							}
 
@@ -209,7 +209,9 @@
 								return false;
 							}
 							alert("회원가입이 완료되었습니다.");
+							
 						}
+						
 						function openConfirmid(join) {
 
 							if (join.USER_ID.value == "") {
@@ -224,7 +226,6 @@
 									url,
 									"confirm",
 									"toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=310,height=180");
-
 						}
 					</script>
 				</div>
