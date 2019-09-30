@@ -3,12 +3,11 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.vo.ShopMenu"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="EUC-KR"%>
+	pageEncoding="UTF-8"%>
 <%
-	Shop s = (Shop)request.getAttribute("shop");
-	ShopMenu sm = null;
-	ArrayList<ShopMenu> list = (ArrayList<ShopMenu>)request.getAttribute("list");
-	ArrayList<Review> rlist = (ArrayList<Review>)request.getAttribute("rlist");
+	Shop s = (Shop) request.getAttribute("shop");
+	ArrayList<ShopMenu> list = (ArrayList<ShopMenu>) request.getAttribute("list");
+	ArrayList<Review> rlist = (ArrayList<Review>) request.getAttribute("rlist");
 %>
 
 <!DOCTYPE html>
@@ -16,47 +15,13 @@
 
 <head>
 
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta name="author" content="">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
 
-<title>Áö»ó°© À½½ÄÁ¡ ¼±ÅÃ½Ã</title>
+	<title>ì§€ìƒê°‘ ìŒì‹ì  ì„ íƒì‹œ</title>
 
-<style> /* º°Á¡±â´É Å×½ºÆ®Áß */
-.starR1 { 
-	background:
-		url('http://miuu227.godohosting.com/images/icon/ico_review.png')
-		no-repeat -52px 0;
-	background-size: auto 100%;
-	width: 15px;
-	height: 30px;
-	float: left;
-	text-indent: -9999px;
-	cursor: pointer;
-}
-
-.starR2 {
-	background:
-		url('http://miuu227.godohosting.com/images/icon/ico_review.png')
-		no-repeat right 0;
-	background-size: auto 100%;
-	width: 15px;
-	height: 30px;
-	float: left;
-	text-indent: -9999px;
-	cursor: pointer;
-}
-
-.starR1.on {
-	background-position: 0 0;
-}
-
-.starR2.on {
-	background-position: -15px 0;
-}
-</style>
 
 </head>
 
@@ -68,251 +33,189 @@
 	<div class="container">
 		<br>
 		<!-- Page Heading/Breadcrumbs -->
-		<h1 class="mt-4 mb-3">
-		<%= s.getCategoryId() %>
-		 <small> <%= s.getShopName() %> </small>
+		<h1 class="mt-5 mb-2">
+			<%=s.getCategoryId()%>
+			<small> <%=s.getShopName()%>
+			</small>
 		</h1>
 
 		<ol class="breadcrumb">
-			<li class="breadcrumb-item"><a href="index.jsp">Home</a>
-			</li>
-			<li class="breadcrumb-item active"><%= s.getCategoryId() %></li>
+			<li class="breadcrumb-item"><a href="index.jsp">Home</a></li>
+			<li class="breadcrumb-item active"><%=s.getCategoryId()%></li>
 		</ol>
 
 		<!-- Intro Content -->
 		<div class="row">
 			<div class="col-lg-4">
-				<img class="img-fluid rounded mb-4"
-					src="resources/images/FoodMenu/<%= s.getShopLogo() %>.jpg" alt="LOGO">
+				<img class="img-fluid rounded mb-4" src="resources/images/FoodMenu/<%=s.getShopLogo()%>.jpg" alt="LOGO">
 			</div>
 
 			<div class="col-lg-4">
-				<h2><%= s.getShopName() %></h2>
+				<h2><%=s.getShopName()%></h2>
 				<h5>
-					<!-- º°Á¡ Å×½ºÆ®±â´É -->
-					<div class="starRev">
-						<span class="starR1 on">º°1_¿ŞÂÊ</span> <span class="starR2">º°1_¿À¸¥ÂÊ</span>
-						<span class="starR1">º°2_¿ŞÂÊ</span> <span class="starR2">º°2_¿À¸¥ÂÊ</span>
-						<span class="starR1">º°3_¿ŞÂÊ</span> <span class="starR2">º°3_¿À¸¥ÂÊ</span>
-						<span class="starR1">º°4_¿ŞÂÊ</span> <span class="starR2">º°4_¿À¸¥ÂÊ</span>
-						<span class="starR1">º°5_¿ŞÂÊ</span> <span class="starR2">º°5_¿À¸¥ÂÊ</span>
-						<div> <%= s.getPoint() %></div>
-					</div>
+					<%
+						for (int i = 0; i < 5; i++) {
+							if (i < s.getPoint()) {
+					%>
+					â˜…
+					<%
+						} else {
+					%>
+					â˜†
+					<%
+						}
+						}
+					%>
+					<!-- ë³„ì  ê°œìˆ˜ -->
+					<%=s.getPoint()%>
 				</h5>
 				<br>
-				<p>¿µ¾÷ ½Ã°£ : <%= s.getShopTime() %></p>
-				<p>ÀüÈ­¹øÈ£ : <%= s.getShopPhone() %></p>
-				<p>¼³¸í : <%= s.getShopInfo() %></p>
+				<p>
+					ì˜ì—… ì‹œê°„ :
+					<%=s.getShopTime()%></p>
+				<p>
+					ì „í™”ë²ˆí˜¸ :
+					<%=s.getShopPhone()%></p>
+				<p>
+					ì„¤ëª… :
+					<%=s.getShopInfo()%></p>
 			</div>
-			
-			<script> // º°Á¡±â´É Å×½ºÆ®¿ë (º°Á¡ ÁÖ±â¿ëÀ¸·Î ½á¾ßÇÒ¶æ)
-				$('.starRev span').click(function() {
-					$(this).parent().children('span').removeClass('on');
-					$(this).addClass('on').prevAll('span').addClass('on');
-					return false;
-				});
-			</script>
 
-			<div class="col-lg-4 pre-scrollable" style="max-height: 500px;">
+			<div class="col-lg-4">
+				<div class=" pre-scrollable" style="max-height: 300px;">
 
-				<!-- ¸®ºä -->
-				<!-- ¹İº¹¹®À» ´Ã¸®¸é µÉ¶æ 
-      				  ÀÏ´Ü ÀÓ½Ã·Î º¹ºÙ ºí·Ï »ı¼º -->
+					<!-- ë¦¬ë·° -->
+					<!-- ë°˜ë³µë¬¸ì„ ëŠ˜ë¦¬ë©´ ë ëœ» 
+							ì¼ë‹¨ ì„ì‹œë¡œ ë³µë¶™ ë¸”ë¡ ìƒì„± -->
 
-				<div id="Review"></div>
+					<div id="Review">
+						<%
+							for (int i = 0; i < rlist.size(); i++) {
+						%>
+						<div class="card mr-2 p-2">
+							<div class='text-left'>
+								<%=rlist.get(i).getUserName()%>
+							</div>
+							<div><%=rlist.get(i).getInfo()%></div>
+							<div class="text-right">
+								<%
+									for (int j = 0; j < 5; j++) {
+											if (j < rlist.get(i).getPoint()) {
+								%>
+								â˜…
+								<%
+									} else {
+								%>
+								â˜†
+								<%
+									}
+										}
+								%>
+							</div>
+							<div class="text-right">
+								<a href="#" class="" style="">ë¦¬ë·° ìˆ˜ì •</a>
+							</div>
+						</div>
+						<%
+							}
+						%>
+					</div>
 
-				<script>
-					// Å×½ºÆ® ¿ëµµ·Î ¸¸µç ¸®ºä ¹İº¹ »ı¼º ÇÔ¼ö
-					window.onload = function() {
-						var test = document.getElementById('Review');
+				</div>
 
-						var result = "";
+				<div class="text-right" style="font-size: 25px;">
+					<a href="#" class="" style="">ë¦¬ë·° ì‘ì„±</a>
+				</div>
 
-						// µ¡±Û ¿¹¹® ÀÛ¼º : Á¦¸ñ,id,³»¿ë,º°Á¡ ID°ª ºÎ¿©ÇØ¾ßµÊ
-						result += '<div class="card">'
-								+ '<div class="text-left">¸®ºäÁ¦¸ñ</p>'
-								+ '<div class="text-right">USER-ID</div>'
-								+ '<small>Á¦2Ç×ÀÇ ÀçÆÇ°üÁß 3ÀÎÀº ±¹È¸¿¡¼­ ¼±ÃâÇÏ´Â ÀÚ¸¦, 3ÀÎÀº ´ë¹ı¿øÀåÀÌ Áö¸íÇÏ´Â ÀÚ¸¦ ÀÓ¸íÇÑ´Ù.</small>'
-								+ '<div class="text-right">¡Ú¡Ú¡Ú¡Ú¡Ú</div> '
-								+ ' <div class="text-right"> '
-								+ ' <a href="#" class="" style="">¸®ºä ¼öÁ¤</a>'
-								+ '</div> </div> </div>';
-
-						// iÀÇ ÃÖ´ë°ªÀ» Á¶ÀıÇÏ¸é °¹¼ö Áõ°¡
-						for (var i = 0; i < 5; i++) {
-							test.innerHTML += result;
-						}
-
-					}
-				</script>
-
-
-			</div>
-			<div class="text-right row" style="margin-left: 92%;">
-				<a href="#" class="" style="">¸®ºä ÀÛ¼º</a>
 			</div>
 		</div>
 		<!-- /.row -->
 
 		<!-- Team Members -->
 		<h2>
-			¸Ş´º <small>ÀÎ±â/ÃßÃµ ¸Ş´º</small>
+			ë©”ë‰´ <small>ì¸ê¸°/ì¶”ì²œ ë©”ë‰´</small>
 		</h2>
 
+
 		<div class="row">
+
+			<% // ë©”ì¸ ë©”ë‰´ 3ì¢…
+			int num = 0;
+			if( 0 < list.size()) {
+			for( int i=0; i<3 ; i++) { 
+				%>
 			<div class="col-lg-4 mb-4">
 				<div class="card h-100 text-center">
-					<img class="card-img-top"
-						src="resources/images/chicken/01/menu02.jpg" alt=""
+					<img class="card-img-top" src="resources/images/FoodMenu/<%=list.get(num).getCode()%>.jpg" alt=""
 						height="250px;">
 					<div class="card-body">
-						<h4 class="card-title">Ä¡Å² ÀÌ¸§1</h4>
-						<h6 class="card-subtitle mb-2 text-muted">°¡°İ : 20,000¿ø</h6>
-						<p class="card-text">Á¦2Ç×ÀÇ ÀçÆÇ°üÁß 3ÀÎÀº ±¹È¸¿¡¼­ ¼±ÃâÇÏ´Â ÀÚ¸¦, 3ÀÎÀº ´ë¹ı¿øÀåÀÌ
-							Áö¸íÇÏ´Â ÀÚ¸¦ ÀÓ¸íÇÑ´Ù.</p>
+						<h4 class="card-title"><%=list.get(num).getName()%></h4>
+						<h6 class="card-subtitle mb-2 text-muted"><%=list.get(num).getPrice()%>ì›
+						</h6>
+						<p class="card-text">
+							<%
+									if (list.get(num).getInfo() == null) {
+								%>
+							<%
+									} else {
+								%>
+							<%=list.get(num).getInfo()%>
+							<%
+									}
+								%>
+						</p>
 					</div>
 					<div class="card-footer">
-						<a href="#">±¸¸ÅÇÏ±â</a>
+						<a href="#">êµ¬ë§¤í•˜ê¸°</a>
 					</div>
 				</div>
 			</div>
 
-			<div class="col-lg-4 mb-4">
-				<div class="card h-100 text-center">
-					<img class="card-img-top"
-						src="resources/images/chicken/01/menu03.jpg" alt=""
-						height="250px;">
-					<div class="card-body">
-						<h4 class="card-title">Ä¡Å² ÀÌ¸§2</h4>
-						<h6 class="card-subtitle mb-2 text-muted">23,000¿ø</h6>
-						<p class="card-text">´ëÅë·ÉÀº ¹ı·üÀÌ Á¤ÇÏ´Â ¹Ù¿¡ ÀÇÇÏ¿© ÈÆÀå ±âÅ¸ÀÇ ¿µÀüÀ» ¼ö¿©ÇÑ´Ù.Á¦2Ç×ÀÇ
-							ÀçÆÇ°üÁß 3ÀÎÀº ±¹È¸¿¡¼­ ¼±ÃâÇÏ´Â ÀÚ¸¦, 3ÀÎÀº ´ë¹ı¿øÀåÀÌ Áö¸íÇÏ´Â ÀÚ¸¦ ÀÓ¸íÇÑ´Ù.</p>
-					</div>
-					<div class="card-footer">
-						<a href="#">±¸¸ÅÇÏ±â</a>
-					</div>
-				</div>
-			</div>
+			<%  num++; } } %>
 
-			<div class="col-lg-4 mb-4">
-				<div class="card h-100 text-center">
-					<img class="card-img-top"
-						src="resources/images/chicken/01/menu04.jpg" alt=""
-						height="250px;">
-					<div class="card-body">
-						<h4 class="card-title">Ä¡Å² ÀÌ¸§3</h4>
-						<h6 class="card-subtitle mb-2 text-muted">23,000¿ø</h6>
-						<p class="card-text">±¹°¡´Â ±ÕÇüÀÖ´Â ±¹¹Î°æÁ¦ÀÇ ¼ºÀå ¹× ¾ÈÁ¤°ú ÀûÁ¤ÇÑ ¼ÒµæÀÇ ºĞ¹è¸¦ À¯ÁöÇÏ°í,
-							½ÃÀåÀÇ Áö¹è¿Í °æÁ¦·ÂÀÇ ³²¿ëÀ» ¹æÁöÇÏ¸ç, °æÁ¦ÁÖÃ¼°£ÀÇ Á¶È­¸¦ ÅëÇÑ °æÁ¦ÀÇ ¹ÎÁÖÈ­¸¦ À§ÇÏ¿© °æÁ¦¿¡ °üÇÑ ±ÔÁ¦¿Í Á¶Á¤À»
-							ÇÒ ¼ö ÀÖ´Ù.</p>
-					</div>
-					<div class="card-footer">
-						<a href="#">±¸¸ÅÇÏ±â</a>
-					</div>
-				</div>
-			</div>
 		</div>
 		<!-- /.row -->
 
 		<!-- Our Customers -->
-		<h4>´Ù¸¥ ¸Ş´º</h4>
+		<h4>ëª¨ë“  ë©”ë‰´</h4>
 		<div class="row">
 
-			<div class="col-lg-2 col-sm-4 mb-4 text-center h-auto">
-				<img class="img-fluid" src="resources/images/chicken/01/menu01.jpg"
-					alt="">
-				<div class="card-body">
-					<h6 class="card-title">Ä¡Å²ÀÌ¸§</h6>
-					<h6 class="card-subtitle mb-2 text-muted">15,000¿ø</h6>
-					<br>
-					<div class="card" style="bottom: 10px;">
-						<a href="#">±¸¸ÅÇÏ±â</a>
+			<%
+					int num2 = 0;
+					for (int i = 0; i < list.size(); i++) {
+
+				%>
+
+			<div class="col-lg-2">
+				<div class="card text-center h-100">
+					<img class="img-thumbnail card-img-top" style="height: 120px;"
+						src="resources/images/FoodMenu/<%=list.get(num2).getCode()%>.jpg" alt="">
+					<div class="card-body">
+						<h6 class="card-title"> <%=list.get(num2).getName()%></h6>
+						<h6 class="card-subtitle mb-2 text-muted"><%=list.get(num2).getPrice()%>ì›
+						</h6>
+
+					</div>
+					<div class="card-footer">
+						<a href="#">êµ¬ë§¤í•˜ê¸°</a>
 					</div>
 				</div>
 			</div>
-
-			<div class="col-lg-2 col-sm-4 mb-4 text-center h-auto">
-				<img class="img-fluid" src="resources/images/chicken/01/menu03.jpg"
-					alt="">
-				<div class="card-body">
-					<h6 class="card-title">Ä¡Å²ÀÌ¸§</h6>
-					<h6 class="card-subtitle mb-2 text-muted">15,000¿ø</h6>
-					<br>
-					<div class="card" style="bottom: 10px;">
-						<a href="#">±¸¸ÅÇÏ±â</a>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-lg-2 col-sm-4 mb-4 text-center h-auto">
-				<img class="img-fluid" src="resources/images/chicken/01/menu04.jpg"
-					alt="">
-				<div class="card-body">
-					<h6 class="card-title">Ä¡Å²ÀÌ¸§</h6>
-					<h6 class="card-subtitle mb-2 text-muted">15,000¿ø</h6>
-					<br>
-					<div class="card" style="bottom: 10px;">
-						<a href="#">±¸¸ÅÇÏ±â</a>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-lg-2 col-sm-4 mb-4 text-center h-auto">
-				<img class="img-fluid" src="resources/images/chicken/01/menu01.jpg"
-					alt="">
-				<div class="card-body">
-					<h6 class="card-title">Ä¡Å²ÀÌ¸§</h6>
-					<h6 class="card-subtitle mb-2 text-muted">15,000¿ø</h6>
-					<br>
-					<div class="card" style="bottom: 10px;">
-						<a href="#">±¸¸ÅÇÏ±â</a>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-lg-2 col-sm-4 mb-4 text-center h-auto">
-				<img class="img-fluid" src="resources/images/chicken/01/menu03.jpg"
-					alt="">
-				<div class="card-body">
-					<h6 class="card-title">Ä¡Å²ÀÌ¸§</h6>
-					<h6 class="card-subtitle mb-2 text-muted">15,000¿ø</h6>
-					<br>
-					<div class="card" style="bottom: 10px;">
-						<a href="#">±¸¸ÅÇÏ±â</a>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-lg-2 col-sm-4 mb-4 text-center h-auto">
-				<img class="img-fluid" src="resources/images/chicken/01/menu04.jpg"
-					alt="">
-				<div class="card-body">
-					<h6 class="card-title">Ä¡Å²ÀÌ¸§</h6>
-					<h6 class="card-subtitle mb-2 text-muted">15,000¿ø</h6>
-					<br>
-					<div class="card" style="bottom: 10px;">
-						<a href="#">±¸¸ÅÇÏ±â</a>
-					</div>
-				</div>
-			</div>
-
+			<%
+				num2++;	}
+				%>
 		</div>
-		<!-- /.row -->
+
+	</div>
+	<!-- /.row -->
 
 	</div>
 	<!-- /.container -->
 
+	<br>
+
 
 	<%@ include file="views/common/footer.jsp"%>
-
-
-	<!-- <script>
-        // Å×½ºÆ®¿ë Å©·Ò¿¡¼± ÀÛµ¿¾ÈµÊ ( ³ªÁß¿¡ »èÁ¦ÇÏ±â )
-        self.moveTo(0, 0);
-        self.resizeTo(1024, 768);
-    </script> -->
-
-
 </body>
 
 </html>
