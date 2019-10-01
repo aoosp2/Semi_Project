@@ -312,4 +312,25 @@ public int updateReview(Connection con, int no, String info, int point) {
 	
 	return result;
 }
+
+public int deleteReview(Connection con, int no) {
+	int result = 0;
+	PreparedStatement pstmt = null;
+	
+	String sql = prop.getProperty("deleteReview");
+	
+	try {
+		pstmt = con.prepareStatement(sql);
+		
+		pstmt.setInt(1, no);
+		
+		result = pstmt.executeUpdate();
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		close(pstmt);
+	}
+	
+	return result;
+}
 }

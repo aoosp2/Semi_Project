@@ -112,15 +112,22 @@
                               }
                         %>
                      </div>
+                     <% if ( m != null ) { %>
                      <% if ( m.getUSER_ID().equals(rlist.get(i).getUserId()) ) { %>
                      <div class="text-right">
-                        <a href="#" class="" style="" onclick="UpdateReview();">리뷰 수정</a>
+                        <a href="#" class="" style="" onclick="UpdateReview();">수정</a>
+                        <a href="#" class="" style="color: red;" onclick="DeleteReview();">삭제</a>
                         <form action="/GoSangEun/ReviewUpdate.s" method="get" name="rUpdate">
                            <input type="hidden" name="No" value="<%= rlist.get(i).getNo() %>">
                            <input type="hidden" name="shopId" value="<%= s.getShopId() %>">
                            <input type="hidden" name="Info">
                            <input type="hidden" name="Point">
                         </form>
+                        <form action="/GoSangEun/ReviewDelete.s" method="get" name="rDelete">
+                           <input type="hidden" name="No" value="<%= rlist.get(i).getNo() %>">
+                           <input type="hidden" name="shopId" value="<%= s.getShopId() %>">
+                        </form>
+
                         <script>
                            function UpdateReview() {
                               var info = prompt('수정할 리뷰내용을 입력해주세요.', '이곳에 입력해주세요');
@@ -136,13 +143,18 @@
                                     alert('별점을 0~5사이로 입력해주세요');
                                  }
                               }
-                           }
+                           };
+
+                           function DeleteReview() {
+                              $('form[name=rDelete]').submit();
+                           };
+
                         </script>
 
                      </div>
-                     <% } %>
+                     <% } } %>
                   </div>
-                  
+
                   <%
                      }
                   %>

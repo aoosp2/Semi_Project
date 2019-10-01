@@ -133,4 +133,19 @@ public int updateReview(int no, String info, int point) {
 	return result;
 }
 
+public int deleteReview(int no) {
+	con = getConnection();
+	
+	int result = sDao.deleteReview(con,no);
+	
+	if( result > 0 )
+		commit(con);
+	else
+		rollback(con);
+	
+	close(con);
+	
+	return result;
+}
+
 }
