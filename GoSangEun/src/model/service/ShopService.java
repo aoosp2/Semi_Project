@@ -104,16 +104,31 @@ public class ShopService {
    }
 
 public int insertReview(int shopId, String info, String userId, String userName, int point) {
-	Connection conn = getConnection();
+	con = getConnection();
 	
-	int result = sDao.insertReview(conn,shopId,info,userId,userName,point);
+	int result = sDao.insertReview(con,shopId,info,userId,userName,point);
 	
 	if(result > 0)
-		commit(conn);
+		commit(con);
 	else
-		rollback(conn);
+		rollback(con);
 	
-	close(conn);
+	close(con);
+	
+	return result;
+}
+
+public int updateReview(int no, String info, int point) {
+	con = getConnection();
+	
+	int result = sDao.updateReview(con,no,info,point);
+	
+	if(result > 0)
+		commit(con);
+	else
+		rollback(con);
+	
+	close(con);
 	
 	return result;
 }

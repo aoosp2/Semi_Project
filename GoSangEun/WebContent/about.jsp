@@ -112,11 +112,12 @@
                               }
                         %>
                      </div>
-                     <% if ( m.getUSER_ID() == rlist.get(i).getUserId() ) { %>
+                     <% if ( m.getUSER_ID().equals(rlist.get(i).getUserId()) ) { %>
                      <div class="text-right">
-                        <a href="#" class="" style="">리뷰 수정</a>
-                        <form action="/GoSangEun/Review.s" method="get" name="rUpdate" onclick="UpdateReview();">
+                        <a href="#" class="" style="" onclick="UpdateReview();">리뷰 수정</a>
+                        <form action="/GoSangEun/ReviewUpdate.s" method="get" name="rUpdate">
                            <input type="hidden" name="No" value="<%= rlist.get(i).getNo() %>">
+                           <input type="hidden" name="shopId" value="<%= s.getShopId() %>">
                            <input type="hidden" name="Info">
                            <input type="hidden" name="Point">
                         </form>
@@ -130,7 +131,7 @@
                                  $('input[name=Point]').val(point);
 
                                  if (point >= 0 && point <= 5) {
-                                    $('form[name=review]').submit();
+                                    $('form[name=rUpdate]').submit();
                                  } else {
                                     alert('별점을 0~5사이로 입력해주세요');
                                  }

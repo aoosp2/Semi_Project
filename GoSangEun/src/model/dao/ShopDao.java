@@ -264,7 +264,7 @@ public class ShopDao {
       
    }
 
-public int insertReview(Connection conn, int shopId, String info, String userId, String userName, int point) {
+public int insertReview(Connection con, int shopId, String info, String userId, String userName, int point) {
 	
 	int result = 0;
 	PreparedStatement pstmt = null;
@@ -272,7 +272,7 @@ public int insertReview(Connection conn, int shopId, String info, String userId,
 	String sql = prop.getProperty("insertReview");
 	
 	try {
-		pstmt = conn.prepareStatement(sql);
+		pstmt = con.prepareStatement(sql);
 		
 		pstmt.setInt(1, shopId);
 		pstmt.setString(2, userId);
@@ -281,6 +281,29 @@ public int insertReview(Connection conn, int shopId, String info, String userId,
 		pstmt.setInt(5, point);
 		
 		result = pstmt.executeUpdate();
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		close(pstmt);
+	}
+	
+	return result;
+}
+
+public int updateReview(Connection con, int no, String info, int point) {
+	int result = 0;
+	PreparedStatement pstmt = null;
+	
+	String sql = prop.getProperty("updateReview");
+	
+	try {
+		pstmt = con.prepareStatement(sql);
+		
+		pstmt.setString(1, info);
+		pstmt.setInt(2, point);
+		pstmt.setInt(3, no);
+		
+		result=pstmt.executeUpdate();
 	} catch (SQLException e) {
 		e.printStackTrace();
 	} finally {
