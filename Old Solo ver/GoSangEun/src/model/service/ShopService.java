@@ -1,7 +1,9 @@
 package model.service;
 
 import static common.JDBCTemplate.close;
+import static common.JDBCTemplate.commit;
 import static common.JDBCTemplate.getConnection;
+import static common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -100,5 +102,50 @@ public class ShopService {
       
       return sList;
    }
+
+public int insertReview(int shopId, String info, String userId, String userName, int point) {
+	con = getConnection();
+	
+	int result = sDao.insertReview(con,shopId,info,userId,userName,point);
+	
+	if(result > 0)
+		commit(con);
+	else
+		rollback(con);
+	
+	close(con);
+	
+	return result;
+}
+
+public int updateReview(int no, String info, int point) {
+	con = getConnection();
+	
+	int result = sDao.updateReview(con,no,info,point);
+	
+	if(result > 0)
+		commit(con);
+	else
+		rollback(con);
+	
+	close(con);
+	
+	return result;
+}
+
+public int deleteReview(int no) {
+	con = getConnection();
+	
+	int result = sDao.deleteReview(con,no);
+	
+	if( result > 0 )
+		commit(con);
+	else
+		rollback(con);
+	
+	close(con);
+	
+	return result;
+}
 
 }

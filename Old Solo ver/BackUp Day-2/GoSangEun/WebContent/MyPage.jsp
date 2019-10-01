@@ -29,8 +29,7 @@
 		<h1 class="mt-4 mb-3">마이페이지</h1>
 
 		<ol class="breadcrumb">
-			<li class="breadcrumb-item"><a href="index_login.html">Home</a>
-			</li>
+			<li class="breadcrumb-item"><a href="index.jsp">Home</a></li>
 			<li class="breadcrumb-item active">계정설정&주문확인</li>
 		</ol>
 
@@ -44,7 +43,9 @@
 					<div style="margin-left: 30px">
 						<img src="resources/images/boy.png" style="width: 120px;">
 					</div>
-					<div>닉네임 : <%=m.getUSER_NICKNAME()%></div>
+					<div>
+						닉네임 :
+						<%=m.getUSER_NICKNAME()%></div>
 				</div>
 
 				<br>
@@ -53,7 +54,7 @@
 		</div>
 
 		<br>
-		<hr style="border: 5px solid gray; border-radius: 4px;">
+		<hr style="border: 5px solid gray;">
 		<br>
 
 		<div class="mb-4" id="accordion" role="tablist"
@@ -79,8 +80,8 @@
 					<div class="card-body">
 						<br>
 						<ul class="edit"
-							style="list-style-type: none; text-align: right; margin-right: 40%;">
-							<table align="center">
+							style="list-style-type: none; text-align: right;">
+							<table align="center";>
 								<tr>
 									<td width="200px">* 이름:</td>
 									<td style="text-align: left; padding-left: 20px;"><%=m.getUSER_NAME()%></td>
@@ -97,11 +98,6 @@
 									<td width="200px"></td>
 								</tr>
 								<tr>
-									<td width="200px">* 비밀번호:</td>
-									<td style="text-align: left; padding-left: 20px;"><%=m.getUSER_PASSWORD()%></td>
-									<td width="200px"></td>
-								</tr>
-								<tr>
 									<td width="200px">* 전화번호:</td>
 									<td style="text-align: left; padding-left: 20px;"><%=m.getUSER_PHONE()%></td>
 									<td width="200px"></td>
@@ -115,11 +111,13 @@
 									<td width="200px">* 주소:</td>
 									<td style="text-align: left; padding-left: 20px;"><%=m.getUSER_ADDRESS()%></td>
 									<td width="200px"></td>
-								</tr>								
+								</tr>
 							</table>
 
 						</ul>
-
+						<div class="btns" align="center">
+							<a href="MyPage_Update.jsp" class="btn btn-primary" style="width: 140px;" button="">수정하기</a>
+						</div>
 					</div>
 				</div>
 			</div>

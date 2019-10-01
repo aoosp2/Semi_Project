@@ -31,7 +31,7 @@
 
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="index_login.html">Home</a>
+                <a href="index.jsp">Home</a>
             </li>
             <li class="breadcrumb-item active">결제하기</li>
         </ol>

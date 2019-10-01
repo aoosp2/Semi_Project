@@ -47,7 +47,11 @@
       <!-- Intro Content -->
       <div class="row">
          <div class="col-lg-4">
+            <% if ( s.getShopId() >= 100 ) { %>
             <img class="img-fluid rounded mb-4" src="resources/images/FoodMenu/<%=s.getShopLogo()%>.jpg" alt="LOGO">
+            <% } else { %>
+            <img class="img-fluid rounded mb-4" src="<%= s.getShopLogo() %>" alt="LOGO">
+            <% } %>
          </div>
 
          <div class="col-lg-4">

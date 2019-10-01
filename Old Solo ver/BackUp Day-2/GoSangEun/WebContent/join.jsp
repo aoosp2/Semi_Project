@@ -5,6 +5,18 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
+<style>
+
+/* 배경 */
+body {
+	background-color: lightyellow !important;
+}
+
+/* 회원가입 박스 */
+div.row {
+	background-color: white !important;
+}
+</style>
 </head>
 <body>
 	<%@ include file="views/common/header.jsp"%>
@@ -22,6 +34,8 @@
 							<div class="controls">
 								<label>이름*</label> <input type="text" class="form-control"
 									name="USER_NAME" id="USER_NAME">
+								<div class="alert alert-danger" id="name-danger">이름을 정확히
+									입력해주세요</div>
 								<p class="help-block"></p>
 							</div>
 						</div>
@@ -29,8 +43,8 @@
 							<div class="controls">
 								<label>ID*</label>
 								<div style="display: flex;">
-									<input type="text" class="form-control" name="USER_ID" id="USER_ID"
-										style="width: 87%">&nbsp;&nbsp;&nbsp; <input
+									<input type="text" class="form-control" name="USER_ID"
+										id="USER_ID" style="width: 87%">&nbsp;&nbsp;&nbsp; <input
 										type="button" name="confirm_id" value="중복확인"
 										onclick="openConfirmid(this.form)"
 										style="border-radius: 4px; border: 1px solid;" />
@@ -64,12 +78,17 @@
 							<div class="controls">
 								<label>전화번호*</label> <input type="tel" class="form-control"
 									name="USER_PHONE" id="USER_PHONE">
+								<div class="alert alert-danger" id="phone-danger">010-0000-0000
+									형식으로 입력해주세요</div>
 							</div>
 						</div>
 						<div class="control-group form-group">
 							<div class="controls">
-								<label>이메일</label> <input type="email" class="form-control"
+								<label>이메일*</label> <input type="email" class="form-control"
 									name="USER_EMAIL" id="USER_EMAIL">
+								<div class="alert alert-danger" id="email-danger">000@000.000
+									형식으로 입력해주세요</div>
+
 							</div>
 						</div>
 						<div class="control-group form-group">
@@ -116,14 +135,21 @@
                             </div>
                         </div> -->
 						<div id="success" align="center">
-							<input type="submit" id="submit" class="btn btn-primary" onclick="return checkz()"
-								id="contactForm" style="width: 140px;" value="회원가입">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="submit" id="submit" class="btn btn-primary"
+								onclick="return checkz()" id="contactForm" style="width: 140px;"
+								value="회원가입">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<a href="index.jsp" class="btn btn-primary" style="width: 140px;"button">비회원주문</a>
 						</div>
 					</form>
 
 					<script type="text/javascript">
 						$(function() {
+
+							$("#name-danger").hide();
+							$("#phone-danger").hide();
+							$("#email-danger").hide();
+
+							// 비밀번호 확인
 							$("#alert-success").hide();
 							$("#alert-danger").hide();
 							$("input").keyup(
@@ -148,70 +174,72 @@
 
 						// 로그인 유효성 검사
 						function checkz() {
+
+							// 형식 설정
 							var getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
 							var getCheck = RegExp(/^[a-zA-Z0-9]{4,12}$/);
 							var getName = RegExp(/^[가-힣]+$/);
 							var getPhone = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;
-							var fmt = RegExp(/^\d{6}[1234]\d{6}$/); //형식 설정
+							var fmt = RegExp(/^\d{6}[1234]\d{6}$/);
 
-							//이름 공백 확인
+							// 공백 확인
 							if ($("#USER_NAME").val() == "") {
 								alert("이름 필수 입력입니다");
 								$("#USER_NAME").focus();
 								return false;
-							}
-							//아이디 공백 확인
-							if ($("#USER_ID").val() == "") {
+							} else if ($("#USER_ID").val() == "") {
 								alert("아이디 필수 입력입니다");
 								$("#USER_ID").focus();
 								return false;
-							}
-							//닉네임 공백 확인
-							if ($("#USER_NICKNAME").val() == "") {
+							} else if ($("#USER_NICKNAME").val() == "") {
 								alert("닉네임 필수 입력입니다");
 								$("#USER_NICKNAME").focus();
 								return false;
-							}
-							//전화번호 공백 확인
-							if ($("#USER_PHONE").val() == "") {
+							} else if ($("#pwd1").val() == "") {
+								alert("비밀번호 필수 입력입니다");
+								$("#pwd1").focus();
+								return false;
+							} else if ($("#USER_PHONE").val() == "") {
 								alert("전화번호 필수 입력입니다");
 								$("#USER_PHONE").focus();
 								return false;
-							}
-							//주소 공백 확인
-							if ($("#USER_ADDRESSE").val() == "") {
+							} else if ($("#USER_EMAIL").val() == "") {
+								alert("이메일 필수 입력입니다");
+								$("#USER_EMAIL").focus();
+								return false;
+							} else if ($("#USER_ADDRESS").val() == "") {
 								alert("주소 필수 입력입니다");
 								$("#USER_ADDRESSE").focus();
 								return false;
 							}
 
-							//이메일 유효성 검사
-							if (!getMail.test($("#USER_EMAIL").val())) {
-								alert("이메일형식에 맞게 입력해주세요")
-								$("#USER_EMAIL").val("");
-								$("#USER_EMAIL").focus();
-								return false;
-							}
+							// 유효성 검사
 
-							//이름 유효성
 							if (!getName.test($("#USER_NAME").val())) {
-								alert("이름을 정확히 입력해주세요");
-								$("#USER_NAME").val("");
+								$("#name-danger").show();
 								$("#USER_NAME").focus();
 								return false;
-							}
-
-							//전화번호 유효성
-							if (!getPhone.test($("#USER_PHONE").val())) {
-								alert("전화번호를 정확히 입력해주세요");
-								$("#USER_PHONE").val("");
+							} else if (!getPhone.test($("#USER_PHONE").val())) {
+								$("#phone-danger").show();
 								$("#USER_PHONE").focus();
 								return false;
 							}
-							alert("회원가입이 완료되었습니다.");
-							
+							if (!getMail.test($("#USER_EMAIL").val())) {
+								$("#email-danger").show();
+								$("#USER_EMAIL").focus();
+								return false;
+
+							}
+
+							var reg = confirm("이 정보로 가입 하시겠습니까?");
+							if (reg) {
+								alert("회원가입이 완료되었습니다");
+							} else {
+								alert("회원가입이 취소되었습니다");
+								return false;
+							}
 						}
-						
+
 						function openConfirmid(join) {
 
 							if (join.USER_ID.value == "") {
@@ -222,10 +250,8 @@
 							url = "confirmid.jsp?USER_ID=" + join.USER_ID.value;
 
 							// 윈도우 창 생성
-							open(
-									url,
-									"confirm",
-									"toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=310,height=180");
+							open(url, "confirm",
+									"status=no,menubar=no,scrollbars=no,width=310,height=180,left=869,top=294");
 						}
 					</script>
 				</div>

@@ -8,18 +8,28 @@
 <head>
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="http://.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <!-- Bootstrap core CSS -->
 <link href="resources/css/bootstrap.min.css" rel="stylesheet">
-
+<!-- 결제수단/마이페이지 슬라이드다운 -->
+<script src="resources/js/bootstrap.bundle.min.js"></script>
 <!-- Custom styles for this template -->
 <link href="resources/css/modern-business.css" rel="stylesheet">
 
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+<!-- 폰트 -->
+<link
+	href="https://fonts.googleapis.com/css?family=Sunflower:300&display=swap"
+	rel="stylesheet">
+
+<style>
+*, a, h1 {
+	font-family: 'Sunflower';
+}
+</style>
+
 </head>
 <body>
 	<!-- Navigation -->
@@ -52,8 +62,9 @@
 	<nav
 		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
 		<div class="container">
-			<a class="navbar-brand" href="index.jsp"><img
-				src="resources/images/logo.png" alt="logo" style="width: 120px;"></a>
+			<a class="navbar-brand" href="index.jsp"> <img
+				src="resources/images/logo.png" alt="logo" style="width: 120px;">
+			</a>
 			<button class="navbar-toggler navbar-toggler-right" type="button"
 				data-toggle="collapse" data-target="#navbarResponsive"
 				aria-controls="navbarResponsive" aria-expanded="false"
@@ -90,10 +101,13 @@
 					<li class="nav-item active dropdown"><a
 						class="nav-link dropdown-toggle" href="MyPage.jsp"
 						id="navbarDropdownBlog" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false"> <%=m.getUSER_NICKNAME()%> </a>
+						aria-haspopup="true" aria-expanded="false"> <img
+							style="width: 25px; height: 25px;"
+							src="resources/images/Rank/<%=m.getRANK()%>.png" alt=""><%=m.getUSER_NICKNAME()%>
+					</a>
 						<div class="dropdown-menu dropdown-menu-right"
 							aria-labelledby="navbarDropdownBlog">
-							<a class="dropdown-item" href="MyPage.jsp">계정 설정</a> <a
+							<a class="dropdown-item" href="MyPage.jsp">나의 정보</a> <a
 								class="dropdown-item" href="MyPage.jsp">주문 확인</a> <a
 								class="dropdown-item" href="index.jsp" onclick='logout()'>로그아웃</a>
 						</div></li>

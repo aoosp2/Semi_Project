@@ -12,7 +12,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
-
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <title>마이페이지</title>
 
 
@@ -21,39 +21,51 @@
 
 <body>
 	<%@ include file="views/common/header.jsp"%>
-
+	<br>
 	<!-- Page Content -->
 	<div class="container">
-		<br>
+
 		<!-- Page Heading/Breadcrumbs -->
-		<h1 class="mt-4 mb-3">마이페이지</h1>
+		<h1 class="mt-4 mb-3">
+			나의 정보
+		</h1>
 
 		<ol class="breadcrumb">
 			<li class="breadcrumb-item"><a href="index.jsp">Home</a></li>
-			<li class="breadcrumb-item active">계정설정&주문확인</li>
+			<li class="breadcrumb-item active">나의 정보 & 주문 확인</li>
 		</ol>
-
 		<br>
-
 		<div
 			style="border-style: dotted; width: 450px; height: 250px; border-radius: 10px; width: 700px; margin: 0 auto;">
 			<br>
 			<div>
 				<div style="display: flex; align-content: center;">
-					<div style="margin-left: 30px">
-						<img src="resources/images/boy.png" style="width: 120px;">
+					<div style="margin-left: 65px">
+						<img style="width: 100px; height: 100px;"
+							src="resources/images/Rank/<%=m.getRANK()%>.png" alt="">
 					</div>
-					<div>
-						닉네임 :
-						<%=m.getUSER_NICKNAME()%></div>
+					<div
+						style="margin-left: 65px; margin-top: 20px;font-size: 40px;">
+						<%=m.getUSER_NICKNAME()%>
+					</div>
 				</div>
-
-				<br>
-				<div style="margin-left: 65px"><%=m.getRANK()%></div>
+				<br> <br>
+				<div style="margin-left: 30px; margin-right: 30px;">
+					<div class="w3-light-grey w3-round-xlarge">
+						<div class="w3-container w3-blue w3-round-xlarge w3-center"
+							style="width: 25%;">25%</div>
+					</div>
+					<div style="display: flex">
+						<p>Bronze 
+						<p style="margin-left: 40%;">Silver
+						<p style="margin-left: 40%;">Gold
+					</div>
+				</div>
 			</div>
+			<br>
 		</div>
 
-		<br>
+		<br> <br>
 		<hr style="border: 5px solid gray;">
 		<br>
 
@@ -72,51 +84,53 @@
 							onmouseout="this.style.color='#a6a6a6'" data-toggle="collapse"
 							data-parent="#accordion" href="#collapseOne"
 							aria-expanded="false" aria-controls="collapseOne"
-							class="collapsed">&nbsp; <b>계정 설정</b></a>
+							class="collapsed">&nbsp; <b>나의 정보</b></a>
 					</h5>
 				</div>
 				<div id="collapseOne" class="collapse" role="tabpanel"
 					aria-labelledby="headingOne">
 					<div class="card-body">
-						<br>
-						<ul class="edit"
-							style="list-style-type: none; text-align: right;">
-							<table align="center";>
+
+						<div style="margin-left: 5%;">고객님께서 가입하신 헬로,지.상.갑 회원 정보입니다.<br>
+						          안전한 배송 안내를 위하여 핸드폰 번호와 이메일 주소를 필히 확인 부탁드립니다</div>
+						          						<br>
+						<ul class="edit" style="list-style-type: none;">
+							<table align="center" style="font-family: Lucida Console; font-size: 20px;">
 								<tr>
-									<td width="200px">* 이름:</td>
+									<td width="250px">계정</td>
+									<td width="200px">이름</td>
 									<td style="text-align: left; padding-left: 20px;"><%=m.getUSER_NAME()%></td>
-									<td width="200px"></td>
 								</tr>
-								<tr>
-									<td width="200px">* 아이디:</td>
+								<tr style="border-bottom: 1px solid lightgray;">
+									<td width="250px"></td>
+									<td width="200px" height="45px">아이디</td>
 									<td style="text-align: left; padding-left: 20px;"><%=m.getUSER_ID()%></td>
+
+								</tr>
+								<tr style="border-bottom: 1px solid lightgray; height: 45px;">
+									<td width="250px">닉네임</td>
+									<td style="text-align: left;"><%=m.getUSER_NICKNAME()%></td>
 									<td width="200px"></td>
 								</tr>
-								<tr>
-									<td width="200px">* 닉네임:</td>
-									<td style="text-align: left; padding-left: 20px;"><%=m.getUSER_NICKNAME()%></td>
+								<tr style="border-bottom: 1px solid lightgray; height: 45px;">
+									<td width="250px">전화번호</td>
+									<td style="text-align: left;"><%=m.getUSER_PHONE()%></td>
 									<td width="200px"></td>
 								</tr>
-								<tr>
-									<td width="200px">* 전화번호:</td>
-									<td style="text-align: left; padding-left: 20px;"><%=m.getUSER_PHONE()%></td>
-									<td width="200px"></td>
+								<tr style="border-bottom: 1px solid lightgray; height: 45px;">
+									<td width="250px">이메일</td>
+									<td colspan="2"  style="text-align: left;"><%=m.getUSER_EMAIL()%></td>
 								</tr>
-								<tr>
-									<td width="200px">* 이메일:</td>
-									<td style="text-align: left; padding-left: 20px;"><%=m.getUSER_EMAIL()%></td>
-									<td width="200px"></td>
-								</tr>
-								<tr>
-									<td width="200px">* 주소:</td>
-									<td style="text-align: left; padding-left: 20px;"><%=m.getUSER_ADDRESS()%></td>
-									<td width="200px"></td>
+								<tr style="height: 45px;">
+									<td width="250px">주소</td>
+									<td colspan="2" style="text-align: left;"><%=m.getUSER_ADDRESS()%></td>
 								</tr>
 							</table>
 
 						</ul>
 						<div class="btns" align="center">
-							<a href="MyPage_Update.jsp" class="btn btn-primary" style="width: 140px;" button="">수정하기</a>
+							<a href="MyPage_Update.jsp" class="btn btn-primary"
+								style="width: 140px;" button="">수정하기</a>
 						</div>
 					</div>
 				</div>
@@ -148,7 +162,7 @@
 	<!-- /.container -->
 	<br>
 	<br>
-
+	<br>
 	<%@ include file="views/common/footer.jsp"%>
 
 </body>
