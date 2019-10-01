@@ -1,5 +1,5 @@
 	<%@ page language="java" contentType="text/html; charset=UTF-8"
-		pageEncoding="EUC-KR"%>
+		pageEncoding="UTF-8"%>
 	<!DOCTYPE html>
 	<html lang="en">
 	
@@ -11,7 +11,7 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 	
-	<title>¡ˆ.ªÛ.∞©</title>
+	<title>ÏßÄ.ÏÉÅ.Í∞ë</title>
 	
 	<!-- Bootstrap core CSS -->
 	<link href="resources/css/bootstrap.min.css" rel="stylesheet">
@@ -78,12 +78,11 @@
 		</header>
 	
 		<!-- Page Content -->
-		<br>
 		<div class="container">
 			<div class="row">
 	
 				<div class="ih-item square effect13 left_to_right">
-					<a href="ShopList.jsp"> <img src="resources/images/«—Ωƒ.png"
+					<a href="category.go?category=ÌïúÏãù"> <img src="resources/images/ÌïúÏãù.png"
 						alt="img" class="img"
 						style="position: inherit; top: 0; left: 0; width: 100%; height: 100%; border-radius: 8px;">
 						<div class="info">
@@ -94,7 +93,7 @@
 				</div>
 	
 				<div class="ih-item square effect13 left_to_right">
-					<a href="ShopList.html"> <img src="resources/images/¿œΩƒ.jpg"
+					<a href="category.go?category=Ï¶êÏ∞æ"> <img src="resources/images/ÏùºÏãù.jpg"
 						alt="korean" class="img"
 						style="position: inherit; top: 0; left: 0; width: 100%; height: 100%; border-radius: 8px;">
 						<div class="info">
@@ -105,7 +104,7 @@
 				</div>
 	
 				<div class="ih-item square effect13 left_to_right">
-					<a href="ShopList.html"> <img src="resources/images/¡ﬂΩƒ.jpg"
+					<a href="category.go?category=Ï§ëÏãù"> <img src="resources/images/Ï§ëÏãù.jpg"
 						alt="korean" class="img"
 						style="position: inherit; top: 0; left: 0; width: 100%; height: 100%; border-radius: 8px;">
 						<div class="info">
@@ -116,7 +115,7 @@
 				</div>
 	
 				<div class="ih-item square effect13 left_to_right">
-					<a href="ShopList.html"> <img src="resources/images/««¿⁄.jfif"
+					<a href="category.go?category=ÌîºÏûê"> <img src="resources/images/ÌîºÏûê.jfif"
 						alt="korean" class="img"
 						style="position: inherit; top: 0; left: 0; width: 100%; height: 100%; border-radius: 8px;">
 						<div class="info">
@@ -127,7 +126,7 @@
 				</div>
 	
 				<div class="ih-item square effect13 left_to_right">
-					<a href="ShopList.html"> <img src="resources/images/ƒ°≈≤.jpg"
+					<a href="category.go?category=ÏπòÌÇ®"> <img src="resources/images/ÏπòÌÇ®.jpg"
 						alt="korean" class="img"
 						style="position: inherit; top: 0; left: 0; width: 100%; height: 100%; border-radius: 8px;">
 						<div class="info">
@@ -138,7 +137,7 @@
 				</div>
 	
 				<div class="ih-item square effect13 left_to_right">
-					<a href="ShopList.html"> <img src="resources/images/¡∑πﬂ.jpg"
+					<a href="category.go?category=Ï°±Î∞ú"> <img src="resources/images/Ï°±Î∞ú.jpg"
 						alt="korean" class="img"
 						style="position: inherit; top: 0; left: 0; width: 100%; height: 100%; border-radius: 8px;">
 						<div class="info">

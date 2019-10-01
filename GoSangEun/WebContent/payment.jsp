@@ -1,5 +1,13 @@
+<%@page import="model.vo.*"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%  ShopOrder sod = (ShopOrder)request.getAttribute("ShopOrder"); 
+   //Member m = (Member)session.getAttribute("member"); 
+    //System.out.println("payment"+m);
+    // 장바구니 객체 - 주문내역
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,14 +19,13 @@
 
     <title>결제하기</title>
 
-   
-
     <!-- Custom styles for this template -->
     <link href="resources/css/payment.css" rel="stylesheet"><!-- 지우지 마세요!! -->
 </head>
 
 <body>
     
+    <%-- <%@ include file = "views/common/header_my.jsp" %> --%>
     <%@ include file = "views/common/header.jsp" %>
 
     <!-- Page Content -->
@@ -31,7 +38,7 @@
 
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="index.jsp">Home</a>
+                <a href="index_login.html">Home</a>
             </li>
             <li class="breadcrumb-item active">결제하기</li>
         </ol>
@@ -44,18 +51,20 @@
                 <div class="pay">
                     <h4 class="pay_header">배달정보</h4>
                         <div class="delivery_content">
+                           <input type="radio" name="radioTxt" id="radioChk" value="addAddr" style="margin-left: 50px;">&nbsp;&nbsp;새로 입력<br><br>
                             <div class="pay_h_txt">
                                 <label>주소</label>
                             </div>
-                            <input type="text" size="75" name="addr" value="서울특별시 강남구 역삼동 823-25 KH정보교육원 강남지원1관" readonly="readonly" disabled="disabled" style="float: left;"><br><br>
-                            <div class="pay_h_txt">
+                            <input type="text" size="75" name="addr" value="<%= m.getUSER_ADDRESS() %>" readonly="readonly" disabled="disabled" style="float: left;"><br><br>
+                            <!-- <input type="text" size="75" name="addr" value="서울특별시 강남구 역삼동 823-25 KH정보교육원 강남지원1관" readonly="readonly" disabled="disabled" style="float: left;"> -->
+                            <!-- <div class="pay_h_txt">
                                 <label></label>
-                            </div>
-                            <input type="text" size="75" name="addr_detail" placeholder="(필수) 상세주소 입력" required="required"><br><br>
+                            </div> -->
+                            <!-- <input type="text" size="75" name="addr_detail" placeholder="(필수) 상세주소 입력" required="required"> -->
                             <div class="pay_h_txt">
                                 <label>핸드폰</label>
                             </div>
-                            <input type="text" size="75" required="required">
+                            <input type="text" size="75" required="required" value="<%= m.getUSER_PHONE() %>" >
                             <!-- 핸드폰 번호만 입력되도록, 안심번호 클릭 -->
                         </div>
                         <br>
@@ -128,7 +137,7 @@
                                                         
                                                         <li style = "margin-left : -300px;">
                                                             <br><br><br>
-                                                            카드비밀번호 :&nbsp;
+                                                                  카드비밀번호 :&nbsp;
                                                             <input type="password" class="cardnum" name="cardnum6" style="width:50px; text-align:center;" maxlength="4" oninput="maxLengthCheck(this)"/>
                     
                                                         </li>
@@ -152,7 +161,7 @@
                                             </div>
                                             <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
                                                 <div class="card-body">
-                                                    현장에서 결제
+                                                       현장에서 결제
                                                 </div>
                                             </div>
                                         </div>
@@ -191,12 +200,43 @@
                     </div>
                 </div>
                 <div class="order-button">
-                    <button class="btn btn-secondary" type="button" onclick="location.href='ordercompt.html'" style="width: 350px;">주문하기</button>
+                    <button class="btn btn-secondary" type="button" onclick="location.href='oInsert.go'" style="width: 350px;">주문하기</button>
                 </div>
             </div>
         </div>
     </div>
     <!-- /.container -->
+    
+    <script>
+       $(function(){
+          var beforeChecked = -1;
+          $('#radioChk').click(function() {
+               /* var checked = $(this).attr('checked', true);
+               //$(this).prop('checked', false);
+               if(checked){ 
+                 $(this).attr('checked', false);
+               }
+               else{ 
+                 $(this).attr('checked', true);
+               } 
+             }); */
+          
+//            $("input:radio[name='radioTxt']:radio[value='VALUE']").attr("checked", true);
+//         $("input:radio[name='radioTxt'].removeAttr("checked");
+              
+             /*  $(document).on("click", "input[type=radio]", function(e) {
+                  
+                  var index = $(this).parent().index("label");
+                  if(beforeChecked == index) {
+                  beforeChecked = -1;
+                  $(this).prop("checked", false);
+                  
+                  }else{
+                  beforeChecked = index;
+                  } */
+           // });
+        });
+    </script>
 
    
     <%@ include file = "views/common/footer.jsp" %>

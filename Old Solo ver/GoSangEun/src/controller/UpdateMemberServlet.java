@@ -36,11 +36,11 @@ public class UpdateMemberServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		// 회원 정보 수정용 데이터 불러오기
-		String USER_NICKNAME = request.getParameter("USER_NICKNAME");
-		String USER_PASSWORD = request.getParameter("USER_PASSWORD");
-		String USER_PHONE = request.getParameter("USER_PHONE");
-		String USER_EMAIL = request.getParameter("USER_EMAIL");
-		String USER_ADDRESS = request.getParameter("USER_ADDRESS");
+		String USER_NICKNAME = request.getParameter("nickname");
+		String USER_PASSWORD = request.getParameter("password");
+		String USER_PHONE = request.getParameter("phone");
+		String USER_EMAIL = request.getParameter("email");
+		String USER_ADDRESS = request.getParameter("address");
 
 		// 해당 회원을 구분짓는 ID 받아오기
 		HttpSession session = request.getSession(false);
@@ -60,16 +60,14 @@ public class UpdateMemberServlet extends HttpServlet {
 
 		if (ms.updateMember(m) > 0) {
 			// 회원 정보 수정 성공!
-
 			System.out.println("회원 정보 수정 완료!");
 
-			session.invalidate();
-
-			RequestDispatcher view = request.getRequestDispatcher("views/login.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("MyPage.jsp");
 
 			view.forward(request, response);
 		} else {
 			// 회원 정보 수정 실패!
+			System.out.println("수정실패!!!!!");
 			response.sendRedirect("views/common/errorPage.jsp");
 		}
 	}
