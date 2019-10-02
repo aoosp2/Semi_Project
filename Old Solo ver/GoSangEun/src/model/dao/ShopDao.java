@@ -14,6 +14,7 @@ import static common.JDBCTemplate.*;
 import model.vo.Review;
 import model.vo.Shop;
 import model.vo.ShopMenu;
+import model.vo.ShopOrder;
 
 /**
  * 
@@ -354,5 +355,46 @@ public int updateShopPoint(Connection con, int shopId) {
 	}
 	
 	return result;
+}
+
+public ArrayList<ShopOrder> selectShopOrderList(Connection con, String uSER_ID) {
+	ArrayList<ShopOrder> list = new ArrayList<ShopOrder>();
+	ShopOrder so = null;
+	PreparedStatement pstmt = null;
+	ResultSet rset = null;
+	
+	String sql = prop.getProperty("selectShopOrderList");
+	
+	try {
+		pstmt = con.prepareStatement(sql);
+		
+		pstmt.setString(1, uSER_ID);
+		
+		rset = pstmt.executeQuery();
+		
+		while(rset.next()) {
+			so = new ShopOrder();
+			
+			so.setMenuName(rset.getString("MENU_NAME"));
+			so.setMenuNo(rset.getInt("MENU_NO"));
+			so.setOrderAddr(rset.getString("USER_ADDRESS"));
+			so.setOrderCheck(rset.getString("ORDER_CHECK"));
+			so.setOrderCount(rset.getInt("ORDER_COUNT"));
+			so.setOrderId(rset.getInt("ORDER_NO"));
+			so.setOrderInfo(rset.getString("ORDER_INFO"));
+			so.setOrderSum(rset.getInt("ORDER_SUM"));
+			so.setShopId(rset.getInt("SHOP_ID"));
+			so.setUserId(uSER_ID);
+			
+			list.add(so);
+		}
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		close(rset);
+		close(pstmt);
+	}
+	
+	return list;
 }
 }

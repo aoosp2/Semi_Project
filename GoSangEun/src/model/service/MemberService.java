@@ -39,7 +39,7 @@ public class MemberService {
 			commit(con);
 		else
 			rollback(con);
-		
+
 		close(con);
 
 		return result;
@@ -72,5 +72,6 @@ public class MemberService {
 
 		return result;
 	}
+
 
 }

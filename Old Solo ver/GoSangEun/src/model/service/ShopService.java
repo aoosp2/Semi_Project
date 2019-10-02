@@ -12,6 +12,7 @@ import model.dao.ShopDao;
 import model.vo.Review;
 import model.vo.Shop;
 import model.vo.ShopMenu;
+import model.vo.ShopOrder;
 
 /**
  * 
@@ -158,6 +159,16 @@ public class ShopService {
 		close(con);
 
 		return result;
+	}
+
+	public ArrayList<ShopOrder> selectShopOrderList(String uSER_ID) {
+		con = getConnection();
+		
+		ArrayList<ShopOrder> list = sDao.selectShopOrderList(con,uSER_ID);
+		
+		close(con);
+		
+		return list;
 	}
 
 }

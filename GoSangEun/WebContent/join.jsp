@@ -46,7 +46,7 @@ div.row {
 									<input type="text" class="form-control" name="USER_ID"
 										id="USER_ID" style="width: 87%">&nbsp;&nbsp;&nbsp; <input
 										type="button" name="confirm_id" value="중복확인"
-										onclick="openConfirmid(this.form)"
+										class="btn btn-primary" onclick="openConfirmid(this.form)"
 										style="border-radius: 4px; border: 1px solid;" />
 								</div>
 							</div>

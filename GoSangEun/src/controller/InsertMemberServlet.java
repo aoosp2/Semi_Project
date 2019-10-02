@@ -70,6 +70,8 @@ public class InsertMemberServlet extends HttpServlet {
 		} else {
 			// 회원 가입 실패
 			System.out.println("실패");
+			
+			response.sendRedirect("joinF.jsp");
 
 		}
 

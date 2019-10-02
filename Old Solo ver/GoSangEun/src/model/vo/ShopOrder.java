@@ -40,6 +40,21 @@ public class ShopOrder implements Serializable {
 	}
 
 
+	public ShopOrder(int orderId, int shopId, int menuNo, String menuName, int orderCount, int orderSum,
+			String orderInfo, String orderCheck, String orderAddr) {
+		super();
+		this.orderId = orderId;
+		this.shopId = shopId;
+		this.menuNo = menuNo;
+		this.menuName = menuName;
+		this.orderCount = orderCount;
+		this.orderSum = orderSum;
+		this.orderInfo = orderInfo;
+		this.orderCheck = orderCheck;
+		this.orderAddr = orderAddr;
+	}
+
+
 	public ShopOrder(int orderId, int shopId, String userId, int menuNo, String menuName, int orderCount, int orderSum,
 			String orderInfo, String orderCheck, String orderAddr) {
 		super();
@@ -51,6 +66,20 @@ public class ShopOrder implements Serializable {
 		this.orderCount = orderCount;
 		this.orderSum = orderSum;
 		this.orderInfo = orderInfo;
+		this.orderCheck = orderCheck;
+		this.orderAddr = orderAddr;
+	}
+
+
+	public ShopOrder(int orderId, int shopId, int menuNo, String menuName, int orderCount, int orderSum,
+			String orderCheck, String orderAddr) {
+		super();
+		this.orderId = orderId;
+		this.shopId = shopId;
+		this.menuNo = menuNo;
+		this.menuName = menuName;
+		this.orderCount = orderCount;
+		this.orderSum = orderSum;
 		this.orderCheck = orderCheck;
 		this.orderAddr = orderAddr;
 	}

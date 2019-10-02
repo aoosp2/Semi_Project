@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,7 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.service.MemberService;
+import model.service.ShopService;
 import model.vo.Member;
+import model.vo.ShopOrder;
 
 /**
  * Servlet implementation class login
@@ -57,6 +60,14 @@ public class LoginServlet extends HttpServlet {
 
          // 로그인 정보 유지하기
          HttpSession session = request.getSession();
+         
+         ArrayList<ShopOrder> so = new ShopService().selectShopOrderList(USER_ID);
+         
+         if (so != null) {
+        	 session.setAttribute("ShopOrder", so);
+         }else {
+        	 System.out.println("장바구니 불러오기 실패!");
+         }
 
          session.setAttribute("member", m);
 

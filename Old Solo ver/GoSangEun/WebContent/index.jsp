@@ -6,24 +6,11 @@
 <head>
 
 <meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
 
 <title>지.상.갑</title>
-
-<!-- Bootstrap core CSS -->
-<link href="resources/css/bootstrap.min.css" rel="stylesheet">
-<link href="resources/vendor/src/ihover.css" rel="stylesheet">
-<!-- 이미지 슬라이더 관련 -->
-<script src="resources/jquery/jquery.min.js"></script>
-<script src="resources/js/bootstrap.bundle.min.js"></script>
-<!-- 결제수단/마이페이지 슬라이드다운 -->
-<script src="resources/js/bootstrap.bundle.min.js"></script>
-<!-- CSS font -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
 
