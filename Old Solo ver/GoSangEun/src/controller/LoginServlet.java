@@ -48,8 +48,6 @@ public class LoginServlet extends HttpServlet {
       m = ms.loginMember(m);
 
       System.out.println("m result : " + m);
-
-      String page = "";
       
       if (m != null) {
          // 로그인 성공!!
@@ -67,11 +65,9 @@ public class LoginServlet extends HttpServlet {
       } else {
          System.out.println("로그인 실패");
          
-         page = "loginF.jsp";
-         request.setAttribute("msg", "로그인 실패");
+         response.sendRedirect("loginF.jsp");
       }
       
-      request.getRequestDispatcher(page).forward(request, response);
    }
 
    /**

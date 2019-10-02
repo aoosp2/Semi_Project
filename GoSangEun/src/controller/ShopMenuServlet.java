@@ -35,27 +35,28 @@ public class ShopMenuServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		int shopId = Integer.parseInt(request.getParameter("shopId"));
-		
+
 		Shop s = new ShopService().selectShop(shopId);
-		
-		if(s != null) {
+
+		if (s != null) {
 			ArrayList<ShopMenu> list = new ShopService().selectShopMenu(shopId);
 			ArrayList<Review> rlist = new ShopService().selectReview(shopId);
-			if(list != null) {
+			if (rlist != null)
+				s = new ShopService().selectShop(shopId);
+			if (list != null) {
 				request.setAttribute("shop", s);
 				request.setAttribute("list", list);
 				request.setAttribute("rlist", rlist);
 				request.getRequestDispatcher("about.jsp").forward(request, response);
-			}else {
+			} else {
 				System.out.println("식당메뉴 조회실패!");
 			}
-		}else {
+		} else {
 			System.out.println("식당조회 실패!");
 		}
-		
-		
+
 	}
 
 	/**

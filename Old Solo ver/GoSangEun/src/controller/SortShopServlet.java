@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import model.service.ShopService;
 import model.vo.Shop;
 
@@ -32,12 +34,15 @@ public class SortShopServlet extends HttpServlet {
     */
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
       
-      String sort = request.getParameter("sort");
+	   
+	  response.setContentType("application/json; charset = UTF-8");
+	  
+	  String sort = request.getParameter("sort");
       String category = request.getParameter("category");
       
       
       String sortCol = "";
-      String cateCode = "";
+      
       
       System.out.println("정렬 기준 : " + sort);
       System.out.println("sort category : " + category);
@@ -45,49 +50,22 @@ public class SortShopServlet extends HttpServlet {
       ShopService ss = new ShopService();
       
       switch(sort) {
-      case "point"   : sortCol = "SHOP_POINT" ;
+      case "별점"   : sortCol = "point" ;
                    break;
-      case "minPrice" : sortCol = "SHOP_PRICE" ;
+      case "최소 배달 금액" : sortCol = "minPrice" ;
                    break;
-      case "dvTime"  : sortCol = "SHOP_DVTIME";
+      case "배달 시간"  : sortCol = "dvTime";
                    break;
       }
-      
-      switch(category) {
-      case "한식" : cateCode = "KO";
-                break;
-      case "중식" : cateCode = "CH";
-                break;
-      case "족발" : cateCode = "ZOK";
-                 break;
-      case "치킨" : cateCode = "CK";
-                 break;
-      case "피자" : cateCode = "PZ";
-                 break;
-      case "즐찾" : cateCode = ""; // 즐겨찾기는 더 생각해보깅
-                 break;
-      
-      }
+ 
       System.out.println("sortColumn : " + sortCol);
-      System.out.println("sort cateCode : " + cateCode);
+   
       
-      ArrayList<Shop> sList = ss.sortShop(sortCol , cateCode);
+      ArrayList<Shop> sList = ss.sortShop(sortCol , category);
       
-      String page = "";
+      new Gson().toJson(sList , response.getWriter());
       
-      if(sList != null) {
-         System.out.println("Servlet shopList : " + sList);
-         page = "shopList.jsp";
-         request.setAttribute("shopList", sList);
-      }
-      else {
-         page = "views/common/errorPage.jsp";
-         request.setAttribute("msg", "식당리스트 정렬 실패");
-         System.out.println("식당리스트 정렬 실패");
-         
-      }
       
-      request.getRequestDispatcher(page).forward(request, response);
       
       
    }
