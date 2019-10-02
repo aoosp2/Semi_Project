@@ -135,6 +135,7 @@ public class ShopDao {
             
             r.setNo(rset.getInt("REVIEW_NO"));
             r.setShopId(shopId);
+            r.setUserId(rset.getString("USER_ID"));
             r.setUserName(rset.getString("USER_NAME"));
             r.setInfo(rset.getString("REVIEW_INFO"));
             r.setPoint(rset.getInt("REVIEW_POINT"));
@@ -262,4 +263,74 @@ public class ShopDao {
       return sList;
       
    }
+
+public int insertReview(Connection con, int shopId, String info, String userId, String userName, int point) {
+	
+	int result = 0;
+	PreparedStatement pstmt = null;
+	
+	String sql = prop.getProperty("insertReview");
+	
+	try {
+		pstmt = con.prepareStatement(sql);
+		
+		pstmt.setInt(1, shopId);
+		pstmt.setString(2, userId);
+		pstmt.setString(3, userName);
+		pstmt.setString(4, info);
+		pstmt.setInt(5, point);
+		
+		result = pstmt.executeUpdate();
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		close(pstmt);
+	}
+	
+	return result;
+}
+
+public int updateReview(Connection con, int no, String info, int point) {
+	int result = 0;
+	PreparedStatement pstmt = null;
+	
+	String sql = prop.getProperty("updateReview");
+	
+	try {
+		pstmt = con.prepareStatement(sql);
+		
+		pstmt.setString(1, info);
+		pstmt.setInt(2, point);
+		pstmt.setInt(3, no);
+		
+		result=pstmt.executeUpdate();
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		close(pstmt);
+	}
+	
+	return result;
+}
+
+public int deleteReview(Connection con, int no) {
+	int result = 0;
+	PreparedStatement pstmt = null;
+	
+	String sql = prop.getProperty("deleteReview");
+	
+	try {
+		pstmt = con.prepareStatement(sql);
+		
+		pstmt.setInt(1, no);
+		
+		result = pstmt.executeUpdate();
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		close(pstmt);
+	}
+	
+	return result;
+}
 }

@@ -36,13 +36,11 @@ public class ShopReviewServlet extends HttpServlet {
 		String userId = request.getParameter("userId");
 		String userName = request.getParameter("userName");
 		int point = Integer.parseInt(request.getParameter("Point"));
-		ArrayList<Review> rlist = (ArrayList<Review>) request.getParameter("rlist");
 		
 		int result = new ShopService().insertReview(shopId,Info,userId,userName,point);
 		
 		if(result > 0) {
 			System.out.println("리뷰작성 성공");
-			
 			response.sendRedirect("/GoSangEun/Menu.s?shopId="+shopId);
 		}else {
 			System.out.println("리뷰작성 실패!");

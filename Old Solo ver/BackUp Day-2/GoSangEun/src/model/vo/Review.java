@@ -15,14 +15,16 @@ public class Review implements Serializable {
 
 	private int no;
 	private int shopId;
+	private String userId;
 	private String userName;
 	private String info;
 	private int point;
 
-	public Review(int no, int shopId, String userName, String info, int point) {
+	public Review(int no, int shopId, String userId, String userName, String info, int point) {
 		super();
 		this.no = no;
 		this.shopId = shopId;
+		this.userId = userId;
 		this.userName = userName;
 		this.info = info;
 		this.point = point;
@@ -42,6 +44,14 @@ public class Review implements Serializable {
 
 	public void setShopId(int shopId) {
 		this.shopId = shopId;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 	public String getUserName() {
@@ -70,8 +80,8 @@ public class Review implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Review [no=" + no + ", shopId=" + shopId + ", userName=" + userName + ", info=" + info + ", point="
-				+ point + "]";
+		return "Review [no=" + no + ", shopId=" + shopId + ", userId=" + userId + ", userName=" + userName + ", info="
+				+ info + ", point=" + point + "]";
 	}
 
 }

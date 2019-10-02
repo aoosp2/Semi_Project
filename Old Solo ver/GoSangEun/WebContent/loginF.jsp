@@ -27,6 +27,7 @@ body{
 	<a href="index.jsp" class="btn btn-primary" style="width: 140px;"button">메인 페이지</a>
 	</div>
 	<br><br><br><br>
+	
 
 	<%@ include file="views/common/footer.jsp"%>
 </body>

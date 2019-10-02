@@ -9,20 +9,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import model.service.ShopService;
-import model.vo.Review;
+import model.vo.Shop;
 
 /**
- * Insert문 리뷰
+ * Servlet implementation class CategoryBarServlet
  */
-@WebServlet("/Review.s")
-public class ShopReviewServlet extends HttpServlet {
+@WebServlet("/cBar.go")
+public class CategoryBarServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ShopReviewServlet() {
+    public CategoryBarServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,22 +33,39 @@ public class ShopReviewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int shopId = Integer.parseInt(request.getParameter("shopId"));
-		String Info = request.getParameter("Info");
-		String userId = request.getParameter("userId");
-		String userName = request.getParameter("userName");
-		int point = Integer.parseInt(request.getParameter("Point"));
-		ArrayList<Review> rlist = (ArrayList<Review>) request.getParameter("rlist");
 		
-		int result = new ShopService().insertReview(shopId,Info,userId,userName,point);
+		response.setContentType("application/json; charset = UTF-8");
 		
-		if(result > 0) {
-			System.out.println("리뷰작성 성공");
-			
-			response.sendRedirect("/GoSangEun/Menu.s?shopId="+shopId);
-		}else {
-			System.out.println("리뷰작성 실패!");
+		String category = request.getParameter("category");
+		String cateCode = "";
+		
+		switch(category) {
+		case "한식" : cateCode = "KO";
+					 break;
+		case "중식" : cateCode = "CH";
+					 break;
+		case "족발" : cateCode = "ZOK";
+		 			 break;
+		case "치킨" : cateCode = "CK";
+		 			 break;
+		case "피자" : cateCode = "PZ";
+		 			 break;
+		case "즐찾" : cateCode = ""; // 즐겨찾기는 더 생각해보깅
+		 			 break;
+		
 		}
+		
+		System.out.println("cBar category : " + category);
+		System.out.println("cBar cateCode : " + cateCode);
+		
+		ShopService ss = new ShopService();
+				
+		ArrayList<Shop> shopList = ss.selectShopList(cateCode);
+
+		new Gson().toJson(shopList, response.getWriter());
+		
+		
+		
 	}
 
 	/**

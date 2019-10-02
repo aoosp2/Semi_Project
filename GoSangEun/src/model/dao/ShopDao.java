@@ -64,7 +64,7 @@ public class ShopDao {
             s.setShopTime(rset.getString("SHOP_TIME"));
             s.setShopInfo(rset.getString("SHOP_INFO"));
             s.setShopAddr(rset.getString("SHOP_ADDRESS"));
-            s.setPoint(rset.getInt("SHOP_POINT"));
+            s.setPoint(rset.getDouble("SHOP_POINT"));
             s.setMinPrice(rset.getInt("SHOP_PRICE"));
             s.setDvTime(rset.getInt("SHOP_DVTIME"));
             s.setDvPrice(rset.getInt("SHOP_DVPRICE"));
@@ -202,67 +202,67 @@ public class ShopDao {
    }
 
    public ArrayList<Shop> sortShop(Connection conn, String sortCol , String cateCode){
-      
-      PreparedStatement pstmt = null;
-      ResultSet rset = null;
-      ArrayList<Shop> sList = new ArrayList<>();
-      Shop shop = null;
-      String sql = "";
-      
-      System.out.println("Dao sortColumn 확인 : " + sortCol);
-      System.out.println("Dao cateCode 확인 : " + cateCode);
-      
-      if(sortCol.equals("SHOP_POINT")) {
-         sql = prop.getProperty("sortPoint");
-      }
-      else if(sortCol.equals("SHOP_DVTIME")) {
-         sql = prop.getProperty("sortDVTIME");
-      }
-      else {
-         sql = prop.getProperty("sortminPrice");
-      }
-      
-      
-      try {
-         pstmt = conn.prepareStatement(sql);
-         
-         pstmt.setString(1, cateCode);
-         
-         rset = pstmt.executeQuery();
-         
-         while(rset.next()) {
-            shop = new Shop();
-            
-            shop.setShopId(rset.getInt("SHOP_ID"));
-            shop.setCategoryId(rset.getString("CATEGORY_CODE"));
-            shop.setShopName(rset.getString("SHOP_NAME"));
-            shop.setShopLogo(rset.getString("SHOP_LOGO"));
-            shop.setShopPhone(rset.getString("SHOP_PHONE"));
-            shop.setShopTime(rset.getString("SHOP_TIME"));
-            shop.setShopInfo(rset.getString("SHOP_INFO"));
-            shop.setShopAddr(rset.getString("SHOP_ADDRESS"));
-            shop.setPoint(rset.getDouble("SHOP_POINT"));
-            shop.setMinPrice(rset.getInt("SHOP_PRICE"));
-            shop.setDvTime(rset.getInt("SHOP_DVTIME"));
-            shop.setDvPrice(rset.getInt("SHOP_DVPRICE"));
-            
-            sList.add(shop);
-         }
-         
-         System.out.println("dao sList" + sList);
-         
-      }
-      catch(SQLException e) {
-         e.printStackTrace();
-      }
-      finally {
-         close(rset);
-         close(pstmt);
-      }
-      
-      return sList;
-      
-   }
+	      
+	      PreparedStatement pstmt = null;
+	      ResultSet rset = null;
+	      ArrayList<Shop> sList = new ArrayList<>();
+	      Shop shop = null;
+	      String sql = "";
+	      
+	      System.out.println("Dao sortColumn 확인 : " + sortCol);
+	      System.out.println("Dao cateCode 확인 : " + cateCode);
+	      
+	      if(sortCol.equals("point")) {
+	         sql = prop.getProperty("sortPoint");
+	      }
+	      else if(sortCol.equals("dvTime")) {
+	         sql = prop.getProperty("sortDVTIME");
+	      }
+	      else {
+	         sql = prop.getProperty("sortminPrice");
+	      }
+	      
+	      
+	      try {
+	         pstmt = conn.prepareStatement(sql);
+	         
+	         pstmt.setString(1, cateCode);
+	         
+	         rset = pstmt.executeQuery();
+	         
+	         while(rset.next()) {
+	            shop = new Shop();
+	            
+	            shop.setShopId(rset.getInt("SHOP_ID"));
+	            shop.setCategoryId(rset.getString("CATEGORY_CODE"));
+	            shop.setShopName(rset.getString("SHOP_NAME"));
+	            shop.setShopLogo(rset.getString("SHOP_LOGO"));
+	            shop.setShopPhone(rset.getString("SHOP_PHONE"));
+	            shop.setShopTime(rset.getString("SHOP_TIME"));
+	            shop.setShopInfo(rset.getString("SHOP_INFO"));
+	            shop.setShopAddr(rset.getString("SHOP_ADDRESS"));
+	            shop.setPoint(rset.getDouble("SHOP_POINT"));
+	            shop.setMinPrice(rset.getInt("SHOP_PRICE"));
+	            shop.setDvTime(rset.getInt("SHOP_DVTIME"));
+	            shop.setDvPrice(rset.getInt("SHOP_DVPRICE"));
+	            
+	            sList.add(shop);
+	         }
+	         
+	         System.out.println("dao sList" + sList);
+	         
+	      }
+	      catch(SQLException e) {
+	         e.printStackTrace();
+	      }
+	      finally {
+	         close(rset);
+	         close(pstmt);
+	      }
+	      
+	      return sList;
+	      
+	   }
 
 public int insertReview(Connection con, int shopId, String info, String userId, String userName, int point) {
 	
@@ -323,6 +323,28 @@ public int deleteReview(Connection con, int no) {
 		pstmt = con.prepareStatement(sql);
 		
 		pstmt.setInt(1, no);
+		
+		result = pstmt.executeUpdate();
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		close(pstmt);
+	}
+	
+	return result;
+}
+
+public int updateShopPoint(Connection con, int shopId) {
+	int result = 0;
+	PreparedStatement pstmt = null;
+	
+	String sql = prop.getProperty("updateShopPoint");
+	
+	try {
+		pstmt = con.prepareStatement(sql);
+		
+		pstmt.setInt(1, shopId);
+		pstmt.setInt(2, shopId);
 		
 		result = pstmt.executeUpdate();
 	} catch (SQLException e) {

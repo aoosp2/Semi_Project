@@ -183,7 +183,4 @@ public class ShopOrder implements Serializable {
 				+ orderInfo + ", orderCheck=" + orderCheck + ", orderAddr=" + orderAddr + "]";
 	}
 	
-	
-
-
 }
