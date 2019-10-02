@@ -127,12 +127,14 @@
 								<a href="#" class="text-right" style="color: red;" onclick="deleteOrderMenu();">취소</a>
 								<form action="/GoSangEun/OrderDelete.s" method="get" name="deleteOrder">
 									<input type="hidden" name="orderNo" value="<%= olist.get(i).getOrderId() %>">
-									<input type="hidden" name="reURI" value="<%= request.getContextPath()%><%= request.getServletPath() %>?<%= request.getQueryString() %>">
+									<input type="hidden" name="reURI">
 								</form>
 								<script>
 									function deleteOrderMenu() {
+										var returnURL = document.URL;
+										$('input[name="reURI"]').val(returnURL);
 										alert($('input[name=reURI]').val());
-										//$('form[name=deleteOrder]').submit();
+										$('form[name=deleteOrder]').submit();
 									}
 								</script>
 							</div>
