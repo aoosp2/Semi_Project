@@ -189,4 +189,17 @@ public class ShopService {
 		return result;
 	}
 
+	public int deleteShopOrder(int orderNo) {
+		con = getConnection();
+		int result = sDao.deleteShopOrder(con,orderNo);
+		
+		if(result > 0)
+			commit(con);
+		else
+			rollback(con);
+		
+		close(con);
+		return result;
+	}
+
 }

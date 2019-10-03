@@ -119,50 +119,55 @@
 							<%
 									int total = 0;
 								 for(int i=0; i<olist.size(); i++) { %>
-							<div class="card">
-								<div style="font-size: 20px;"><%= olist.get(i).getMenuName() %></div>
-								<div class="text-right" style="font-size: 20px;">
-									<%= olist.get(i).getOrderCount() %>개 :
-									&nbsp;&nbsp;<%= olist.get(i).getOrderSum() / olist.get(i).getOrderCount() %>원</div>
-								<a href="#" class="text-right" style="color: red;" onclick="deleteOrderMenu();">취소</a>
-								<form action="/GoSangEun/OrderDelete.s" method="get" name="deleteOrder">
+							<form action="/GoSangEun/OrderDelete.s" method="get" name="deleteOrder"
+								id="DeleteOrder<%= i %>">
+								<div class="card">
+									<div style="font-size: 20px;"><%= olist.get(i).getMenuName() %></div>
+									<div class="text-right" style="font-size: 20px;">
+										<%= olist.get(i).getOrderCount() %>개 :
+										&nbsp;&nbsp;<%= olist.get(i).getOrderSum() / olist.get(i).getOrderCount() %>원
+									</div>
+									<div class="text-right">
+										<input type="submit" value="취소" style="color: red; padding: 0; border: none; background: none;" onclick="deleteOrderMenu();">
+									</div>
 									<input type="hidden" name="orderNo" value="<%= olist.get(i).getOrderId() %>">
 									<input type="hidden" name="reURI">
-								</form>
-								<script>
-									function deleteOrderMenu() {
-										var returnURL = document.URL;
-										$('input[name="reURI"]').val(returnURL);
-										alert($('input[name=reURI]').val());
-										$('form[name=deleteOrder]').submit();
-									}
-								</script>
-							</div>
-							<% total += olist.get(i).getOrderSum(); %>
-							<% } %>
-							<hr>
-							<div class="card" style="color: red;">
-								<div style="font-size: 20px;">총 금액</div>
-								<div class="text-right" style="font-size: 35px;"><%= total %>원</div>
-							</div>
-							<a class="dropdown-item;" href="payment.jsp"
-								style="font-size: 20px; float: right; margin-right: 10px;">구매하기</a>
+									<input type="hidden" name="USER_ID" value="<%= m.getUSER_ID() %>">
+							</form>
+							<script>
+								function deleteOrderMenu() {
+									var returnURL = document.URL;
+									$('input[name="reURI"]').val(returnURL);
+									$(this).submit();
+								}
+
+							</script>
 						</div>
-					</li>
-					<li class="nav-item active dropdown">
-						<a class="nav-link dropdown-toggle" href="MyPage.jsp" id="navbarDropdownBlog"
-							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							<img style="width: 25px; height: 25px;" src="resources/images/Rank/<%=m.getRANK()%>.png"
-								alt=""><%=m.getUSER_NICKNAME()%>
-						</a>
-						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-							<a class="dropdown-item" href="MyPage.jsp">나의 정보</a>
-							<a class="dropdown-item" href="MyPage.jsp">주문 확인</a>
-							<a class="dropdown-item" onclick='logout()'>로그아웃</a>
+						<% total += olist.get(i).getOrderSum(); %>
+						<% } %>
+						<hr>
+						<div class="card" style="color: red;">
+							<div style="font-size: 20px;">총 금액</div>
+							<div class="text-right" style="font-size: 35px;"><%= total %>원</div>
 						</div>
-					</li>
-				</ul>
+						<a class="dropdown-item;" href="payment.jsp"
+							style="font-size: 20px; float: right; margin-right: 10px;">구매하기</a>
 			</div>
+			</li>
+			<li class="nav-item active dropdown">
+				<a class="nav-link dropdown-toggle" href="MyPage.jsp" id="navbarDropdownBlog" data-toggle="dropdown"
+					aria-haspopup="true" aria-expanded="false">
+					<img style="width: 25px; height: 25px;" src="resources/images/Rank/<%=m.getRANK()%>.png"
+						alt=""><%=m.getUSER_NICKNAME()%>
+				</a>
+				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
+					<a class="dropdown-item" href="MyPage.jsp">나의 정보</a>
+					<a class="dropdown-item" href="MyPage.jsp">주문 확인</a>
+					<a class="dropdown-item" onclick='logout()'>로그아웃</a>
+				</div>
+			</li>
+			</ul>
+		</div>
 		</div>
 	</nav>
 	<%

@@ -427,5 +427,24 @@ public class ShopDao {
 			
 }
 
+		public int deleteShopOrder(Connection con, int orderNo) {
+			int result = 0;
+			PreparedStatement pstmt = null;
+			
+			String sql = prop.getProperty("deleteShopOrder");
+			
+			try {
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, orderNo);
+				
+				result = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+			}
+			return result;
+		}
+
 	
 }
