@@ -170,5 +170,23 @@ public class ShopService {
 		
 		return list;
 	}
+	
+	public int updateMyshop(int userId , int shopId , String myShop) {
+		
+		Connection conn = getConnection();
+		
+		int result = sDao.updateMyshop(conn,userId,shopId , myShop);
+		
+		if(result > 0) {
+			commit(conn);
+		}
+		else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
 
 }

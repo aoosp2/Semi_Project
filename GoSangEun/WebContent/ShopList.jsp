@@ -7,6 +7,7 @@
    System.out.println(category);
    ArrayList<Shop> sList = (ArrayList<Shop>)request.getAttribute("shopList");
    System.out.println("jsp : " + sList);
+   
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,18 +43,19 @@
 
 		<div style="display: flex;">
 			<div class="col-lg-2" style="text-align: center;">
-				<a href="#" class="list-group-item" onclick="cateBar(this);">한식</a> <a
-					href="#" class="list-group-item" onclick="cateBar(this);">중식</a> <a
-					href="#" class="list-group-item" onclick="cateBar(this);">족발</a> <a
-					href="#" class="list-group-item" onclick="cateBar(this);">치킨</a> <a
-					href="#" class="list-group-item" onclick="cateBar(this);">피자</a> <a
-					href="#" class="list-group-item" onclick="cateBar(this);">나만의 메뉴</a>
+				<a href="#" class="list-group-item" onclick="cateBar(this);">한식</a>
+				<a href="#" class="list-group-item" onclick="cateBar(this);">중식</a>
+				<a href="#" class="list-group-item" onclick="cateBar(this);">족발</a>
+				<a href="#" class="list-group-item" onclick="cateBar(this);">치킨</a>
+				<a href="#" class="list-group-item" onclick="cateBar(this);">피자</a>
+				<a href="#" class="list-group-item" onclick="cateBar(this);">나만의
+					메뉴</a>
 			</div>
 
 			<div class="row view"
 				style="width: 780px;; height: 600px; overflow: hidden; border-color: white;">
 				<div class="row pre-scrollable myScroll"
-					style="width: 830px;; max-height: 600px; border-color: white; margin-right: -30px;">
+					id = "myScroll" style="width: 830px;; max-height: 600px; border-color: white; margin-right: -30px;">
 
 
 
@@ -119,24 +121,20 @@
 
 				</div>
 			</div>
-			
+
 			<div class="col-lg-2">
 
 				<div
 					style="border-radius: 5px; border: 0.5px solid gainsboro; margin-left: 9%;">
 					<h6 class="card-header" style="text-align: center">정렬 기준</h6>
 					<ul class="list-unstyled mb-0" style="text-align: center;">
-						<li style="margin-top: 20px;">
-							<a href="#" onclick = "sortBar(this);">별점</a>
-						</li>
+						<li style="margin-top: 20px;"><a href="#"
+							onclick="sortBar(this);">별점</a></li>
 						<br>
-						<li>
-							<a href="#" onclick = "sortBar(this);">최소 배달 금액</a>
-						</li>
+						<li><a href="#" onclick="sortBar(this);">최소 배달 금액</a></li>
 						<br>
-						<li style="margin-bottom: 20px;">
-							<a href="#" onclick = "sortBar(this);">배달 시간</a>
-						</li>
+						<li style="margin-bottom: 20px;"><a href="#"
+							onclick="sortBar(this);">배달 시간</a></li>
 					</ul>
 				</div>
 			</div>
@@ -144,7 +142,7 @@
 			<script>
 			
 				var sortCate = "";
-				
+				var idIndex = 0;
                 function defaultCheck() {
                    
                    var index = -1;
@@ -193,30 +191,67 @@
                     choice.innerHTML = change;
                     
                     var input = "";
+                    var src = "";
+                    var empty = "resources/images/shop/empty_star.png";
+                    var full = "resources/images/shop/full_star.png";
                     <% 
+                    	ArrayList myList = new ArrayList();
+                    	String[] myArr = null;
+                       if(m != null){
+                    	System.out.println("일단은 들어옴" + m.getMyShop());
+                    	if(m.getMyShop() != null){
+	                         myArr = m.getMyShop().split(",");
+	                    	
+		                    for(int i = 0 ; i < myArr.length ; i++) {
+		        				if(!myArr[i].equals("")) {
+		        					myList.add(Integer.parseInt(myArr[i]));
+		        				}
+		        			}
+		        					
+		        		   System.out.println("jsp myList : " + myList);	
+                    	}
+                       }
                        System.out.println(sList.size());
+                       
                        for (int i = 0; i < sList.size(); i++) { 
                           %>
                           
                        <%
+                       if(myList.contains(sList.get(i).getShopId())){
+                    	   System.out.println(sList.get(i).getShopId() + "는 즐겨찾기가 맞습니다");
+                       %>	   src =  full; <% 
+                       }
+                       else{
+                    	   System.out.println(sList.get(i).getShopId() + "는 즐겨찾기가 아니에요");
+                       %> 	   src = empty; <%
+                       }
                        if(sList.get(i).getShopId() >= 100) {
+                    	   
                        %>
                             input = '<div class="col-lg-11" style="border-radius: 5px; border: 0.5px solid gainsboro ; margin-left : 5%; margin-bottom: 23px;">' +
                                 '<div style="display: flex;">' +
                                 '<div style="margin-top: 25px; margin-left: 25px;">' +
                                 '<a href="#"><img class="img-fluid rounded" src="http://placehold.it/750x300" alt="" style="width : 150px; height : 150px;"></a>' +
                                 '</div>' +
-                                '<div style="margin-left: 30px;margin-top: 18px; width : 550px ; height : 100px;">' +
-                                '<h2 class="card-title shopName">' + "<%= sList.get(i).getShopName() %>" +
-                                '</h2>' +
+                                '<div style="margin-left: 30px;margin-top: 18px; width : 550px ; height : 100px; ">' +
+                                '<h2 class="card-title shopName" >' + "<%= sList.get(i).getShopName() %>" + '&nbsp;&nbsp;'+
+                                 
+                                '<a href="#" onclick = "insertMyshop(this);">' +  
+                                '<img src="' + src +'" style="width: 30px; height: 30px; border-radius: 8px;"> ' +
+                                '<input type="hidden" class = "shopI" id="shopId'+ <%= (i+1)%> +'" value="'+ <%= sList.get(i).getShopId()%>  +'">'+
+            					'</a> ' +
+            					'</h2>' +
                                 '<br>' +
                                 '<p class="card-text shopText">' + "<%= sList.get(i).getShopInfo() %> " +'</p>' +
                                 '<p class="card-text shopInfo">평점  : ' +"<%= sList.get(i).getPoint() %>" + '  최소 배달 금액  : ' + <%=sList.get(i).getMinPrice() %> +'원  소요시간: ' + "<%= sList.get(i).getDvTime() %>"+ '분' +'</p>' +
                                 '</div>' +
                                 '</div>' +
+                                
                                 '<div style="margin-top: 25px; margin-left: 3% ; float:right; margin-right : 20px; margin-bottom: 20px; ">' +
                                 '<a href="Menu.s?shopId=' + <%= sList.get(i).getShopId()%> + '" class="btn btn-primary more" ">&nbsp;&nbsp;&nbsp; More &rarr;&nbsp;&nbsp;</a>' +
+                                
                                 '</div>' +
+                                
                                 '</div>' ;
                             $(".myScroll").append(input);
                        <% } 
@@ -227,7 +262,11 @@
                             '<a href="#"><img class="img-fluid rounded shopImg"  src=' + "<%= sList.get(i).getShopLogo()%>" + ' style="width : 150px; height : 150px;"></a>' +
                             '</div>' +
                             '<div style="margin-left: 30px;margin-top: 18px; width : 550px ; height : 100px;">' +
-                            '<h2 class="card-title shopName">' + "<%= sList.get(i).getShopName() %>" +
+                            '<h2 class="card-title shopName" >' + "<%= sList.get(i).getShopName() %>" + '&nbsp;&nbsp;'+
+                            '<a href="#" onclick = "insertMyshop(this);">' +    
+                            '<img src="' + src +'" style="width: 30px; height: 30px; border-radius: 8px;"> ' +
+                            '<input type="hidden"  class = "shopI" id="shopId' + <%= (i+1)%> + '" value="'+<%= sList.get(i).getShopId()%> +'">'+
+        					'</a> ' +
                             '</h2>' +
                             '<br>' +
                             '<p class="card-text shopText">' + "<%= sList.get(i).getShopInfo() %> " +'</p>' +
@@ -242,6 +281,8 @@
                               $(".myScroll").append(input); 
                   <%}%>
                     <%}%>
+                    
+                    
                     
                 }
 
@@ -265,8 +306,15 @@
                 		   $(".myScroll").empty();
                 		   var str = "";
                 		   
-                		   var cateStr = data[0].categoryId;
-                		   switch(data[0].categoryId){
+                		   var cateStr = "";
+                		   if(obj.innerText == "나만의 메뉴"){
+                			   cateStr = "MY";
+                		   }
+                		   else{
+                			   cateStr = data[0].categoryId;
+                		   }
+                		   console.log("cateStr : " + cateStr);
+                		   switch(cateStr){
                 		   case "KO" : str = "한식";
                 		   			   index = 0;
                 		   			   sortCate = "KO";
@@ -287,7 +335,7 @@
                 		   			   index = 4;
                 		   			   sortCate = "PZ";
     		   			   			   break;
-    		   			   default 	 : str = "나만의 메뉴";
+                		   case "MY"  : str = "나만의 메뉴";
     		   			   			   index = 5;
     		   			   			   sortCate = "KO";
     		   			   			   break;
@@ -325,10 +373,37 @@
                             
                             
                             var input = "";
-                           
-                            console.log(typeof(data[0].shopId));
+                            var src = "";
+                            var empty = "resources/images/shop/empty_star.png";
+                            var full = "resources/images/shop/full_star.png";
+                       
+                            <%-- <% 
+                            if(m != null){
+                            String[] myArr1 = m.getMyShop().split(",");
+                        	ArrayList myList1 = new ArrayList();
+    	                    for(int i = 0 ; i < myArr1.length ; i++) {
+    	        				if(!myArr1[i].equals("")) {
+    	        					myList1.add(Integer.parseInt(myArr1[i]));
+    	        				}
+    	        			}
+    	        					
+    	        		   System.out.println("jsp myList1 : " + myList1);
+                            }
+                           %> --%>
+                          <%--  for (int i = 0; i < sList.size(); i++) { 
+                              %>
+                              
+                           <%
+                           if(myList.contains(sList.get(i).getShopId())){
+                        	   System.out.println(sList.get(i).getShopId() + "는 즐겨찾기가 맞습니다");
+                           %>	   src =  full; <% 
+                           }
+                           else{
+                        	   System.out.println(sList.get(i).getShopId() + "는 즐겨찾기가 아니에요");
+                           %> 	   src = empty;  --%>
+                            
                             for(var i = 0; i < data.length; i++) { 
-                                 
+                               
 	                               if(data[i].shopId >= 100) {
 	                             		console.log("더미입니다");
 	                                    input = '<div class="col-lg-11" style="border-radius: 5px; border: 0.5px solid gainsboro ; margin-left : 5%; margin-bottom: 23px;">' +
@@ -337,7 +412,11 @@
 	                                        '<a href="#"><img class="img-fluid rounded" src="http://placehold.it/750x300" alt="" style="width : 150px; height : 150px;"></a>' +
 	                                        '</div>' +
 	                                        '<div style="margin-left: 30px;margin-top: 18px; width : 550px ; height : 100px;">' +
-	                                        '<h2 class="card-title shopName">' + data[i].shopName +
+	                                        '<h2 class="card-title shopName">' + data[i].shopName + '&nbsp;&nbsp;'+ 
+	                                        '<a href="#" onclick = "insertMyshop();">' +  
+	                                        '<img src="resources/images/shop/empty_star.png" style="width: 30px; height: 30px; border-radius: 8px;"> ' +
+	                                        '<input type="hidden"  id="shopId" value="'+ data[i].shopId  +'">'+
+	                    					'</a> ' +
 	                                        '</h2>' +
 	                                        '<br>' +
 	                                        '<p class="card-text shopText">' + data[i].shopInfo +'</p>' +
@@ -358,7 +437,11 @@
 		                                    '<a href="#"><img class="img-fluid rounded shopImg"  src=' + data[i].shopLogo + ' style="width : 150px; height : 150px;"></a>' +
 		                                    '</div>' +
 		                                    '<div style="margin-left: 30px;margin-top: 18px; width : 550px ; height : 100px;">' +
-		                                    '<h2 class="card-title shopName">' + data[i].shopName +
+		                                    '<h2 class="card-title shopName">' + data[i].shopName +  '&nbsp;&nbsp;'+ 
+		                                    '<a href="#" onclick = "insertMyshop(this);">' +  
+		                                    '<img src="resources/images/shop/empty_star.png" style="width: 30px; height: 30px; border-radius: 8px;"> ' +
+		                                    '<input type="hidden"  id="shopId" value="'+ data[i].shopId  +'">'+
+		                					'</a> ' +
 		                                    '</h2>' +
 		                                    '<br>' +
 		                                    '<p class="card-text shopText">' + data[i].shopInfo +'</p>' +
@@ -388,6 +471,7 @@
                 	
                 	console.log(obj.innerText);
                 	console.log(sortCate);
+       
                 	console.log("category가 갈까요?");
                 	$.ajax({
                 		url : "/GoSangEun/sort.go" ,
@@ -477,7 +561,11 @@
  	                                        '<a href="#"><img class="img-fluid rounded" src="http://placehold.it/750x300" alt="" style="width : 150px; height : 150px;"></a>' +
  	                                        '</div>' +
  	                                        '<div style="margin-left: 30px;margin-top: 18px; width : 550px ; height : 100px;">' +
- 	                                        '<h2 class="card-title shopName">' + data[i].shopName +
+ 	                                        '<h2 class="card-title shopName">' + data[i].shopName +  '&nbsp;&nbsp;'+ 
+ 	                                       '<a href="#" onclick = "insertMyshop();">' +  
+ 	                                        '<img src="resources/images/shop/empty_star.png" style="width: 30px; height: 30px; border-radius: 8px;"> ' +
+ 	                                       '<input type="hidden"  id="shopId" value="'+ data[i].shopId  +'">'+
+ 	                  					    '</a> ' +
  	                                        '</h2>' +
  	                                        '<br>' +
  	                                        '<p class="card-text shopText">' + data[i].shopInfo +'</p>' +
@@ -498,7 +586,11 @@
  		                                    '<a href="#"><img class="img-fluid rounded shopImg"  src=' + data[i].shopLogo + ' style="width : 150px; height : 150px;"></a>' +
  		                                    '</div>' +
  		                                    '<div style="margin-left: 30px;margin-top: 18px; width : 550px ; height : 100px;">' +
- 		                                    '<h2 class="card-title shopName">' + data[i].shopName +
+ 		                                    '<h2 class="card-title shopName">' + data[i].shopName +  '&nbsp;&nbsp;'+ 
+ 		                                    '<a href="#" onclick = "insertMyshop();">' +   
+ 		                                    '<img src="resources/images/shop/empty_star.png" style="width: 30px; height: 30px; border-radius: 8px;"> ' +
+ 		                                    '<input type="hidden"  id="shopId" value="'+ data[i].shopId  +'">'+
+ 		              					    '</a> ' +
  		                                    '</h2>' +
  		                                    '<br>' +
  		                                    '<p class="card-text shopText">' + data[i].shopInfo +'</p>' +
@@ -523,10 +615,38 @@
                 	
                 	});
                 }
+                
+                function insertMyshop(obj){
+                	console.log(obj);
+                	console.log("lastchild : " + $(obj).children().last().attr('value'));
+                	console.log("건너뛰나?");
+                
+                	$.ajax({
+                 	   url : "/GoSangEun/myInsert.go" ,
+                 	   type : "get" ,
+                 	   data : {
+                 		 	shopId : $(obj).children().last().attr('value')
+                 	   } ,
+                 	   dataType : "TEXT",
+                 	   success : function(data){
+                 		   console.log(data);
+                 		  window.location.reload();
+                 		   
+                 	   } , 
+                 	   error : function(error ,errorcode){
+                 		   console.log("통신실패!!");
+                 		   console.log(error);
+                 		  console.log(error , errorcode);
+                 	   }
+                 	   
+                	});
+                	
+                	
+                }
 
             </script>
 
-			
+
 		</div>
 		<br>
 

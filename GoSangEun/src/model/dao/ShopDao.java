@@ -265,136 +265,167 @@ public class ShopDao {
 	      
 	   }
 
-public int insertReview(Connection con, int shopId, String info, String userId, String userName, int point) {
-	
-	int result = 0;
-	PreparedStatement pstmt = null;
-	
-	String sql = prop.getProperty("insertReview");
-	
-	try {
-		pstmt = con.prepareStatement(sql);
-		
-		pstmt.setInt(1, shopId);
-		pstmt.setString(2, userId);
-		pstmt.setString(3, userName);
-		pstmt.setString(4, info);
-		pstmt.setInt(5, point);
-		
-		result = pstmt.executeUpdate();
-	} catch (SQLException e) {
-		e.printStackTrace();
-	} finally {
-		close(pstmt);
-	}
-	
-	return result;
-}
-
-public int updateReview(Connection con, int no, String info, int point) {
-	int result = 0;
-	PreparedStatement pstmt = null;
-	
-	String sql = prop.getProperty("updateReview");
-	
-	try {
-		pstmt = con.prepareStatement(sql);
-		
-		pstmt.setString(1, info);
-		pstmt.setInt(2, point);
-		pstmt.setInt(3, no);
-		
-		result=pstmt.executeUpdate();
-	} catch (SQLException e) {
-		e.printStackTrace();
-	} finally {
-		close(pstmt);
-	}
-	
-	return result;
-}
-
-public int deleteReview(Connection con, int no) {
-	int result = 0;
-	PreparedStatement pstmt = null;
-	
-	String sql = prop.getProperty("deleteReview");
-	
-	try {
-		pstmt = con.prepareStatement(sql);
-		
-		pstmt.setInt(1, no);
-		
-		result = pstmt.executeUpdate();
-	} catch (SQLException e) {
-		e.printStackTrace();
-	} finally {
-		close(pstmt);
-	}
-	
-	return result;
-}
-
-public int updateShopPoint(Connection con, int shopId) {
-	int result = 0;
-	PreparedStatement pstmt = null;
-	
-	String sql = prop.getProperty("updateShopPoint");
-	
-	try {
-		pstmt = con.prepareStatement(sql);
-		
-		pstmt.setInt(1, shopId);
-		pstmt.setInt(2, shopId);
-		
-		result = pstmt.executeUpdate();
-	} catch (SQLException e) {
-		e.printStackTrace();
-	} finally {
-		close(pstmt);
-	}
-	
-	return result;
-}
-
-public ArrayList<ShopOrder> selectShopOrderList(Connection con, String uSER_ID) {
-	ArrayList<ShopOrder> list = new ArrayList<ShopOrder>();
-	ShopOrder so = null;
-	PreparedStatement pstmt = null;
-	ResultSet rset = null;
-	
-	String sql = prop.getProperty("selectShopOrderList");
-	
-	try {
-		pstmt = con.prepareStatement(sql);
-		
-		pstmt.setString(1, uSER_ID);
-		
-		rset = pstmt.executeQuery();
-		
-		while(rset.next()) {
-			so = new ShopOrder();
+		public int insertReview(Connection con, int shopId, String info, String userId, String userName, int point) {
 			
-			so.setMenuName(rset.getString("MENU_NAME"));
-			so.setMenuNo(rset.getInt("MENU_NO"));
-			so.setOrderAddr(rset.getString("USER_ADDRESS"));
-			so.setOrderCheck(rset.getString("ORDER_CHECK"));
-			so.setOrderCount(rset.getInt("ORDER_COUNT"));
-			so.setOrderId(rset.getInt("ORDER_NO"));
-			so.setOrderInfo(rset.getString("ORDER_INFO"));
-			so.setOrderSum(rset.getInt("ORDER_SUM"));
-			so.setShopId(rset.getInt("SHOP_ID"));
-			so.setUserId(uSER_ID);
+			int result = 0;
+			PreparedStatement pstmt = null;
 			
-			list.add(so);
+			String sql = prop.getProperty("insertReview");
+			
+			try {
+				pstmt = con.prepareStatement(sql);
+				
+				pstmt.setInt(1, shopId);
+				pstmt.setString(2, userId);
+				pstmt.setString(3, userName);
+				pstmt.setString(4, info);
+				pstmt.setInt(5, point);
+				
+				result = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			
+			return result;
 		}
-	} catch (SQLException e) {
-		e.printStackTrace();
-	} finally {
-		close(rset);
-		close(pstmt);
-	}
-	
-	return list;
+		
+		public int updateReview(Connection con, int no, String info, int point) {
+			int result = 0;
+			PreparedStatement pstmt = null;
+			
+			String sql = prop.getProperty("updateReview");
+			
+			try {
+				pstmt = con.prepareStatement(sql);
+				
+				pstmt.setString(1, info);
+				pstmt.setInt(2, point);
+				pstmt.setInt(3, no);
+				
+				result=pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			
+			return result;
+		}
+		
+		public int deleteReview(Connection con, int no) {
+			int result = 0;
+			PreparedStatement pstmt = null;
+			
+			String sql = prop.getProperty("deleteReview");
+			
+			try {
+				pstmt = con.prepareStatement(sql);
+				
+				pstmt.setInt(1, no);
+				
+				result = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			
+			return result;
+		}
+		
+		public int updateShopPoint(Connection con, int shopId) {
+			int result = 0;
+			PreparedStatement pstmt = null;
+			
+			String sql = prop.getProperty("updateShopPoint");
+			
+			try {
+				pstmt = con.prepareStatement(sql);
+				
+				pstmt.setInt(1, shopId);
+				pstmt.setInt(2, shopId);
+				
+				result = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			
+			return result;
+		}
+		
+		public ArrayList<ShopOrder> selectShopOrderList(Connection con, String uSER_ID) {
+			ArrayList<ShopOrder> list = new ArrayList<ShopOrder>();
+			ShopOrder so = null;
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			
+			String sql = prop.getProperty("selectShopOrderList");
+			
+			try {
+				pstmt = con.prepareStatement(sql);
+				
+				pstmt.setString(1, uSER_ID);
+				
+				rset = pstmt.executeQuery();
+				
+				while(rset.next()) {
+					so = new ShopOrder();
+					
+					so.setMenuName(rset.getString("MENU_NAME"));
+					so.setMenuNo(rset.getInt("MENU_NO"));
+					so.setOrderAddr(rset.getString("USER_ADDRESS"));
+					so.setOrderCheck(rset.getString("ORDER_CHECK"));
+					so.setOrderCount(rset.getInt("ORDER_COUNT"));
+					so.setOrderId(rset.getInt("ORDER_NO"));
+					so.setOrderInfo(rset.getString("ORDER_INFO"));
+					so.setOrderSum(rset.getInt("ORDER_SUM"));
+					so.setShopId(rset.getInt("SHOP_ID"));
+					so.setUserId(uSER_ID);
+					
+					list.add(so);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rset);
+				close(pstmt);
+			}
+			
+			return list;
+		}
+		
+		public int updateMyshop(Connection conn , int userId, int shopId , String myShop) {
+			
+			int result = 0;
+			
+			PreparedStatement pstmt = null;
+			
+			String sql = prop.getProperty("updateMyshop");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setString(1, myShop);
+				pstmt.setString(2,  shopId + ",");
+				pstmt.setInt(3, userId);
+				
+				result = pstmt.executeUpdate();
+			}
+			catch(SQLException e) {
+				e.printStackTrace();
+			}
+			finally {
+				close(pstmt);
+			}
+			
+			return result;
+		
+			
 }
+
+	
 }

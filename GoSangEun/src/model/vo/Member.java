@@ -19,7 +19,7 @@ public class Member implements Serializable {
    private String USER_EMAIL;
    private String USER_ADDRESS;
    private String USER_CARD;
-   private int SHOP_ID;
+   private String myShop;
 
    // 기본 생성자
    public Member() {
@@ -74,7 +74,7 @@ public class Member implements Serializable {
       USER_EMAIL = uSER_EMAIL;
       USER_ADDRESS = uSER_ADDRESS;
       USER_CARD = uSER_CARD;
-      SHOP_ID = sHOP_ID;
+      this.myShop = myShop;
    }
 
    public int getUSER_NO() {
@@ -157,20 +157,20 @@ public class Member implements Serializable {
       USER_CARD = uSER_CARD;
    }
 
-   public int getSHOP_ID() {
-      return SHOP_ID;
-   }
+   public String getMyShop() {
+		return myShop;
+	}
 
-   public void setSHOP_ID(int sHOP_ID) {
-      SHOP_ID = sHOP_ID;
-   }
+	public void setMyShop(String myShop) {
+		this.myShop = myShop;
+	}
 
    @Override
    public String toString() {
       return "Member [USER_NO=" + USER_NO + ", USER_NAME=" + USER_NAME + ", RANK=" + RANK + ", USER_ID=" + USER_ID
             + ", USER_NICKNAME=" + USER_NICKNAME + ", USER_PASSWORD=" + USER_PASSWORD + ", USER_PHONE=" + USER_PHONE
             + ", USER_EMAIL=" + USER_EMAIL + ", USER_ADDRESS=" + USER_ADDRESS + ", USER_CARD=" + USER_CARD
-            + ", SHOP_ID=" + SHOP_ID + "]";
+            +  ", myShop=" + myShop  + "]";
    }
 
 }

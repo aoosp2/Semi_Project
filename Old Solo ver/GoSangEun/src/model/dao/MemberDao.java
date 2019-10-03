@@ -121,13 +121,8 @@ public class MemberDao {
 
 		try {
 
-			String sql = "UPDATE MEMBER" 
-					+ " SET USER_NICKNAME = ?" 
-					+ ", USER_PASSWORD = ?" 
-					+ ", USER_PHONE = ?"
-					+ ", USER_EMAIL = ?" 
-					+ ", USER_ADDRESS = ?" 
-					+ " WHERE USER_ID = ?";
+			String sql = "UPDATE MEMBER" + " SET USER_NICKNAME = ?" + ", USER_PASSWORD = ?" + ", USER_PHONE = ?"
+					+ ", USER_EMAIL = ?" + ", USER_ADDRESS = ?" + " WHERE USER_ID = ?";
 
 			pstmt = con.prepareStatement(sql);
 
@@ -178,5 +173,6 @@ public class MemberDao {
 		}
 		return result;
 	}
+
 
 }
