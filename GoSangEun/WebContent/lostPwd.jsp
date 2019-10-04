@@ -1,10 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
+<%
+String password = "";
+
+password = (String)session.getAttribute("password"); 
+
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>아이디 비밀번호 찾기</title>
+<title>비밀번호 찾기</title>
 <style>
 .box {
 	background: white;
@@ -71,9 +79,9 @@ main.cf.my_account {
 						<div id="signup_box">
 							<div class="text-center"></div>
 							<br />
-							<form id="login_form" method="post" action="lostpwd.do">
-								<input type="hidden" name="nonce" value="69b8631805"> <input
-									type="hidden" name="redirect" value="">
+							<form id="login_form" method="post" action="lostpwd.do" onsubmit="return lostpwd()">
+								<input type="hidden" name="nonce" value="69b8631805"> 
+								<input type="hidden" name="redirect" value="">
 								<div class="form-group">
 									<label for="id">ID *</label> <input placeholder="ID"
 										type="text" required class="form-control" name="USER_ID"
@@ -85,7 +93,7 @@ main.cf.my_account {
 										value="" />
 								</div>
 								<div class="form-group text-center">
-									<input id="lostPwd" type="submit" value="비밀번호 찾기" onclick=""
+									<input id="lostPwd" type="submit" value="비밀번호 찾기"
 										class="btn btn-success btn-lg btn-block" />
 								</div>
 								<div class="form-group text-center">
@@ -116,6 +124,21 @@ main.cf.my_account {
 			</div>
 		</div>
 	</div>
+	<script>
+	
+	function lostpwd() {
+		var result = confirm("비밀번호는 (<%=password%>) 입니다!!!");
+        
+        if(result)
+        {
+        	alert("로그인 화면으로 갑니다");
+        }
+        else
+        {
+        	alert("다시 확인하고 싶어요!!");
+        }
+	} 
+	</script>
 	<%@ include file="views/common/footer.jsp"%>
 </body>
 </html>

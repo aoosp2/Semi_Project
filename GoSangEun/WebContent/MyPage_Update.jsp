@@ -107,8 +107,7 @@
 									</tr>
 									<tr style="border-bottom: 1px solid lightgray; height: 45px;">
 										<td width="250px">닉네임</td>
-										<td colspan="2" style="text-align: left;"><input type="nickname"
-											name="nickname" value="<%=m.getUSER_NICKNAME()%>" style="width: 100%; border-radius: 8px; padding-left: 10px;"></td>
+										<td style="text-align: left;"><%=m.getUSER_NICKNAME()%></td>
 
 									</tr>
 									<tr>

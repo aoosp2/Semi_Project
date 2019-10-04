@@ -47,12 +47,10 @@ public class UpdateMemberServlet extends HttpServlet {
 
 		Member m = (Member) session.getAttribute("member");
 
-		m.setUSER_NICKNAME(USER_NICKNAME);
 		m.setUSER_PASSWORD(USER_PASSWORD);
 		m.setUSER_PHONE(USER_PHONE);
 		m.setUSER_EMAIL(USER_EMAIL);
 		m.setUSER_ADDRESS(USER_ADDRESS);
-
 
 		System.out.println("변경한 회원 정보 확인: " + m);
 

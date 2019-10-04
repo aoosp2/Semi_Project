@@ -1,10 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+<%
+String id = "";
+
+id = (String)session.getAttribute("id"); 
+
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>아이디 비밀번호 찾기</title>
+<title>아이디 찾기</title>
 <style>
 .box {
 	background: white;
@@ -71,7 +79,7 @@ main.cf.my_account {
 						<div id="signup_box">
 							<div class="text-center"></div>
 							<br />
-							<form id="login_form" method="post" action="lostid.do">
+							<form id="login_form" method="post" action="lostid.do" onsubmit="return lostid()">
 								<input type="hidden" name="nonce" value="69b8631805"> <input
 									type="hidden" name="redirect" value="">
 								<div class="form-group">
@@ -87,7 +95,7 @@ main.cf.my_account {
 										value="" />
 								</div>
 								<div class="form-group text-center">
-									<input id="lostid" type="submit" value="ID찾기" onclick=""
+									<input id="lostId" type="submit" value="ID찾기" 
 										class="btn btn-success btn-lg btn-block" />
 								</div>
 								<div class="form-group text-center">
@@ -116,29 +124,21 @@ main.cf.my_account {
 			</div>
 		</div>
 	</div>
-	
 	<script>
-		$('#lostid').click(function(){
-			$.ajax({
-				url:"/lostid.do",
-				type:"post",
-				data:{
-					username:$('#USER_NAME').val(),
-					userphone:$('#USER_PHONE').val()
-				},success:function(data){
-					console.log(data);
-					
-					var result=data.USER_ID;
-					
-					alert(result);
-					
-				},error:function(data){
-					console.log("실패");
-				}
-			});
-		});
-	</script>	
 
+	function lostid() {
+		var result = confirm("ID는 (<%=id%>) 입니다!!!");
+        
+        if(result)
+        {
+        	alert("로그인 화면으로 갑니다");
+        }
+        else
+        {
+        	alert("다시 확인하고 싶어요!!");
+        }
+	} 
+	</script>
 	<%@ include file="views/common/footer.jsp"%>
 </body>
 </html>

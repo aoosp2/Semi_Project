@@ -8,8 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.service.ShopService;
+import model.vo.Member;
 import model.vo.Shop;
 
 /**
@@ -32,6 +34,27 @@ public class CategoryServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		ArrayList<Integer> myShop = new ArrayList<>();
+		
+		HttpSession session = request.getSession(false);
+		Member m = (Member)session.getAttribute("member");
+		String[] myArr = null;
+		
+		
+		if(m != null) {
+				
+			System.out.println("현재 즐겨찾기는 ? : " + m.getMyShop() );
+			if(m.getMyShop() != null) {
+				myArr = m.getMyShop().split(",");
+				for(int i = 0 ; i < myArr.length ;i++) {
+					if(!myArr[i].equals("")) {
+						myShop.add(Integer.parseInt(myArr[i]));
+					}
+					
+				}
+			}
+		}
+		System.out.println("String myShop 은 ? : " + myShop);
 		String category = request.getParameter("category");
 		String cateCode = "";
 		
@@ -46,7 +69,7 @@ public class CategoryServlet extends HttpServlet {
 		 			 break;
 		case "피자" : cateCode = "PZ";
 		 			 break;
-		case "즐찾" : cateCode = ""; // 즐겨찾기는 더 생각해보깅
+		case "즐찾" : cateCode = "MY"; // 즐겨찾기는 더 생각해보깅
 		 			 break;
 		
 		}
@@ -57,7 +80,14 @@ public class CategoryServlet extends HttpServlet {
 		String page = "";
 		
 		
-		ArrayList<Shop> shopList = ss.selectShopList(cateCode);
+		ArrayList<Shop> shopList = null;
+		if(!cateCode.equals("MY")) {
+			shopList = ss.selectShopList(cateCode);
+
+		}
+		else {
+			shopList = ss.selectMyShop(myShop);
+		}
 	
 		if(shopList != null) {
 			System.out.println("Servlet shopList : " + shopList);

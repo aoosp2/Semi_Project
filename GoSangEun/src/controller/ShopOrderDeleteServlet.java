@@ -43,9 +43,11 @@ public class ShopOrderDeleteServlet extends HttpServlet {
 		int result = new ShopService().deleteShopOrder(orderNo);
 		ArrayList<ShopOrder> so = new ShopService().selectShopOrderList(userId);
 
+		
 		if (result > 0) {
 			System.out.println("선택한 메뉴 삭제 성공!");
 			session.setAttribute("ShopOrder", so);
+
 		} else {
 			System.out.println("선택한 메뉴 삭제 실패!");
 		}

@@ -28,8 +28,7 @@ div.row {
 					<h3>회원가입</h3>
 					<h6 style="text-align: right;">*표는 꼭 기입해주세요</h6>
 
-					<form action="join.do" name="join" id="contactForm" method="post"
-						onsubmit="return check()">
+					<form action="join.do" name="join" id="contactForm" method="post">
 						<div class="control-group form-group">
 							<div class="controls">
 								<label>이름*</label> <input type="text" class="form-control"
@@ -53,93 +52,62 @@ div.row {
 						</div>
 						<div class="control-group form-group">
 							<div class="controls">
-								<label>닉네임*</label> <input type="text" class="form-control"
-									name="USER_NICKNAME" id="USER_NICKNAME">
+								<label>닉네임*</label>
+								<div style="display: flex;">
+									<input type="text" class="form-control" name="USER_NICKNAME"
+										id="USER_NICKNAME" style="width: 87%">&nbsp;&nbsp;&nbsp;
+									<input type="button" name="confirm_nickname" value="중복확인"
+										class="btn btn-primary" onclick="openConfirmnickname(this.form)"
+										style="border-radius: 4px; border: 1px solid;" />
+								</div>
 							</div>
-						</div>
-						<div class="control-group form-group">
-							<div class="controls">
-								<label>비밀번호*</label> <input type="password" id="pwd1"
-									class="form-control" name="USER_PASSWORD" id="USER_PASSWORD">
+							<div class="control-group form-group">
+								<div class="controls">
+									<label>비밀번호*</label> <input type="password" id="pwd1"
+										class="form-control" name="USER_PASSWORD" id="USER_PASSWORD">
+								</div>
 							</div>
-						</div>
-						<div class="control-group form-group">
-							<div class="controls">
-								<label>비밀번호 확인*</label> <input type="password" id="pwd2"
-									class="form-control" name="USER_PASSWORDENT">
-								<div class="alert alert-success" id="alert-success">비밀번호가
-									일치합니다.</div>
-								<div class="alert alert-danger" id="alert-danger">비밀번호가
-									일치하지 않습니다.</div>
-								<p class="help-block"></p>
+							<div class="control-group form-group">
+								<div class="controls">
+									<label>비밀번호 확인*</label> <input type="password" id="pwd2"
+										class="form-control" name="USER_PASSWORDENT">
+									<div class="alert alert-success" id="alert-success">비밀번호가
+										일치합니다.</div>
+									<div class="alert alert-danger" id="alert-danger">비밀번호가
+										일치하지 않습니다.</div>
+									<p class="help-block"></p>
+								</div>
 							</div>
-						</div>
-						<div class="control-group form-group">
-							<div class="controls">
-								<label>전화번호*</label> <input type="tel" class="form-control"
-									name="USER_PHONE" id="USER_PHONE">
-								<div class="alert alert-danger" id="phone-danger">010-0000-0000
-									형식으로 입력해주세요</div>
+							<div class="control-group form-group">
+								<div class="controls">
+									<label>전화번호*</label> <input type="tel" class="form-control"
+										name="USER_PHONE" id="USER_PHONE">
+									<div class="alert alert-danger" id="phone-danger">010-0000-0000
+										형식으로 입력해주세요</div>
+								</div>
 							</div>
-						</div>
-						<div class="control-group form-group">
-							<div class="controls">
-								<label>이메일*</label> <input type="email" class="form-control"
-									name="USER_EMAIL" id="USER_EMAIL">
-								<div class="alert alert-danger" id="email-danger">000@000.000
-									형식으로 입력해주세요</div>
+							<div class="control-group form-group">
+								<div class="controls">
+									<label>이메일*</label> <input type="email" class="form-control"
+										name="USER_EMAIL" id="USER_EMAIL">
+									<div class="alert alert-danger" id="email-danger">000@000.000
+										형식으로 입력해주세요</div>
 
+								</div>
 							</div>
-						</div>
-						<div class="control-group form-group">
-							<div class="controls">
-								<label>주소*</label> <input type="text" class="form-control"
-									name="USER_ADDRESS" id="USER_ADDRESS">
+							<div class="control-group form-group">
+								<div class="controls">
+									<label>주소*</label> <input type="text" class="form-control"
+										name="USER_ADDRESS" id="USER_ADDRESS">
+								</div>
 							</div>
-						</div>
-						<!-- <div class="control-group form-group">
-                            <div class="controls" id="card">
-                                <label>카드 등록</label>
-                                <br>
-                                <br>
-                                <li style="list-style-type: none;">
-                                    카드종류 :&nbsp;
-                                 <select name="CARD_NAME" style="border-radius: .25rem;">
-                                     <option value=" " >선택</option>
-                                     <option value="BC">BC카드</option>
-                                     <option value="KB">KB국민카드</option>
-                                     <option value="SAMSUNG">삼성카드</option>
-                                     <option value="NH">NH농협카드</option>
-                                 </select>
-                                     <br>
-                                     <br>
-                                     카드번호 :&nbsp;
-                                     <input type="text" class="cardnum" name="CARD_NO1" style="text-align:center; width:70px; border-radius: .25rem;" maxlength="4" oninput="maxLengthCheck(this)"/>&nbsp;-&nbsp;
-                                     <input type="text" class="cardnum" name="CARD_NO2" style="text-align:center; width:70px; border-radius: .25rem;" maxlength="4" oninput="maxLengthCheck(this)"/>&nbsp;-&nbsp;
-                                     <input type="text" class="cardnum" name="CARD_NO3" style="text-align:center; width:70px; border-radius: .25rem;" maxlength="4" oninput="maxLengthCheck(this)"/>&nbsp;-&nbsp;
-                                     <input type="text" class="cardnum" name="CARD_NO4" style="text-align:center; width:70px; border-radius: .25rem;" maxlength="4" oninput="maxLengthCheck(this)"/>
-                                     <br>
-                                     <br>
-                                     유효기간 :&nbsp;
-                                     <input type="month" name="CARD_DATE" style="width:150px; border-radius: .25rem;"><br>
-                                     <br>
-                                     주민번호뒷번호 :&nbsp;
-                                     XXXXXX &nbsp; - &nbsp; <input type="text" class="cardnum" name="USER_RRN" style="text-align:center; width:80px; border-radius: .25rem;" maxlength="7" oninput="maxLengthCheck(this)"/>
-                                     <br>
-                                     <br>
-                                     카드비밀번호 :&nbsp;
-                                     <input type="password" class="cardnum" name="CARD_PASSWORD" style="width:50px; text-align:center; border-radius: .25rem;" maxlength="4" oninput="maxLengthCheck(this)"/>
-                        
-                               </li>
-                                <br>
-                            </div>
-                        </div> -->
-						<div id="success" align="center">
-							<input type="submit" id="submit" class="btn btn-primary"
-								onclick="return checkz()" id="contactForm" style="width: 140px;"
-								value="회원가입">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<a href="index.jsp" class="btn btn-primary" style="width: 140px;"button">비회원주문</a>
-						</div>
+
+							<div id="success" align="center">
+								<input type="submit" id="submit" class="btn btn-primary"
+									onclick="return checkz()" style="width: 140px;" value="회원가입">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<a href="index.jsp" class="btn btn-primary"
+									style="width: 140px;">비회원주문</a>
+							</div>
 					</form>
 
 					<script type="text/javascript">
@@ -174,80 +142,91 @@ div.row {
 
 						// 로그인 유효성 검사
 						function checkz() {
-
-							// 형식 설정
 							var getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
 							var getCheck = RegExp(/^[a-zA-Z0-9]{4,12}$/);
 							var getName = RegExp(/^[가-힣]+$/);
 							var getPhone = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;
-							var fmt = RegExp(/^\d{6}[1234]\d{6}$/);
+							var fmt = RegExp(/^\d{6}[1234]\d{6}$/); //형식 설정
 
-							// 공백 확인
+							//이름 공백 확인
 							if ($("#USER_NAME").val() == "") {
-								alert("이름 필수 입력입니다");
+								swal("이름이 없어요!", "이름을 입력 해주세요");
 								$("#USER_NAME").focus();
 								return false;
-							} else if ($("#USER_ID").val() == "") {
-								alert("아이디 필수 입력입니다");
+							}
+							//아이디 공백 확인
+							if ($("#USER_ID").val() == "") {
+								swal("아이디가 없어요!", "아이디를 입력 해주세요");
 								$("#USER_ID").focus();
 								return false;
-							} else if ($("#USER_NICKNAME").val() == "") {
-								alert("닉네임 필수 입력입니다");
+							}
+							//닉네임 공백 확인
+							if ($("#USER_NICKNAME").val() == "") {
+								swal("닉네임이 없어요!", "닉네임을 입력 해주세요");
 								$("#USER_NICKNAME").focus();
 								return false;
-							} else if ($("#pwd1").val() == "") {
-								alert("비밀번호 필수 입력입니다");
-								$("#pwd1").focus();
-								return false;
-							} else if ($("#USER_PHONE").val() == "") {
-								alert("전화번호 필수 입력입니다");
+							}
+							//전화번호 공백 확인
+							if ($("#USER_PHONE").val() == "") {
+								swal("전화번호가 없어요!", "전화번호를 입력 해주세요");
 								$("#USER_PHONE").focus();
 								return false;
-							} else if ($("#USER_EMAIL").val() == "") {
-								alert("이메일 필수 입력입니다");
-								$("#USER_EMAIL").focus();
-								return false;
-							} else if ($("#USER_ADDRESS").val() == "") {
-								alert("주소 필수 입력입니다");
-								$("#USER_ADDRESSE").focus();
+							}
+							//주소 공백 확인
+							if ($("#USER_ADDRESS").val() == "") {
+								swal("주소가 없어요!", "주소를 입력 해주세요");
+								$("#USER_ADDRESS").focus();
 								return false;
 							}
 
-							// 유효성 검사
+							//이메일 유효성 검사
+							if (!getMail.test($("#USER_EMAIL").val())) {
+								swal("이메일 에러", "형식에 맞게 입력 해주세요");
+								$("#USER_EMAIL").val("");
+								$("#USER_EMAIL").focus();
+								return false;
+							}
 
+							//이름 유효성
 							if (!getName.test($("#USER_NAME").val())) {
-								$("#name-danger").show();
+								swal("이름 에러", "한글로 2글자 이상 넣어주세요");
+								$("#USER_NAME").val("");
 								$("#USER_NAME").focus();
 								return false;
-							} else if (!getPhone.test($("#USER_PHONE").val())) {
-								$("#phone-danger").show();
+							}
+
+							//전화번호 유효성
+							if (!getPhone.test($("#USER_PHONE").val())) {
+								swal("전화번호 에러", "010으로 시작해주세요");
+								$("#USER_PHONE").val("");
 								$("#USER_PHONE").focus();
 								return false;
 							}
-							if (!getMail.test($("#USER_EMAIL").val())) {
-								$("#email-danger").show();
-								$("#USER_EMAIL").focus();
-								return false;
 
-							}
-
-							var reg = confirm("이 정보로 가입 하시겠습니까?");
-							if (reg) {
-								alert("회원가입이 완료되었습니다");
-							} else {
-								alert("회원가입이 취소되었습니다");
-								return false;
-							}
 						}
 
 						function openConfirmid(join) {
 
 							if (join.USER_ID.value == "") {
-								alert("아이디를 입력하세요")
+								swal("아이디가 없어요", "아이디를 입력해주세요");
 								return;
 							}
 							// ID 전송
 							url = "confirmid.jsp?USER_ID=" + join.USER_ID.value;
+
+							// 윈도우 창 생성
+							open(url, "confirm",
+									"status=no,menubar=no,scrollbars=no,width=310,height=180,left=869,top=294");
+						}
+						
+						function openConfirmnickname(join) {
+
+							if (join.USER_NICKNAME.value == "") {
+								swal("닉네임이 없어요", "닉네임을 입력해주세요");
+								return;
+							}
+							// ID 전송
+							url = "confirmnickname.jsp?USER_NICKNAME=" + join.USER_NICKNAME.value;
 
 							// 윈도우 창 생성
 							open(url, "confirm",

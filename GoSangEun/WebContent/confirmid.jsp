@@ -16,11 +16,11 @@
 <br>
 <br>
 <center>
-	<b><font color="red"><%=id%></font>는 이미 사용중인 아이디 입니다</b>
-	<form name="checkForm" method="post" action="confirmid.jsp">
-		<b>다른 아이디를 선택하세요</b><br> <br> <input type="text" name="id">
-		<input type="submit" value="ID중복확인">
-	</form>
+   <b><font color="red"><%=id%></font>는 이미 사용중인 아이디 입니다</b>
+   <form name="checkForm" method="post" action="confirmid.jsp">
+      <b>다른 아이디를 선택하세요</b><br> <br> 
+      <input type="button" value="닫기" onclick="setid()">
+   </form>
 </center>
 <%
    } else {
