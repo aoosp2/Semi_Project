@@ -40,7 +40,7 @@
       </h1>
 
       <ol class="breadcrumb">
-         <li class="breadcrumb-item"><a href="index.jsp">Home</a></li>
+         <li class="breadcrumb-item"><a href="category.go?category=<%= s.getCategoryId() %>">Home</a></li>
          <li class="breadcrumb-item active"><%=s.getCategoryId()%></li>
       </ol>
 
