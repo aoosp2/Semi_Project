@@ -94,6 +94,7 @@
 
                <div id="Review">
                   <%
+                  if(m != null) {
                      for (int i = 0; i < rlist.size(); i++) {
                   %>
                   <div class="card mr-2 p-2">
@@ -160,7 +161,7 @@
                   </div>
 
                   <%
-                     }
+                     } }
                   %>
                </div>
 
@@ -237,12 +238,38 @@
                   </p>
                </div>
                <div class="card-footer">
-                  <a href="#">구매하기</a>
-               </div>
+                  <form action="/GoSangEun/Order.s" method="get" onsubmit="return OrderCount();" name="addOrder">
+                     <input type="hidden" name="shopId" value="<%= s.getShopId() %>">
+                     <% if ( m != null) { %>
+                     <input type="hidden" name="userId" value="<%= m.getUSER_ID() %>">
+                     <% } %>
+                     <input type="hidden" name="menuNo" value="<%= list.get(num).getNo() %>">
+                     <input type="hidden" name="oCount">
+                     <input type="hidden" name="oSum" value="<%= list.get(num).getPrice() %>">
+                     <input type="submit" value="구매하기"
+                        style="font-size: 20px; background: none; padding: 0; border: none; color: rgb(0, 132, 255);">
+                  </form>
+               </div> 
             </div>
          </div>
 
          <%  num++; } } %>
+
+         <script>
+            // 구매하기 버튼 스크립트
+            function OrderCount() {
+               var Count = parseInt(prompt('몇개를 주문할까요?', '숫자만 입력해주세요. (1개 이상)'));
+
+               if (Count > 0) {
+                  $('input[name=oCount]').val(Count);
+                  return true;
+               } else {
+                  alert("1이상의 숫자만 입력해주세요!");
+                  return false;
+               }
+            };
+
+         </script>
 
       </div>
       <!-- /.row -->
@@ -268,7 +295,15 @@
 
                </div>
                <div class="card-footer">
-                  <a href="#">구매하기</a>
+                  <form action="/GoSangEun/Order.s" method="get" onsubmit="return OrderCount();">
+                     <input type="hidden" name="shopId" value="<%= s.getShopId() %>">
+                     <input type="hidden" name="userId" value="<%= m.getUSER_ID() %>">
+                     <input type="hidden" name="menuNo" value="<%= list.get(num2).getNo() %>">
+                     <input type="hidden" name="oCount">
+                     <input type="hidden" name="oSum" value="<%= list.get(num2).getPrice() %>">
+                     <input type="submit" value="구매하기"
+                        style="font-size: 20px; background: none; padding: 0; border: none; color: rgb(0, 132, 255);">
+                  </form>
                </div>
             </div>
          </div>

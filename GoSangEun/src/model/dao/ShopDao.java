@@ -377,7 +377,7 @@ public class ShopDao {
 					
 					so.setMenuName(rset.getString("MENU_NAME"));
 					so.setMenuNo(rset.getInt("MENU_NO"));
-					so.setOrderAddr(rset.getString("USER_ADDRESS"));
+					so.setOrderAddr(rset.getString("DV_ADDRESS"));
 					so.setOrderCheck(rset.getString("ORDER_CHECK"));
 					so.setOrderCount(rset.getInt("ORDER_COUNT"));
 					so.setOrderId(rset.getInt("ORDER_NO"));
@@ -443,6 +443,63 @@ public class ShopDao {
 			}finally {
 				close(pstmt);
 			}
+			return result;
+		}
+
+		public int insertShopOrder(Connection con, int shopId, String userId, int menuNo, int count, int sum, int groupNum) {
+			int result =0;
+			PreparedStatement pstmt = null;
+			
+			String sql = prop.getProperty("insertShopOrder");
+			
+			try {
+				pstmt = con.prepareStatement(sql);
+				
+				pstmt.setInt(1, shopId);
+				pstmt.setString(2, userId);
+				pstmt.setInt(3, menuNo);
+				pstmt.setInt(4, count);
+				pstmt.setInt(5, sum);
+				pstmt.setInt(6, groupNum);
+				pstmt.setString(7, userId);
+				
+				result = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			
+			return result;
+		}
+
+		public int selectGroupNum(Connection con, String userId) {
+			int result = 0;
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			
+			String sql = prop.getProperty("selectGroupNum");
+			
+			try {
+				pstmt = con.prepareStatement(sql);
+				
+				pstmt.setString(1, userId);
+				
+				rset = pstmt.executeQuery();
+				
+				if(rset.next()) {
+					result = rset.getInt(1)+1;
+				}else {
+					result = 1;
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+				close(rset);
+			}
+			
 			return result;
 		}
 

@@ -202,4 +202,26 @@ public class ShopService {
 		return result;
 	}
 
+	public int insertShopOrder(int shopId, String userId, int menuNo, int count, int sum, int groupNum) {
+		con = getConnection();
+		int result = sDao.insertShopOrder(con,shopId,userId,menuNo,count,sum,groupNum);
+		
+		if(result > 0)
+			commit(con);
+		else
+			rollback(con);
+		
+		close(con);
+		
+		return result;
+	}
+
+	public int selectGroupNum(String userId) {
+		con = getConnection();
+		int result = sDao.selectGroupNum(con,userId);
+		
+		close(con);
+		return result;
+	}
+
 }

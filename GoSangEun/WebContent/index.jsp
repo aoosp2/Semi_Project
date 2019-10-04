@@ -39,7 +39,8 @@
 				<div class="carousel-item">
 					<img src="resources/images/2.jpg" alt="">
 				</div>
-				<!-- Slide Three - Set the background image for this slide in the line below -->
+				<!-- Slide Three - Set
+				 the background image for this slide in the line below -->
 				<div class="carousel-item">
 					<img src="resources/images/3.jpg" alt="">
 				</div>
