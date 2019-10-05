@@ -9,10 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
-import model.service.MemberService;
 import model.service.ShopService;
-import model.vo.Member;
 import model.vo.ShopOrder;
 
 /**
@@ -44,9 +43,11 @@ public class ShopOrderDeleteServlet extends HttpServlet {
 		int result = new ShopService().deleteShopOrder(orderNo);
 		ArrayList<ShopOrder> so = new ShopService().selectShopOrderList(userId);
 
+		
 		if (result > 0) {
 			System.out.println("선택한 메뉴 삭제 성공!");
 			session.setAttribute("ShopOrder", so);
+
 		} else {
 			System.out.println("선택한 메뉴 삭제 실패!");
 		}

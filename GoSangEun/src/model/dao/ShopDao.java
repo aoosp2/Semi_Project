@@ -1,15 +1,16 @@
 package model.dao;
 
+import static common.JDBCTemplate.close;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
-
-import static common.JDBCTemplate.*;
 
 import model.vo.Review;
 import model.vo.Shop;
@@ -530,7 +531,8 @@ public class ShopDao {
 
 	}
 
-	public int deleteShopOrder(Connection con, int orderNo) {
+	public int deleteShopOrder(Connection con, int orderNo, String userId) { 
+		// 회원,비회원 구분용으로 userId 가져왔으나 사용하지는 않음
 		int result = 0;
 		PreparedStatement pstmt = null;
 
@@ -604,6 +606,84 @@ public class ShopDao {
 			close(rset);
 		}
 
+		return result;
+	}
+
+	public int insertShopOrder(Connection con, int shopId, int menuNo, int count, int sum, int nonGroupNum) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertNonShopOrder");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, shopId);
+			pstmt.setInt(2, menuNo);
+			pstmt.setInt(3, count);
+			pstmt.setInt(4, sum);
+			pstmt.setInt(5, nonGroupNum);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public ArrayList<ShopOrder> selectShopOrderList(Connection con) {
+		ArrayList<ShopOrder> list = new ArrayList<ShopOrder>();
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectNonShopOrder");
+		
+		try {
+			stmt = con.createStatement();
+			
+			rset = stmt.executeQuery(sql);
+			
+			while(rset.next()) {
+				ShopOrder so = new ShopOrder();
+				
+				so.setOrderId(rset.getInt("NON_ORDER_NO"));
+				so.setShopId(rset.getInt("SHOP_ID"));
+				so.setMenuNo(rset.getInt("MENU_NO"));
+				so.setOrderCount(rset.getInt("NON_ORDER_COUNT"));
+				so.setOrderSum(rset.getInt("NON_ORDER_SUM"));
+				so.setOrderInfo(rset.getString("NON_ORDER_INFO"));
+				so.setOrderCheck(rset.getString("NON_ORDER_CHECK"));
+				so.setMenuName(rset.getString("MENU_NAME"));
+				
+				list.add(so);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(stmt);
+			close(rset);
+		}
+		return list;
+	}
+
+	public int deleteShopOrder(Connection con, int orderNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+
+		String sql = prop.getProperty("deleteNonShopOrder");
+
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, orderNo);
+
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
 		return result;
 	}
 

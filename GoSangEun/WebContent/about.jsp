@@ -15,14 +15,12 @@
 
 <head>
 
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta name="author" content="">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
 
-<title>지상갑 음식점 선택시</title>
-
+	<title><%= s.getShopName() %></title>
 
 </head>
 
@@ -51,13 +49,11 @@
 				<%
 					if (s.getShopId() >= 100) {
 				%>
-				<img class="img-fluid rounded mb-4"
-					src="resources/images/FoodMenu/<%=s.getShopLogo()%>.jpg" alt="LOGO">
+				<img class="img-fluid rounded mb-4" src="resources/images/FoodMenu/<%=s.getShopLogo()%>.jpg" alt="LOGO">
 				<%
 					} else {
 				%>
-				<img class="img-fluid rounded mb-4" src="<%=s.getShopLogo()%>"
-					alt="LOGO">
+				<img class="img-fluid rounded mb-4" src="<%=s.getShopLogo()%>" alt="LOGO">
 				<%
 					}
 				%>
@@ -133,29 +129,24 @@
 								if (m.getUSER_ID().equals(rlist.get(i).getUserId())) {
 							%>
 							<div class="text-right">
-								<a href="#" class="" style="" onclick="UpdateReview();">수정</a> <a
-									href="#" class="" style="color: red;" onclick="DeleteReview();">삭제</a>
-								<form action="/GoSangEun/ReviewUpdate.s" method="get"
-									name="rUpdate">
-									<input type="hidden" name="No"
-										value="<%=rlist.get(i).getNo()%>"> <input
+								<a href="#" class="" style="" onclick="UpdateReview();">수정</a> <a href="#" class=""
+									style="color: red;" onclick="DeleteReview();">삭제</a>
+								<form action="/GoSangEun/ReviewUpdate.s" method="get" name="rUpdate">
+									<input type="hidden" name="No" value="<%=rlist.get(i).getNo()%>"> <input
 										type="hidden" name="shopId" value="<%=s.getShopId()%>">
-									<input type="hidden" name="Info"> <input type="hidden"
-										name="Point">
+									<input type="hidden" name="Info"> <input type="hidden" name="Point">
 								</form>
-								<form action="/GoSangEun/ReviewDelete.s" method="get"
-									name="rDelete">
-									<input type="hidden" name="No"
-										value="<%=rlist.get(i).getNo()%>"> <input
+								<form action="/GoSangEun/ReviewDelete.s" method="get" name="rDelete">
+									<input type="hidden" name="No" value="<%=rlist.get(i).getNo()%>"> <input
 										type="hidden" name="shopId" value="<%=s.getShopId()%>">
 								</form>
 
 								<script>
 									function UpdateReview() {
 										var info = prompt('수정할 리뷰내용을 입력해주세요.',
-												'이곳에 입력해주세요');
+											'이곳에 입력해주세요');
 										var point = prompt('별점의 개수를 입력해주세요',
-												'0~5개 사이');
+											'0~5개 사이');
 
 										if (info != null && point != null) {
 											$('input[name=Info]').val(info);
@@ -163,7 +154,7 @@
 
 											if (point >= 0 && point <= 5) {
 												$('form[name=rUpdate]')
-														.submit();
+													.submit();
 											} else {
 												alert('별점을 0~5사이로 입력해주세요');
 											}
@@ -173,6 +164,7 @@
 									function DeleteReview() {
 										$('form[name=rDelete]').submit();
 									};
+
 								</script>
 
 							</div>
@@ -196,9 +188,9 @@
 					<a href="#" class="" style="" onclick="CreateReview();">리뷰 작성</a>
 					<form action="/GoSangEun/Review.s" method="get" name="review">
 						<input type="hidden" name="shopId" value="<%=s.getShopId()%>">
-						<input type="hidden" name="Info"> <input type="hidden"
-							name="userId" value="<%=m.getUSER_ID()%>"> <input
-							type="hidden" name="userName" value="<%=m.getUSER_NICKNAME()%>">
+						<input type="hidden" name="Info"> <input type="hidden" name="userId"
+							value="<%=m.getUSER_ID()%>"> <input type="hidden" name="userName"
+							value="<%=m.getUSER_NICKNAME()%>">
 						<input type="hidden" name="Point">
 					</form>
 				</div>
@@ -219,6 +211,7 @@
 							}
 						}
 					}
+
 				</script>
 
 				<%
@@ -245,9 +238,8 @@
 			%>
 			<div class="col-lg-4 mb-4">
 				<div class="card h-100 text-center">
-					<img class="card-img-top"
-						src="resources/images/FoodMenu/<%=list.get(num).getCode()%>.jpg"
-						alt="" height="250px;">
+					<img class="card-img-top" src="resources/images/FoodMenu/<%=list.get(num).getCode()%>.jpg" alt=""
+						height="250px;">
 					<div class="card-body">
 						<h4 class="card-title"><%=list.get(num).getName()%></h4>
 						<h6 class="card-subtitle mb-2 text-muted"><%=list.get(num).getPrice()%>원
@@ -266,8 +258,7 @@
 						</p>
 					</div>
 					<div class="card-footer">
-						<form action="/GoSangEun/Order.s" method="get"
-							onsubmit="return OrderCount();" name="addOrder">
+						<form action="/GoSangEun/Order.s" method="get" onsubmit="return OrderCount();" name="addOrder">
 							<input type="hidden" name="shopId" value="<%=s.getShopId()%>">
 							<%
 								if (m != null) {
@@ -276,11 +267,9 @@
 							<%
 								}
 							%>
-							<input type="hidden" name="menuNo"
-								value="<%=list.get(num).getNo()%>"> <input type="hidden"
-								name="oCount"> <input type="hidden" name="oSum"
-								value="<%=list.get(num).getPrice()%>"> <input
-								type="submit" value="구매하기"
+							<input type="hidden" name="menuNo" value="<%=list.get(num).getNo()%>"> <input type="hidden"	name="oCount"> 
+							<input type="hidden" name="oSum" value="<%=list.get(num).getPrice()%>">
+							<input type="submit" value="구매하기"
 								style="font-size: 20px; background: none; padding: 0; border: none; color: rgb(0, 132, 255);">
 						</form>
 					</div>
@@ -297,7 +286,7 @@
 				// 구매하기 버튼 스크립트
 				function OrderCount() {
 					var Count = parseInt(prompt('몇개를 주문할까요?',
-							'숫자만 입력해주세요. (1개 이상)'));
+						'숫자만 입력해주세요. (1개 이상)'));
 
 					if (Count > 0) {
 						$('input[name=oCount]').val(Count);
@@ -307,6 +296,7 @@
 						return false;
 					}
 				};
+
 			</script>
 
 		</div>
@@ -315,34 +305,29 @@
 		<!-- Our Customers -->
 		<h4>모든 메뉴</h4>
 		<div class="row">
-
 			<%
 				int num2 = 0;
 				for (int i = 0; i < list.size(); i++) {
 			%>
-
 			<div class="col-lg-2">
 				<div class="card text-center h-100">
 					<img class="img-thumbnail card-img-top" style="height: 120px;"
-						src="resources/images/FoodMenu/<%=list.get(num2).getCode()%>.jpg"
-						alt="">
+						src="resources/images/FoodMenu/<%=list.get(num2).getCode()%>.jpg" alt="">
 					<div class="card-body">
 						<h6 class="card-title">
 							<%=list.get(num2).getName()%></h6>
 						<h6 class="card-subtitle mb-2 text-muted"><%=list.get(num2).getPrice()%>원
 						</h6>
-
 					</div>
 					<div class="card-footer">
-						<form action="/GoSangEun/Order.s" method="get"
-							onsubmit="return OrderCount();">
+						<form action="/GoSangEun/Order.s" method="get" onsubmit="return OrderCount();">
 							<input type="hidden" name="shopId" value="<%=s.getShopId()%>">
+							<% if ( m != null ) { %>
 							<input type="hidden" name="userId" value="<%=m.getUSER_ID()%>">
-							<input type="hidden" name="menuNo"
-								value="<%=list.get(num2).getNo()%>"> <input
-								type="hidden" name="oCount"> <input type="hidden"
-								name="oSum" value="<%=list.get(num2).getPrice()%>"> <input
-								type="submit" value="구매하기"
+							<% } %>
+							<input type="hidden" name="menuNo" value="<%=list.get(num2).getNo()%>"> <input type="hidden"
+								name="oCount"> <input type="hidden" name="oSum" value="<%=list.get(num2).getPrice()%>">
+							<input type="submit" value="구매하기"
 								style="font-size: 20px; background: none; padding: 0; border: none; color: rgb(0, 132, 255);">
 						</form>
 					</div>

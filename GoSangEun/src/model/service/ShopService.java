@@ -210,9 +210,9 @@ public class ShopService {
 		return sList;
 	}
 
-	public int deleteShopOrder(int orderNo) {
+	public int deleteShopOrder(int orderNo, String userId) {
 		con = getConnection();
-		int result = sDao.deleteShopOrder(con, orderNo);
+		int result = sDao.deleteShopOrder(con, orderNo,userId);
 
 		if (result > 0)
 			commit(con);
@@ -240,6 +240,40 @@ public class ShopService {
 	public int selectGroupNum(String userId) {
 		con = getConnection();
 		int result = sDao.selectGroupNum(con, userId);
+
+		close(con);
+		return result;
+	}
+
+	public int insertShopOrder(int shopId, int menuNo, int count, int sum, int nonGroupNum) {
+		con = getConnection();
+		int result = sDao.insertShopOrder(con, shopId, menuNo, count, sum, nonGroupNum);
+		
+		if (result > 0 )
+			commit(con);
+		else
+			rollback(con);
+		
+		close(con);
+		
+		return result;
+	}
+
+	public ArrayList<ShopOrder> selectShopOrderList() {
+		con = getConnection();
+		ArrayList<ShopOrder> list = sDao.selectShopOrderList(con);
+		close(con);
+		return list;
+	}
+
+	public int deleteShopOrder(int orderNo) {
+		con = getConnection();
+		int result = sDao.deleteShopOrder(con, orderNo);
+
+		if (result > 0)
+			commit(con);
+		else
+			rollback(con);
 
 		close(con);
 		return result;

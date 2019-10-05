@@ -39,23 +39,11 @@ public class MemberService {
 			commit(con);
 		else
 			rollback(con);
-
+		
 		close(con);
 
 		return result;
 
-	}
-
-	public Member lostId(Member m) {
-		con = getConnection();
-
-		Member result = mDao.lostId(con, m);
-
-		System.out.println("id 찾기 service : " + m);
-
-		close(con);
-
-		return result;
 	}
 
 	public int updateMember(Member m) {
@@ -73,5 +61,28 @@ public class MemberService {
 		return result;
 	}
 
+	public Member lostpwd(Member m) {
+		con = getConnection();
+
+		Member result = mDao.lostpwd(con, m);
+
+		System.out.println("pwd 찾기 service : " + m);
+
+		close(con);
+
+		return result;
+	}
+
+	public Member lostid(Member m) {
+		con = getConnection();
+
+		Member result = mDao.lostid(con, m);
+
+		System.out.println("id 찾기 service : " + m);
+
+		close(con);
+
+		return result;
+	}
 
 }

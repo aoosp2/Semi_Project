@@ -163,63 +163,84 @@ public class ShopService {
 
 	public ArrayList<ShopOrder> selectShopOrderList(String uSER_ID) {
 		con = getConnection();
-		
-		ArrayList<ShopOrder> list = sDao.selectShopOrderList(con,uSER_ID);
-		
+
+		ArrayList<ShopOrder> list = sDao.selectShopOrderList(con, uSER_ID);
+
 		close(con);
-		
+
 		return list;
 	}
-	
-	public int updateMyshop(int userId , int shopId , String myShop) {
-		
+
+	public int updateMyshop(int userId, String str) {
+
 		Connection conn = getConnection();
-		
-		int result = sDao.updateMyshop(conn,userId,shopId , myShop);
-		
-		if(result > 0) {
+
+		int result = sDao.updateMyshop(conn, userId, str);
+
+		if (result > 0) {
 			commit(conn);
-		}
-		else {
+		} else {
 			rollback(conn);
 		}
-		
+
 		close(conn);
-		
+
 		return result;
+	}
+
+	public ArrayList<Shop> selectMyShop(ArrayList<Integer> myShop) {
+
+		Connection conn = getConnection();
+
+		ArrayList<Shop> sList = sDao.selectMyShop(conn, myShop);
+
+		close(conn);
+
+		return sList;
+	}
+
+	public ArrayList<Shop> sortMyShop(String sortCol, ArrayList<Integer> myShop) {
+
+		Connection conn = getConnection();
+
+		ArrayList<Shop> sList = sDao.sortMyShop(conn, sortCol, myShop);
+
+		close(conn);
+
+		return sList;
 	}
 
 	public int deleteShopOrder(int orderNo) {
 		con = getConnection();
-		int result = sDao.deleteShopOrder(con,orderNo);
-		
-		if(result > 0)
+		int result = sDao.deleteShopOrder(con, orderNo);
+
+		if (result > 0)
 			commit(con);
 		else
 			rollback(con);
-		
+
 		close(con);
 		return result;
 	}
 
 	public int insertShopOrder(int shopId, String userId, int menuNo, int count, int sum, int groupNum) {
 		con = getConnection();
-		int result = sDao.insertShopOrder(con,shopId,userId,menuNo,count,sum,groupNum);
-		
-		if(result > 0)
+		int result = sDao.insertShopOrder(con, shopId, userId, menuNo, count, sum, groupNum);
+
+		if (result > 0)
 			commit(con);
 		else
 			rollback(con);
-		
+
 		close(con);
-		
+
 		return result;
 	}
 
 	public int selectGroupNum(String userId) {
 		con = getConnection();
-		int result = sDao.selectGroupNum(con,userId);
-		
+		int result = sDao.selectGroupNum(con, userId);
+
 		close(con);
 		return result;
 	}

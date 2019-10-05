@@ -94,8 +94,6 @@ public class MemberDao {
 				result.setUSER_ADDRESS(rset.getString("USER_ADDRESS"));
 				result.setRANK(rset.getString("RANK_NAME"));
 				result.setUSER_NO(rset.getInt("USER_NO"));
-				//즐겨찾기 담아오는 부분
-				result.setMyShop(rset.getString("MY_SHOP"));
 			}
 
 		} catch (Exception e) {
@@ -112,28 +110,22 @@ public class MemberDao {
 		return result;
 	}
 
-	public Member lostId(Connection con, Member m) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public int updateMember(Connection con, Member m) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 
 		try {
 
-			String sql = "UPDATE MEMBER" + " SET USER_NICKNAME = ?" + ", USER_PASSWORD = ?" + ", USER_PHONE = ?"
+			String sql = "UPDATE MEMBER" + " SET USER_PASSWORD = ?" + ", USER_PHONE = ?"
 					+ ", USER_EMAIL = ?" + ", USER_ADDRESS = ?" + " WHERE USER_ID = ?";
 
 			pstmt = con.prepareStatement(sql);
 
-			pstmt.setString(1, m.getUSER_NICKNAME());
-			pstmt.setString(2, m.getUSER_PASSWORD());
-			pstmt.setString(3, m.getUSER_PHONE());
-			pstmt.setString(4, m.getUSER_EMAIL());
-			pstmt.setString(5, m.getUSER_ADDRESS());
-			pstmt.setString(6, m.getUSER_ID());
+			pstmt.setString(1, m.getUSER_PASSWORD());
+			pstmt.setString(2, m.getUSER_PHONE());
+			pstmt.setString(3, m.getUSER_EMAIL());
+			pstmt.setString(4, m.getUSER_ADDRESS());
+			pstmt.setString(5, m.getUSER_ID());
 
 			result = pstmt.executeUpdate();
 
@@ -176,5 +168,106 @@ public class MemberDao {
 		return result;
 	}
 
+	// NICKNAME 중복 체크
+	public int confirmnickname(String USER_NICKNAME) throws Exception {
+		int result = -1;
+		PreparedStatement pstmt = null;
+		Connection con = getConnection();
+		ResultSet rset = null;
+
+		try {
+
+			pstmt = con.prepareStatement("SELECT USER_NICKNAME FROM MEMBER WHERE USER_NICKNAME=?");
+			pstmt.setString(1, USER_NICKNAME);
+			rset = pstmt.executeQuery();
+
+			if (rset.next()) {
+				result = 1; // ID 있음
+			} else {
+				result = -1; // ID 없음
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+			close(con);
+		}
+		return result;
+	}
+
+	public Member lostpwd(Connection con, Member m) {
+		Member result = null; // 결과를 담을 객체
+		PreparedStatement pstmt = null;
+		ResultSet rset = null; // Select의 결과를 담은 객체
+
+		String sql = prop.getProperty("lostpwd");
+
+		System.out.println("lostpwd dao : " + m);
+
+		try {
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setString(1, m.getUSER_ID());
+			pstmt.setString(2, m.getUSER_PHONE());
+
+			rset = pstmt.executeQuery();
+
+			if (rset.next()) {
+				result = new Member();
+
+				result.setUSER_PASSWORD(rset.getString("USER_PASSWORD"));
+			}
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		System.out.println("dao result :" + result);
+
+		return result;
+	}
+
+	public Member lostid(Connection con, Member m) {
+		Member result = null; // 결과를 담을 객체
+		PreparedStatement pstmt = null;
+		ResultSet rset = null; // Select의 결과를 담은 객체
+
+		String sql = prop.getProperty("lostid");
+
+		System.out.println("lostid dao : " + m);
+
+		try {
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setString(1, m.getUSER_NAME());
+			pstmt.setString(2, m.getUSER_PHONE());
+
+			rset = pstmt.executeQuery();
+
+			if (rset.next()) {
+				result = new Member();
+
+				result.setUSER_ID(rset.getString("USER_ID"));
+			}
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		System.out.println("dao result :" + result);
+
+		return result;
+	}
 
 }

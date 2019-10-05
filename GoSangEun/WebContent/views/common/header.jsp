@@ -5,6 +5,7 @@
 <%
 	Member m = (Member) session.getAttribute("member");
 	ArrayList<ShopOrder> olist = (ArrayList<ShopOrder>) session.getAttribute("ShopOrder");
+	ArrayList<ShopOrder> nlist = (ArrayList<ShopOrder>) session.getAttribute("NonShopOrder");
 %>
 <!DOCTYPE html>
 <html>
@@ -50,6 +51,14 @@
 
 <body>
 	<!-- Navigation -->
+	<script>
+		function deleteOrderMenu() {
+			var returnURL = document.URL;
+			$('input[name="reURI"]').val(returnURL);
+			$(this).submit();
+		}
+	</script>
+
 	<%
 		if (m == null) {
 	%>
@@ -74,24 +83,40 @@
 						<div class="dropdown-menu dropdown-menu-right"
 							aria-labelledby="navbarDropdownPortfolio"
 							style="width: 220px; height: auto;">
-							<div class="dropdown-item-text" style="padding-left: 47px;">장바구니
+							<div class="dropdown-item-text" style="font-size: 18px;">장바구니
 								목록</div>
-							<div class="card">
-								<div>치킨메뉴1</div>
-								<div class="text-right">20,000원</div>
+							<%
+								int ntotal = 0;
+							if( nlist != null ) {
+									for (int i = 0; i < nlist.size(); i++) {
+							%>
+							<form action="/GoSangEun/OrderDelete.s" method="get"
+								name="deleteOrder" id="DeleteOrder<%=i%>">
+								<div class="card">
+									<div style="font-size: 20px;"><%=nlist.get(i).getMenuName()%></div>
+									<div class="text-right" style="font-size: 20px;">
+										<%=nlist.get(i).getOrderCount()%>개 : &nbsp;&nbsp;<%=nlist.get(i).getOrderSum() / nlist.get(i).getOrderCount()%>원
+									</div>
+									<div class="text-right">
+										<input type="submit" value="취소" style="color: red; padding: 0; border: none; background: none;" onclick="deleteOrderMenu();">
+									</div>
+										<input type="hidden" name="orderNo" value="<%=nlist.get(i).getOrderId()%>"> 
+										<input type="hidden" name="reURI">
+							</form>
+							
+						</div> <% ntotal += nlist.get(i).getOrderSum(); %> 
+						<% 	} } %>
+						<hr>
+						<div class="card" style="color: red;">
+							<div style="font-size: 20px;">총 금액</div>
+							<div class="text-right" style="font-size: 35px;"><%=ntotal%>원
 							</div>
-							<div class="card">
-								<div>치킨메뉴2</div>
-								<div class="text-right">20,000원</div>
-							</div>
-							<hr>
-							<div class="card" style="color: red;">
-								<div style="font-size: 20px;">총 금액</div>
-								<div class="text-right">40,000원</div>
-							</div>
-							<a class="dropdown-item;" href="payment.jsp"
-								style="font-size: 20px; float: right; margin-right: 10px;">구매하기</a>
-						</div></li>
+						</div> 
+						<% if ( ntotal != 0 ) { %>
+						<a class="dropdown-item;" href="login.jsp" style="font-size: 20px; float: right; margin-right: 10px;">구매하기</a>
+						<% } %>
+				</div>
+			</li>
 
 					<li class="nav-item"><a class="nav-link dropdown-toggle"
 						href="login.jsp" style="color: #fff;">로그인</a></li>
@@ -147,25 +172,17 @@
 										type="hidden" name="reURI"> <input type="hidden"
 										name="USER_ID" value="<%=m.getUSER_ID()%>">
 							</form>
-							<script>
-								function deleteOrderMenu() {
-									var returnURL = document.URL;
-									$('input[name="reURI"]').val(returnURL);
-									$(this).submit();
-								}
-							</script>
-						</div> <%
- 	total += olist.get(i).getOrderSum();
- %> <%
- 	}
- %>
+						</div> <% total += olist.get(i).getOrderSum(); %> 
+						<% 	} %>
 						<hr>
 						<div class="card" style="color: red;">
 							<div style="font-size: 20px;">총 금액</div>
 							<div class="text-right" style="font-size: 35px;"><%=total%>원
 							</div>
-						</div> <a class="dropdown-item;" href="payment.jsp"
-						style="font-size: 20px; float: right; margin-right: 10px;">구매하기</a>
+						</div> 
+						<% if ( total != 0 ) { %>
+						<a class="dropdown-item;" href="payment.jsp" style="font-size: 20px; float: right; margin-right: 10px;">구매하기</a>
+						<% } %>
 			</div>
 			</li>
 			<li class="nav-item active dropdown"><a

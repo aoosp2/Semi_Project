@@ -92,7 +92,7 @@ main.cf.my_account {
 								</div>
 								<div class="form-group text-center">
 									<input id="login_submit" type="submit" value="Login"
-										onclick="location.href='index.jsp'"
+										onclick="return checkz()"
 										class="btn btn-success btn-lg btn-block" />
 								</div>
 								<div class="form-group text-center">
@@ -127,6 +127,23 @@ main.cf.my_account {
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript">
+	function checkz() {
+		//아이디 공백 확인
+		if ($("#USER_ID").val() == "") {
+			swal("아이디가 없어요!","아이디를 입력 해주세요");
+			$("#USER_ID").focus();
+			return false;
+		}
+		//비밀번호 공백 확인
+		if ($("#USER_PASSWORD").val() == "") {
+			swal("비밀번호가 없어요!","비밀번호를 입력 해주세요");
+			$("#USER_PASSWORD").focus();
+			return false;
+		}
+	}
+	</script>
+
 
 	<%@ include file="views/common/footer.jsp"%>
 </body>

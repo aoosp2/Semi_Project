@@ -14,7 +14,7 @@ import model.service.ShopService;
 import model.vo.ShopOrder;
 
 /**
- * Servlet implementation class ShopOrderServlet
+ * 장바구니 추가 서블릿
  */
 @WebServlet("/Order.s")
 public class ShopOrderServlet extends HttpServlet {
@@ -41,13 +41,21 @@ public class ShopOrderServlet extends HttpServlet {
 		int Sum = Integer.parseInt(request.getParameter("oSum")) * count;
 
 		HttpSession session = request.getSession();
-
-		int groupNum = new ShopService().selectGroupNum(userId);
-		int result = new ShopService().insertShopOrder(shopId, userId, menuNo, count, Sum,groupNum);
+		int result = 0;
+		
+		if( userId != null ) {
+			int groupNum = new ShopService().selectGroupNum(userId);
+			result = new ShopService().insertShopOrder(shopId, userId, menuNo, count, Sum,groupNum);
+		}else {
+			int nonGroupNum = 1;
+			result = new ShopService().insertShopOrder(shopId, menuNo, count, Sum, nonGroupNum);
+		}
 
 		if (result > 0) {
 			ArrayList<ShopOrder> so = new ShopService().selectShopOrderList(userId); // 새로고침용
+			ArrayList<ShopOrder> nSo = new ShopService().selectShopOrderList(); // 비회원용
 			session.setAttribute("ShopOrder", so);
+			session.setAttribute("NonShopOrder", nSo);
 		} else {
 			System.out.println("장바구니 담기 실패!");
 		}
