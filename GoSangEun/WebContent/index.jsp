@@ -18,7 +18,7 @@
 
    <%@ include file="views/common/header.jsp"%>
 
-   <br>
+	<br>
    <header>
       <!-- image slider -->
       <div id="carouselExampleIndicators" class="carousel slide"

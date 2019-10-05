@@ -76,10 +76,25 @@
 
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active dropdown"><a
-						class="nav-link dropdown-toggle" href="MyPage.jsp"
-						id="navbarDropdownBlog" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false"> 장바구니 </a> <!-- servlet으로 이동 -->
+					<li class="nav-item active dropdown">
+					<% if (nlist == null) { %>
+					<a class="nav-link dropdown-toggle" href="MyPage.jsp" id="navbarDropdownBlog2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 장바구니 </a>
+					<% } else { %>
+					<a class="nav-link dropdown-toggle" href="MyPage.jsp" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 장바구니 </a> <!-- servlet으로 이동 -->
+					<% } %>
+						<form action="/GoSangEun/NonSelect.s" method="get" id="selectNonOrder"></form>
+						<script>
+							$('#navbarDropdownBlog2').one("mouseenter",function(){
+								var result = confirm('과거에 방문한 적이 있나요?');
+								
+								if(result){
+									alert('과거 구매하지 않은 기록을 불러옵니다.');
+									$('#selectNonOrder').submit();
+								}else{
+									
+								}
+							});
+						</script>
 						<div class="dropdown-menu dropdown-menu-right"
 							aria-labelledby="navbarDropdownPortfolio"
 							style="width: 220px; height: auto;">
