@@ -40,9 +40,10 @@ public class ShopNonOrderSelectServlet extends HttpServlet {
 			throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
+		String url = request.getParameter("rURL");
 		ArrayList<ShopOrder> list = new ShopService().selectShopOrderList();
 		session.setAttribute("NonShopOrder", list);
-		response.sendRedirect("index.jsp");
+		response.sendRedirect(url);
 	}
 
 	/**

@@ -212,7 +212,7 @@ public class ShopService {
 
 	public int deleteShopOrder(int orderNo, String userId) {
 		con = getConnection();
-		int result = sDao.deleteShopOrder(con, orderNo,userId);
+		int result = sDao.deleteShopOrder(con, orderNo, userId);
 
 		if (result > 0)
 			commit(con);
@@ -248,14 +248,14 @@ public class ShopService {
 	public int insertShopOrder(int shopId, int menuNo, int count, int sum, int nonGroupNum) {
 		con = getConnection();
 		int result = sDao.insertShopOrder(con, shopId, menuNo, count, sum, nonGroupNum);
-		
-		if (result > 0 )
+
+		if (result > 0)
 			commit(con);
 		else
 			rollback(con);
-		
+
 		close(con);
-		
+
 		return result;
 	}
 
@@ -266,6 +266,12 @@ public class ShopService {
 		return list;
 	}
 
+	/**
+	 * 비회원용 장바구니 선택 삭제
+	 * 
+	 * @param orderNo
+	 * @return
+	 */
 	public int deleteShopOrder(int orderNo) {
 		con = getConnection();
 		int result = sDao.deleteShopOrder(con, orderNo);
@@ -275,6 +281,38 @@ public class ShopService {
 		else
 			rollback(con);
 
+		close(con);
+		return result;
+	}
+
+	/**
+	 * 비회원용 다른 식당 이용시 장바구니 전체 삭제
+	 * 
+	 * @return
+	 */
+	public int deleteShopOrder() {
+		con = getConnection();
+		int result = sDao.deleteShopOrder(con);
+
+		if (result > 0)
+			commit(con);
+		else
+			rollback(con);
+
+		close(con);
+
+		return result;
+	}
+
+	public int deleteShopOrder(String userId) {
+		con = getConnection();
+		int result = sDao.deleteShopOrder(con, userId);
+
+		if (result > 0)
+			commit(con);
+		else
+			rollback(con);
+		
 		close(con);
 		return result;
 	}

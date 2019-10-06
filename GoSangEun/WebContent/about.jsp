@@ -28,6 +28,46 @@
 
 
 	<%@ include file="views/common/header.jsp"%>
+	
+	<% if ( nlist != null ) { %>
+	<% if( m == null && nlist.size() > 0 ) { // 비회원용 다른가게 체크 %>
+	<% for ( int i = 0; i < nlist.size(); i++) { %>
+	<% if( nlist.get(i).getShopId() != s.getShopId() ) { %>
+		<input type="hidden" name="" id="MultiCheck" value="true"/>
+		<form action="/GoSangEun/MultiDelete.s" method="get" id="MultiDel">
+			<input type="hidden" name="URL" />
+		</form>
+		<% break; } else { %>
+		<input type="hidden" name="" id="MultiCheck" value="false"/>
+	<% } } } } %>
+	
+	<% if( m != null && olist.size() > 0) { // 회원용 다른가게 체크%>
+	<% for ( int i = 0; i < olist.size(); i++) { %>
+	<% if( olist.get(i).getShopId() != s.getShopId() ) { %>
+		<input type="hidden" name="" id="MultiCheck" value="true"/>
+		<form action="/GoSangEun/MultiDelete.s" method="get" id="MultiDel">
+			<input type="hidden" name="MultiUserId" value=<%= m.getUSER_ID() %> />
+			<input type="hidden" name="URL" />
+		</form>
+		<% break; } else { %>
+		<input type="hidden" name="" id="MultiCheck" value="false"/>
+	<% } } } %>
+	
+	<script>
+		$(function(){
+			var mCheck = $('#MultiCheck').val();
+			$('input[name=URL]').val(document.URL);
+			if( mCheck == 'true'){
+				var anser = confirm("다른 가게의 메뉴가 장바구니에 담겨있습니다. 계속 진행할시 장바구니 내용이 사라집니다. 계속하시겠습니까?");
+				if(anser){
+					$('#MultiDel').submit();
+				}else{
+					window.history.back();
+				}
+			}
+				
+		});
+	</script>
 	<!-- Page Content -->
 	<div class="container">
 		<br>
@@ -39,7 +79,7 @@
 		</h1>
 
 		<ol class="breadcrumb">
-			<li class="breadcrumb-item"><a href="category.go?category=<%=s.getCategoryId()%>">Home</a></li>
+			<li class="breadcrumb-item"><a href="category.go?category=<%=s.getCategoryId()%>" id="Home">Home</a></li>
 			<li class="breadcrumb-item active"><%=s.getCategoryId()%></li>
 		</ol>
 
@@ -99,7 +139,6 @@
 
 					<div id="Review">
 						<%
-							if (m != null) {
 								for (int i = 0; i < rlist.size(); i++) {
 						%>
 						<div class="card mr-2 p-2">
@@ -175,7 +214,6 @@
 						</div>
 
 						<%
-							}
 							}
 						%>
 					</div>
@@ -269,8 +307,7 @@
 							%>
 							<input type="hidden" name="menuNo" value="<%=list.get(num).getNo()%>"> <input type="hidden"	name="oCount"> 
 							<input type="hidden" name="oSum" value="<%=list.get(num).getPrice()%>">
-							<input type="submit" value="구매하기"
-								style="font-size: 20px; background: none; padding: 0; border: none; color: rgb(0, 132, 255);">
+							<input type="submit" value="구매하기" style="font-size: 20px; background: none; padding: 0; border: none; color: rgb(0, 132, 255);">
 						</form>
 					</div>
 				</div>

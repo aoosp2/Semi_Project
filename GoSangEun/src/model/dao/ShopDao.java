@@ -687,4 +687,41 @@ public class ShopDao {
 		return result;
 	}
 
+	public int deleteShopOrder(Connection con) {
+		int result = 0;
+		Statement stmt = null;
+		
+		String sql = prop.getProperty("MultiNonOrderDelete");
+		
+		try {
+			stmt = con.createStatement();
+			
+			result = stmt.executeUpdate(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(stmt);
+		}
+		return result;
+	}
+
+	public int deleteShopOrder(Connection con, String userId) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("MultiOrderDelete");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
 }

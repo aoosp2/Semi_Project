@@ -58,7 +58,6 @@
 			$(this).submit();
 		}
 	</script>
-
 	<%
 		if (m == null) {
 	%>
@@ -82,16 +81,18 @@
 					<% } else { %>
 					<a class="nav-link dropdown-toggle" href="MyPage.jsp" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 장바구니 </a> <!-- servlet으로 이동 -->
 					<% } %>
-						<form action="/GoSangEun/NonSelect.s" method="get" id="selectNonOrder"></form>
+						<form action="/GoSangEun/NonSelect.s" method="get" id="selectNonOrder">
+							<input type="hidden" name="rURL" id="checkReURL" />
+						</form>
 						<script>
 							$('#navbarDropdownBlog2').one("mouseenter",function(){
 								var result = confirm('과거에 방문한 적이 있나요?');
 								
 								if(result){
+									$('#checkReURL').val(document.URL);
 									alert('과거 구매하지 않은 기록을 불러옵니다.');
 									$('#selectNonOrder').submit();
 								}else{
-									
 								}
 							});
 						</script>
