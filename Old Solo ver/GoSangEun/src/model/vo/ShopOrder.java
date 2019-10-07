@@ -19,6 +19,8 @@ public class ShopOrder implements Serializable {
 	private String orderInfo;
 	private String orderCheck;
 	private String orderAddr;
+	private String shopName;
+	private int dvPrice ;
 
 	public ShopOrder() {
 		super();
@@ -82,6 +84,24 @@ public class ShopOrder implements Serializable {
 		this.orderSum = orderSum;
 		this.orderCheck = orderCheck;
 		this.orderAddr = orderAddr;
+	}
+	
+
+	public ShopOrder(int orderId, int shopId, String userId, int menuNo, String menuName, int orderCount, int orderSum,
+			String orderInfo, String orderCheck, String orderAddr, String shopName, int dvPrice) {
+		super();
+		this.orderId = orderId;
+		this.shopId = shopId;
+		this.userId = userId;
+		this.menuNo = menuNo;
+		this.menuName = menuName;
+		this.orderCount = orderCount;
+		this.orderSum = orderSum;
+		this.orderInfo = orderInfo;
+		this.orderCheck = orderCheck;
+		this.orderAddr = orderAddr;
+		this.shopName = shopName;
+		this.dvPrice = dvPrice;
 	}
 
 
@@ -204,12 +224,41 @@ public class ShopOrder implements Serializable {
 	}
 
 
+	public String getShopName() {
+		return shopName;
+	}
+
+
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
+	}
+	
+	
+
+
+	public int getDvPrice() {
+		return dvPrice;
+	}
+
+
+	public void setDvPrice(int dvPrice) {
+		this.dvPrice = dvPrice;
+	}
+
 
 	@Override
 	public String toString() {
 		return "ShopOrder [orderId=" + orderId + ", shopId=" + shopId + ", userId=" + userId + ", menuNo=" + menuNo
 				+ ", menuName=" + menuName + ", orderCount=" + orderCount + ", orderSum=" + orderSum + ", orderInfo="
-				+ orderInfo + ", orderCheck=" + orderCheck + ", orderAddr=" + orderAddr + "]";
+				+ orderInfo + ", orderCheck=" + orderCheck + ", orderAddr=" + orderAddr + ", shopName=" + shopName
+				+ ", dvPrice=" + dvPrice + "]";
 	}
+
+
+	
+
+
+
+	
 	
 }

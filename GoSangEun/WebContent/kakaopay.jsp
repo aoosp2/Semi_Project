@@ -1,12 +1,15 @@
+<%@page import="model.vo.Kakao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	// + 총 주문금액
-    String name = (String)request.getAttribute("name");
-    String email = (String)request.getAttribute("email");
-    String phone = (String)request.getAttribute("phone");
-    String address = (String)request.getAttribute("address");
-    int totalPrice = (int)request.getAttribute("totalPrice");    
+   System.out.println("여기는 kakao.jsp");
+   Kakao kk = (Kakao)request.getAttribute("kakao");
+   String oAddr = (String)request.getAttribute("newAddr");
+   String phone = (String)request.getAttribute("phone");
+   int totalPrice = (int)request.getAttribute("totalPrice");
+   String orderInfo = (String)request.getAttribute("orderInfo");
+   String pay = (String)request.getAttribute("pay");
+
 %>
 <!DOCTYPE html>
 <html>
@@ -27,13 +30,12 @@
             pg : 'kakaopay',
             pay_method : 'card',
             merchant_uid : 'merchant_' + new Date().getTime(),
-            name : 'KH GoSangEun', // EX> KH Books 도서 결제
-            amount : <%=totalPrice%>,
-            buyer_email : '<%=email%>',
-            buyer_name : '<%=name%>',
-            buyer_tel : '<%=phone%>',
-            buyer_addr : '<%=address%>',
-            buyer_postcode : '123-456',
+            name : 'KH GoSangEun',
+            
+            amount : <%= kk.getTotalPrice() %>,
+            buyer_email : '<%= kk.getUSER_EMAIL() %>',
+            <%-- buyer_name : '<%=name%>', --%>
+            buyer_tel : '<%= kk.getUSER_PHONE() %>',
             //m_redirect_url : 'http://www.naver.com'
         }, function(rsp) {
             if ( rsp.success ) {
@@ -62,7 +64,9 @@
                     }
                 });
                 //성공시 이동할 페이지
-                location.href='<%=request.getContextPath()%>/order/paySuccess?msg='+msg;
+                <%-- location.href='<%=request.getContextPath()%>/order/paySuccess?msg='+msg; --%>
+                $('#kakaoSubmit').submit();
+                
             } else {
                 msg = '결제에 실패하였습니다.';
                 msg += '에러내용 : ' + rsp.error_msg;
@@ -71,9 +75,21 @@
                 alert(msg);
             }
         });
-        
     });
     </script>
+    
+    <form action="oUpdate.go" id="kakaoSubmit">
+    
+    <input type="hidden" value="<%= kk.getUSER_PHONE() %>" name="USER_PHONE">
+    <input type="hidden" value="<%= kk.getUSER_EMAIL() %>" name="USER_EMAIL">
+    <input type="hidden" value="<%= kk.getShopName() %>" name="shopName">
+    <input type="hidden" value="<%= totalPrice%>" name="totalPrice">
+    <input type="hidden" value="<%= oAddr %>" name="addr">
+    <input type="hidden" value="<%= phone %>" name="phone">
+    <input type="hidden" value="<%= orderInfo %>" name="textrequest">
+    <input type="hidden" value="<%= pay %>" name="pay">
+    
+    </form>
  
 </body>
 </html>

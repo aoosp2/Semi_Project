@@ -94,6 +94,7 @@ public class MemberDao {
 				result.setUSER_ADDRESS(rset.getString("USER_ADDRESS"));
 				result.setRANK(rset.getString("RANK_NAME"));
 				result.setUSER_NO(rset.getInt("USER_NO"));
+				result.setMyShop(rset.getString("MY_SHOP"));
 			}
 
 		} catch (Exception e) {

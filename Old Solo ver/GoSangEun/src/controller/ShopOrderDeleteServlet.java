@@ -38,16 +38,24 @@ public class ShopOrderDeleteServlet extends HttpServlet {
 		int orderNo = Integer.parseInt(request.getParameter("orderNo"));
 		String uri = request.getParameter("reURI");
 		String userId = request.getParameter("USER_ID");
+
 		HttpSession session = request.getSession();
+		int result = 0;
+		ArrayList<ShopOrder> so = null;
+		ArrayList<ShopOrder> nSo = null;
 
-		int result = new ShopService().deleteShopOrder(orderNo);
-		ArrayList<ShopOrder> so = new ShopService().selectShopOrderList(userId);
+		if (userId != null) {
+			result = new ShopService().deleteShopOrder(orderNo, userId);
+			so = new ShopService().selectShopOrderList(userId);
+		} else {
+			result = new ShopService().deleteShopOrder(orderNo);
+			nSo = new ShopService().selectShopOrderList();
+		}
 
-		
 		if (result > 0) {
 			System.out.println("선택한 메뉴 삭제 성공!");
 			session.setAttribute("ShopOrder", so);
-
+			session.setAttribute("NonShopOrder", nSo);
 		} else {
 			System.out.println("선택한 메뉴 삭제 실패!");
 		}

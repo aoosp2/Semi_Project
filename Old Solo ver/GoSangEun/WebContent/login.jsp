@@ -97,7 +97,7 @@ main.cf.my_account {
 								</div>
 								<div class="form-group text-center">
 									<input id="unlogin_submit" type="submit" value="비회원주문"
-										onclick="location.href='index.jsp'"
+										onclick="location.href='noMcart.go'"
 										class="btn btn-success btn-lg btn-block" />
 								</div>
 								<div class="form-group login-link">

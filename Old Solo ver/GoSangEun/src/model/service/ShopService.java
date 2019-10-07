@@ -68,13 +68,15 @@ public class ShopService {
 		ArrayList<Review> list = sDao.selectReview(con, shopId);
 
 		if (list != null) {
-			int result = sDao.updateShopPoint(con, shopId);
+			if (list.size() > 0) {
+				int result = sDao.updateShopPoint(con, shopId);
 
-			if (result > 0) {
-				commit(con);
-			} else {
-				rollback(con);
-				System.out.println("별점 업데이트 실패!");
+				if (result > 0) {
+					commit(con);
+				} else {
+					rollback(con);
+					System.out.println("별점 업데이트 실패!");
+				}
 			}
 		}
 
@@ -210,9 +212,9 @@ public class ShopService {
 		return sList;
 	}
 
-	public int deleteShopOrder(int orderNo) {
+	public int deleteShopOrder(int orderNo, String userId) {
 		con = getConnection();
-		int result = sDao.deleteShopOrder(con, orderNo);
+		int result = sDao.deleteShopOrder(con, orderNo, userId);
 
 		if (result > 0)
 			commit(con);
@@ -245,4 +247,95 @@ public class ShopService {
 		return result;
 	}
 
+	public int insertShopOrder(int shopId, int menuNo, int count, int sum, int nonGroupNum) {
+		con = getConnection();
+		int result = sDao.insertShopOrder(con, shopId, menuNo, count, sum, nonGroupNum);
+
+		if (result > 0)
+			commit(con);
+		else
+			rollback(con);
+
+		close(con);
+
+		return result;
+	}
+
+	public ArrayList<ShopOrder> selectShopOrderList() {
+		con = getConnection();
+		ArrayList<ShopOrder> list = sDao.selectShopOrderList(con);
+		close(con);
+		return list;
+	}
+
+	public int deleteShopOrder(int orderNo) {
+		con = getConnection();
+		int result = sDao.deleteShopOrder(con, orderNo);
+
+		if (result > 0)
+			commit(con);
+		else
+			rollback(con);
+
+		close(con);
+		return result;
+	}
+
+	public ArrayList<ShopOrder> selectNoCart() {
+
+		Connection conn = getConnection();
+
+		ArrayList<ShopOrder> noList = new ShopDao().selectNoCart(conn);
+
+		close(conn);
+
+		return noList;
+	}
+
+	public int updateNoOrder(String orderInfo, String addr, String phone) {
+
+		Connection conn = getConnection();
+
+		int result = new ShopDao().updateNoOrder(conn, orderInfo, addr, phone);
+
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+
+		return result;
+	}
+
+	/**
+	 * 비회원용 다른 식당 이용시 장바구니 전체 삭제
+	 * 
+	 * @return
+	 */
+	public int deleteShopOrder() {
+		con = getConnection();
+		int result = sDao.deleteShopOrder(con);
+
+		if (result > 0)
+			commit(con);
+		else
+			rollback(con);
+
+		close(con);
+
+		return result;
+	}
+
+	public int deleteShopOrder(String userId) {
+		con = getConnection();
+		int result = sDao.deleteShopOrder(con, userId);
+
+		if (result > 0)
+			commit(con);
+		else
+			rollback(con);
+
+		close(con);
+		return result;
+	}
 }

@@ -1,3 +1,4 @@
+<%@page import="model.vo.OrderHistory"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.vo.ShopOrder"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -6,6 +7,7 @@
 	Member m = (Member) session.getAttribute("member");
 	ArrayList<ShopOrder> olist = (ArrayList<ShopOrder>) session.getAttribute("ShopOrder");
 	ArrayList<ShopOrder> nlist = (ArrayList<ShopOrder>) session.getAttribute("NonShopOrder");
+	ArrayList<OrderHistory> OHlist = (ArrayList<OrderHistory>) session.getAttribute("OHList");
 %>
 <!DOCTYPE html>
 <html>
@@ -36,6 +38,7 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <!-- favicon erroe -->
 <link rel="shortcut icon" href="/path/to/icons/favicon.ico">
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <!-- 폰트 -->
 <link
 	href="https://fonts.googleapis.com/css?family=Sunflower:300&display=swap"
@@ -58,6 +61,7 @@
 			$(this).submit();
 		}
 	</script>
+
 	<%
 		if (m == null) {
 	%>
@@ -76,25 +80,37 @@
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item active dropdown">
-					<% if (nlist == null) { %>
-					<a class="nav-link dropdown-toggle" href="MyPage.jsp" id="navbarDropdownBlog2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 장바구니 </a>
-					<% } else { %>
-					<a class="nav-link dropdown-toggle" href="MyPage.jsp" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 장바구니 </a> <!-- servlet으로 이동 -->
-					<% } %>
-						<form action="/GoSangEun/NonSelect.s" method="get" id="selectNonOrder">
+						<%
+							if (nlist == null) {
+						%> <a class="nav-link dropdown-toggle" href="MyPage.jsp"
+						id="navbarDropdownBlog2" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false"> 장바구니 </a> <%
+ 	} else {
+ %> <a class="nav-link dropdown-toggle" href="MyPage.jsp"
+						id="navbarDropdownBlog" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false"> 장바구니 </a> <!-- servlet으로 이동 -->
+						<%
+							}
+						%>
+						<form action="/GoSangEun/NonSelect.s" method="get"
+							id="selectNonOrder">
 							<input type="hidden" name="rURL" id="checkReURL" />
-						</form>
-						<script>
-							$('#navbarDropdownBlog2').one("mouseenter",function(){
-								var result = confirm('과거에 방문한 적이 있나요?');
-								
-								if(result){
-									$('#checkReURL').val(document.URL);
-									alert('과거 구매하지 않은 기록을 불러옵니다.');
-									$('#selectNonOrder').submit();
-								}else{
-								}
-							});
+						</form> <script>
+							$('#navbarDropdownBlog2')
+									.one(
+											"mouseenter",
+											function() {
+												var result = confirm('과거에 방문한 적이 있나요?');
+
+												if (result) {
+													$('#checkReURL').val(
+															document.URL);
+													alert('과거 구매하지 않은 기록을 불러옵니다.');
+													$('#selectNonOrder')
+															.submit();
+												} else {
+												}
+											});
 						</script>
 						<div class="dropdown-menu dropdown-menu-right"
 							aria-labelledby="navbarDropdownPortfolio"
@@ -103,8 +119,8 @@
 								목록</div>
 							<%
 								int ntotal = 0;
-							if( nlist != null ) {
-									for (int i = 0; i < nlist.size(); i++) {
+									if (nlist != null) {
+										for (int i = 0; i < nlist.size(); i++) {
 							%>
 							<form action="/GoSangEun/OrderDelete.s" method="get"
 								name="deleteOrder" id="DeleteOrder<%=i%>">
@@ -114,30 +130,41 @@
 										<%=nlist.get(i).getOrderCount()%>개 : &nbsp;&nbsp;<%=nlist.get(i).getOrderSum() / nlist.get(i).getOrderCount()%>원
 									</div>
 									<div class="text-right">
-										<input type="submit" value="취소" style="color: red; padding: 0; border: none; background: none;" onclick="deleteOrderMenu();">
+										<input type="submit" value="취소"
+											style="color: red; padding: 0; border: none; background: none;"
+											onclick="deleteOrderMenu();">
 									</div>
-										<input type="hidden" name="orderNo" value="<%=nlist.get(i).getOrderId()%>"> 
-										<input type="hidden" name="reURI">
+									<input type="hidden" name="orderNo"
+										value="<%=nlist.get(i).getOrderId()%>"> <input
+										type="hidden" name="reURI">
 							</form>
-							
-						</div> <% ntotal += nlist.get(i).getOrderSum(); %> 
-						<% 	} } %>
+
+						</div> <%
+ 	ntotal += nlist.get(i).getOrderSum();
+ %> <%
+ 	}
+ 		}
+ %>
 						<hr>
 						<div class="card" style="color: red;">
 							<div style="font-size: 20px;">총 금액</div>
 							<div class="text-right" style="font-size: 35px;"><%=ntotal%>원
 							</div>
-						</div> 
-						<% if ( ntotal != 0 ) { %>
-						<a class="dropdown-item;" href="login.jsp" style="font-size: 20px; float: right; margin-right: 10px;">구매하기</a>
-						<% } %>
-				</div>
+						</div> <%
+ 	if (ntotal != 0) {
+ %> <a class="dropdown-item;" href="login.jsp"
+						style="font-size: 20px; float: right; margin-right: 10px;">구매하기</a>
+						<%
+							}
+						%>
+					
+			</div>
 			</li>
 
-					<li class="nav-item"><a class="nav-link dropdown-toggle"
-						href="login.jsp" style="color: #fff;">로그인</a></li>
-				</ul>
-			</div>
+			<li class="nav-item"><a class="nav-link dropdown-toggle"
+				href="login.jsp" style="color: #fff;">로그인</a></li>
+			</ul>
+		</div>
 		</div>
 	</nav>
 	<%
@@ -188,17 +215,23 @@
 										type="hidden" name="reURI"> <input type="hidden"
 										name="USER_ID" value="<%=m.getUSER_ID()%>">
 							</form>
-						</div> <% total += olist.get(i).getOrderSum(); %> 
-						<% 	} %>
+						</div> <%
+ 	total += olist.get(i).getOrderSum();
+ %> <%
+ 	}
+ %>
 						<hr>
 						<div class="card" style="color: red;">
 							<div style="font-size: 20px;">총 금액</div>
 							<div class="text-right" style="font-size: 35px;"><%=total%>원
 							</div>
-						</div> 
-						<% if ( total != 0 ) { %>
-						<a class="dropdown-item;" href="payment.jsp" style="font-size: 20px; float: right; margin-right: 10px;">구매하기</a>
-						<% } %>
+						</div> <%
+ 	if (total != 0) {
+ %> <a class="dropdown-item;" href="sCart.go"
+						style="font-size: 20px; float: right; margin-right: 10px;">구매하기</a>
+						<%
+							}
+						%>
 			</div>
 			</li>
 			<li class="nav-item active dropdown"><a
@@ -209,9 +242,9 @@
 			</a>
 				<div class="dropdown-menu dropdown-menu-right"
 					aria-labelledby="navbarDropdownBlog">
-					<a class="dropdown-item" href="MyPage.jsp">나의 정보</a> <a
-						class="dropdown-item" href="MyPage.jsp">주문 확인</a> <a
-						class="dropdown-item" onclick='logout()'>로그아웃</a>
+					<a class="dropdown-item" href="ohList.go">나의 정보</a> <a
+						class="dropdown-item" href="ohList.go">주문 확인</a> <a
+						class="dropdown-item" onclick='logout()'style="cursor: pointer;">로그아웃</a>
 				</div></li>
 			</ul>
 		</div>

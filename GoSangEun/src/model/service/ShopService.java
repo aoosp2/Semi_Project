@@ -68,13 +68,15 @@ public class ShopService {
 		ArrayList<Review> list = sDao.selectReview(con, shopId);
 
 		if (list != null) {
-			int result = sDao.updateShopPoint(con, shopId);
+			if (list.size() > 0) {
+				int result = sDao.updateShopPoint(con, shopId);
 
-			if (result > 0) {
-				commit(con);
-			} else {
-				rollback(con);
-				System.out.println("별점 업데이트 실패!");
+				if (result > 0) {
+					commit(con);
+				} else {
+					rollback(con);
+					System.out.println("별점 업데이트 실패!");
+				}
 			}
 		}
 
@@ -266,12 +268,6 @@ public class ShopService {
 		return list;
 	}
 
-	/**
-	 * 비회원용 장바구니 선택 삭제
-	 * 
-	 * @param orderNo
-	 * @return
-	 */
 	public int deleteShopOrder(int orderNo) {
 		con = getConnection();
 		int result = sDao.deleteShopOrder(con, orderNo);
@@ -282,6 +278,32 @@ public class ShopService {
 			rollback(con);
 
 		close(con);
+		return result;
+	}
+
+	public ArrayList<ShopOrder> selectNoCart() {
+
+		Connection conn = getConnection();
+
+		ArrayList<ShopOrder> noList = new ShopDao().selectNoCart(conn);
+
+		close(conn);
+
+		return noList;
+	}
+
+	public int updateNoOrder(String orderInfo, String addr, String phone) {
+
+		Connection conn = getConnection();
+
+		int result = new ShopDao().updateNoOrder(conn, orderInfo, addr, phone);
+
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+
 		return result;
 	}
 
@@ -312,9 +334,8 @@ public class ShopService {
 			commit(con);
 		else
 			rollback(con);
-		
+
 		close(con);
 		return result;
 	}
-
 }

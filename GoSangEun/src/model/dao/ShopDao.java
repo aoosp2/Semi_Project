@@ -686,7 +686,7 @@ public class ShopDao {
 		}
 		return result;
 	}
-
+	
 	public int deleteShopOrder(Connection con) {
 		int result = 0;
 		Statement stmt = null;
@@ -724,4 +724,72 @@ public class ShopDao {
 		return result;
 	}
 
+	public ArrayList<ShopOrder> selectNoCart(Connection conn) {
+		
+		
+		ArrayList<ShopOrder> noList = new ArrayList<>();
+		ShopOrder so = null;
+		
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectNoCart");
+		
+		try {
+			stmt = conn.createStatement();
+			
+			rset = stmt.executeQuery(sql);
+			
+			while(rset.next()) {
+				so = new ShopOrder();
+				
+				
+				so.setShopName(rset.getString("SHOP_NAME"));
+				so.setMenuName(rset.getString("MENU_NAME"));
+				so.setOrderCount(rset.getInt("NON_ORDER_COUNT"));
+				so.setOrderSum(rset.getInt("NON_ORDER_SUM"));
+				so.setOrderInfo(rset.getString("NON_ORDER_INFO"));
+				so.setDvPrice(rset.getInt("SHOP_DVPRICE"));
+				
+				noList.add(so);
+			}
+			
+		
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(rset);
+			close(stmt);
+		}
+		return noList;
+	}
+	
+	public int updateNoOrder(Connection conn, String orderInfo, String addr, String phone) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateNoOrder");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, orderInfo);
+			pstmt.setString(2, phone);
+			pstmt.setString(3, addr);
+			
+			result = pstmt.executeUpdate();
+			
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(pstmt);
+		}
+		return result;
+	}
 }
